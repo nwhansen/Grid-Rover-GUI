@@ -42,9 +42,15 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-
+#include "dummymodel.h"
+#include <iostream>
 int main(int argc, char **argv)
 {
+    DummyModel d;
+
+
+    std::cout << d.getTile(0,0) << std::endl;
+
     Q_INIT_RESOURCE(images);
 
     QApplication app(argc, argv);

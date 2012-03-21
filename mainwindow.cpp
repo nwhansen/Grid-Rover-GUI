@@ -66,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
   */
 void MainWindow::populateScene()
 {
+    //Needs to interact with model to get tile types and location.
     scene = new QGraphicsScene;
 
     QPixmap image(":/qt4logo.png");
