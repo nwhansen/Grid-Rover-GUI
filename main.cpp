@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 {
     DummyModel d;
 
-
+    //TODO: Get rid eventually.
     std::cout << d.getTile(0,0) << std::endl;
 
     Q_INIT_RESOURCE(images);

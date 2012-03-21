@@ -43,6 +43,7 @@
 #define MAINWINDOW_H
 
 #include <QtGui/qwidget.h>
+#include "dummymodel.h"
 
 QT_FORWARD_DECLARE_CLASS(QGraphicsScene)
 QT_FORWARD_DECLARE_CLASS(QGraphicsView)
@@ -58,8 +59,9 @@ public:
     
 private:
     void setupMatrix();
-    void populateScene();
+    void populateScene(int width, int height);
     
+    DummyModel dummy;
     QGraphicsScene *scene;
     QSplitter *h1Splitter;
     QSplitter *h2Splitter;

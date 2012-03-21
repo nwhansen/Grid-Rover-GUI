@@ -5,6 +5,9 @@
 #include <stdlib.h>
 
 
+enum TileType {
+    Lake, Plain, Mountain, Rugged
+};
 class DummyModel
 {
 public:
@@ -14,12 +17,13 @@ public:
       * Get a tile located at X and Y.
       *
       */
-    std::string getTile(int x, int y);
+    TileType getTile(int x, int y);
 
 private:
     //Random Numbers
 
     //
 };
+
 
 #endif // DUMMYMODEL_H

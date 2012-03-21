@@ -44,11 +44,11 @@
 #include "chip.h"
 
 #include <QtGui>
-
+#include <iostream>
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
-    populateScene();
+    populateScene(10,10);
 
     View *view = new View("World");
     view->view()->setScene(scene);
@@ -63,21 +63,45 @@ MainWindow::MainWindow(QWidget *parent)
 
 /**
   * Main code to populate the tiles of the main window. Stitching time baby.
+  * Assumes all tiles provided are of the same height and width.
   */
-void MainWindow::populateScene()
+void MainWindow::populateScene(int width, int height)
 {
     //Needs to interact with model to get tile types and location.
     scene = new QGraphicsScene;
 
-    QPixmap image(":/qt4logo.png");
+    QPixmap lake(":/lake"), plain(":/plain"),
+            mountain(":/mountain"), rugged(":/rugged");
+    QGraphicsPixmapItem *item = NULL;
+    //Build maps from bottom left corner to top right corner
+    for(int w = 0; w < width; w++){
+        for(int h = 0; h < height; h++){
+            switch(dummy.getTile(w,h)){
+                case Mountain:
+                    item = new QGraphicsPixmapItem(mountain);
+                    break;
+                case Lake:
+                    item = new QGraphicsPixmapItem(lake);
+                    break;
+                case Plain:
+                    item = new QGraphicsPixmapItem(plain);
+                    break;
+                case Rugged:
+                    item = new QGraphicsPixmapItem(rugged);
+                    break;
+                default:
+                    std::cerr << "Unexpected Tile selected! correct code";
+                    item = NULL;
+            }
+            item->setPos(QPointF(w * lake.width(), h * mountain.height()));
+            scene->addItem(item);
+        }
+    }
+    /*QGraphicsPixmapItem *item = new QGraphicsPixmapItem(image);
+    item->setPos(QPointF(0, 0));
 
-
-    QGraphicsPixmapItem *item = new QGraphicsPixmapItem(image);
-    item->setPos(QPointF(500, 0));
     scene->addItem(item);
-    item = new QGraphicsPixmapItem(image);
-        item->setPos(QPointF(0, 0));
-        scene->addItem(item);
+
     return;
     // Populate scene
     int xx = 0;
@@ -95,5 +119,5 @@ void MainWindow::populateScene()
 
             ++nitems;
         }
-    }
+    }*/
 }
