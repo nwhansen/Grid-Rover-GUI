@@ -126,19 +126,30 @@ View::View(const QString &name, QWidget *parent)
     // Label layout
     QHBoxLayout *labelLayout = new QHBoxLayout;
     label = new QLabel(name);
+
+    refreshButton = new QToolButton;
+    refreshButton->setText(tr("Regenerate"));
+    refreshButton->setCheckable(true);
+    refreshButton->setChecked(false);
+    refreshButton->setEnabled(false);
+
     label2 = new QLabel(tr("Pointer Mode"));
+
     selectModeButton = new QToolButton;
     selectModeButton->setText(tr("Select"));
     selectModeButton->setCheckable(true);
     selectModeButton->setChecked(true);
+
     dragModeButton = new QToolButton;
     dragModeButton->setText(tr("Drag"));
     dragModeButton->setCheckable(true);
     dragModeButton->setChecked(false);
+
     antialiasButton = new QToolButton;
     antialiasButton->setText(tr("Antialiasing"));
     antialiasButton->setCheckable(true);
     antialiasButton->setChecked(false);
+
     openGlButton = new QToolButton;
     openGlButton->setText(tr("OpenGL"));
     openGlButton->setCheckable(true);
@@ -150,12 +161,16 @@ View::View(const QString &name, QWidget *parent)
     printButton = new QToolButton;
     printButton->setIcon(QIcon(QPixmap(":/fileprint.png")));
 
+    //A container for the PointerMode switcher buttons.
     QButtonGroup *pointerModeGroup = new QButtonGroup;
     pointerModeGroup->setExclusive(true);
     pointerModeGroup->addButton(selectModeButton);
     pointerModeGroup->addButton(dragModeButton);
 
+    //The button Layout
     labelLayout->addWidget(label);
+    labelLayout->addWidget(refreshButton);
+
     labelLayout->addStretch();
     labelLayout->addWidget(label2);
     labelLayout->addWidget(selectModeButton);
@@ -165,6 +180,7 @@ View::View(const QString &name, QWidget *parent)
     labelLayout->addWidget(openGlButton);
     labelLayout->addWidget(printButton);
 
+    //Generating layout for entire window
     QGridLayout *topLayout = new QGridLayout;
     topLayout->addLayout(labelLayout, 0, 0);
     topLayout->addWidget(graphicsView, 1, 0);
@@ -173,6 +189,7 @@ View::View(const QString &name, QWidget *parent)
     topLayout->addWidget(resetButton, 2, 1);
     setLayout(topLayout);
 
+    //Connect Socket to signal.
     connect(resetButton, SIGNAL(clicked()), this, SLOT(resetView()));
     connect(zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(setupMatrix()));
     connect(rotateSlider, SIGNAL(valueChanged(int)), this, SLOT(setupMatrix()));

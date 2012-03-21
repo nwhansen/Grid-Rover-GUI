@@ -97,6 +97,7 @@ private:
     QToolButton *antialiasButton;
     QToolButton *printButton;
     QToolButton *resetButton;
+    QToolButton *refreshButton;
     QSlider *zoomSlider;
     QSlider *rotateSlider;
 };

@@ -61,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(tr("Grid Rover Map Viewer"));
 }
 
+
+
 /**
   * Main code to populate the tiles of the main window. Stitching time baby.
   * Assumes all tiles provided are of the same height and width.
