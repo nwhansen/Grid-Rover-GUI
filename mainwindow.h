@@ -56,7 +56,9 @@ class MainWindow : public QWidget
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = 0);
-    
+private slots:
+    void reloadMap();
+
 private:
     void setupMatrix();
     void populateScene(int width, int height);

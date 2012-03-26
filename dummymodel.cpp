@@ -1,9 +1,9 @@
 #include "dummymodel.h"
-
+#include <time.h>
 DummyModel::DummyModel()
 {
     //Generate Salt for seed.
-    srand(time(0));
+    srand(time(NULL));
 }
 
 TileType DummyModel::getTile(int x, int y){

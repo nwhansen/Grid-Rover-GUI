@@ -48,10 +48,12 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
+    scene = new QGraphicsScene;
     populateScene(10,10);
 
     View *view = new View("World");
     view->view()->setScene(scene);
+    connect(view->refreshButton, SIGNAL(clicked()), this, SLOT(reloadMap()));
 
 
     QHBoxLayout *layout = new QHBoxLayout;
@@ -70,7 +72,6 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::populateScene(int width, int height)
 {
     //Needs to interact with model to get tile types and location.
-    scene = new QGraphicsScene;
 
     QPixmap lake(":/lake"), plain(":/plain"),
             mountain(":/mountain"), rugged(":/rugged");
@@ -122,4 +123,14 @@ void MainWindow::populateScene(int width, int height)
             ++nitems;
         }
     }*/
+}
+
+void MainWindow::reloadMap(){
+    QList<QGraphicsItem*> list = scene->items();
+    for(int i = 0; i < list.size(); i++){
+        QGraphicsItem* item = list.at(i);
+        scene->removeItem(item);
+        delete item;
+    }
+    populateScene(10,10);
 }

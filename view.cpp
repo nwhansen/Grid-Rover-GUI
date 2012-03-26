@@ -131,7 +131,7 @@ View::View(const QString &name, QWidget *parent)
     refreshButton->setText(tr("Regenerate"));
     refreshButton->setCheckable(true);
     refreshButton->setChecked(false);
-    refreshButton->setEnabled(false);
+    refreshButton->setEnabled(true);
 
     label2 = new QLabel(tr("Pointer Mode"));
 

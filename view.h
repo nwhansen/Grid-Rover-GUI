@@ -69,7 +69,7 @@ class View : public QFrame
     Q_OBJECT
 public:
     View(const QString &name, QWidget *parent = 0);
-
+    QToolButton *refreshButton;
     QGraphicsView *view() const;
 
 public slots:
@@ -95,9 +95,8 @@ private:
     QToolButton *dragModeButton;
     QToolButton *openGlButton;
     QToolButton *antialiasButton;
-    QToolButton *printButton;
     QToolButton *resetButton;
-    QToolButton *refreshButton;
+    QToolButton *printButton;
     QSlider *zoomSlider;
     QSlider *rotateSlider;
 };
