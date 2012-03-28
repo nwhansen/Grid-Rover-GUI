@@ -41,7 +41,6 @@
 
 #include "mainwindow.h"
 #include "view.h"
-#include "chip.h"
 
 #include <QtGui>
 #include <iostream>
