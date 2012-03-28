@@ -1,21 +1,36 @@
-#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
-\lyxformat 345
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass scrartcl
+\begin_preamble
+\usepackage{fancyheadings}
+\pagestyle{fancy}
+\lhead{Team Samurai}
+\chead{Project 4 Report}
+\rhead{Last modified: \date{\today}}
+\end_preamble
 \use_default_options true
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding auto
+\fontencoding global
 \font_roman default
 \font_sans default
 \font_typewriter default
 \font_default_family default
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
 
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -23,21 +38,31 @@
 \use_geometry false
 \use_amsmath 1
 \use_esint 1
+\use_mhchem 1
+\use_mathdots 1
 \cite_engine basic
 \use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
-\defskip medskip
+\paragraph_indentation default
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\author "" 
-\author "" 
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
 \end_header
 
 \begin_body
@@ -121,7 +146,7 @@ The goal the team set out to accomplish was fairly modest: A program that
 \begin_layout Standard
 We found a suitable Qt demo from which to begin our efforts: The chips demo
  uses a QGraphicsView to display 40,000 vector graphics in an easily scrollable,
- rotatable, and zoomable window.
+ rotatable, and zoom-able window.
  Beginning our efforts from here will mean that players will be able to
  zoom, rotate, and scroll their view of Titan without any extra effort on
  our part.
@@ -147,6 +172,44 @@ Time Usage
 
 \begin_layout Section
 Summary
+\end_layout
+
+\begin_layout Standard
+This project allowed the team to create a basic framework that will need
+ little modifications to create the final implementation.
+ While the project may have appeared to been simplified from the origional
+ program we have laid the building blocks for the C++ version of Cassini's.
+ The power of this project is that the map display has been created, what
+ remains boils down to the objects a rover encounters and the rover itself
+ need to be displayed.
+ The next step for the final project is to decided if the controller will
+ be event driven or through direct function calles.
+\end_layout
+
+\begin_layout Standard
+As a team we were able to decode the Chips program and convert it to the
+ the GridRover Viewer Very efficiently.
+ It also became apperent that since the Scene was populated by the main
+ window but the button was contained in the view a cleaver need to pass
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+clicked
+\begin_inset Quotes erd
+\end_inset
+
+ event was needed.
+ The button was made public as to prevent tight coupling of the main window
+ to the view.
+ That way the main window could change the method in which in regenerates
+ the map without needed to change the code of the view.
+ This effective user of loose coupling will improve the scaleability of
+ the program.
+ This effective management of time and resouces allowed for the base design
+ to be created quicky without needed a large amount of time rewriting already
+ effective code.
+ 
 \end_layout
 
 \end_body
