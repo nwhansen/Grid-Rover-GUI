@@ -1,10 +1,10 @@
 RESOURCES += images.qrc
 
-HEADERS += mainwindow.h view.h chip.h \
+HEADERS += mainwindow.h view.h  \
     dummymodel.h
 SOURCES += main.cpp \
     dummymodel.cpp
-SOURCES += mainwindow.cpp view.cpp chip.cpp
+SOURCES += mainwindow.cpp view.cpp
 
 contains(QT_CONFIG, opengl):QT += opengl
 

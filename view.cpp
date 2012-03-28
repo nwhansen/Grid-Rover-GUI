@@ -248,6 +248,8 @@ void View::togglePointerMode()
     graphicsView->setInteractive(selectModeButton->isChecked());
 }
 
+
+
 void View::toggleOpenGL()
 {
 #ifndef QT_NO_OPENGL
