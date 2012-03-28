@@ -2,10 +2,8 @@ BUILDING
 ========
 
 We recommend this project be built from within QtCreator, properly configured
-with a recent version of Qt. Simply open the chip.pro project file, select
-"Shadow builds" if available, and press the Build icon. This will produce a
-complete build of the project in the configured shadow-build directory next to
-the project directory, avoiding messy mixing of code and compiled files.
+with a recent version of Qt. Simply open the chip.pro project file, Specifiy the build target is desktop
+and press Run (play). 
 
 If this is not an option, qmake can be used:
 
