@@ -3,7 +3,7 @@ BUILDING
 
 We recommend this project be built from within QtCreator, properly configured
 with a recent version of Qt. Simply open the chip.pro project file, Specifiy the build target is desktop
-and press Run (play). 
+and press Run (play button). 
 
 If this is not an option, qmake can be used:
 
