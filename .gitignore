@@ -1,2 +1,4 @@
 *.user
 /images/*.xcf
+*.*~
+*.autosave
