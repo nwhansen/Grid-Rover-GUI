@@ -7,10 +7,10 @@
 
 #ifndef ABSTRACTMODEL_H
 #define	ABSTRACTMODEL_H
-
+#include "TitanTime.h"
 //project includes
-#include "AbstractConsequence.h"
-#include "AbstractTile.h"
+class AbstractEvent;
+
 
 namespace AbstractModelNameSpace {
     /**
@@ -27,7 +27,7 @@ namespace AbstractModelNameSpace {
          *      The Reason Why a rover could not preform the last move.
          * @return The Next Step in the simulation dubbed "consequence"
          */
-        virtual AbstractConsequence* sufferConsequence() = 0;
+        virtual AbstractEvent* next() = 0;
         /**
          * Gets the basic tile information for the specified tile offset from the Top Left Corner of the map.
          * Contains only minimal information regarding the tile. No details about tile contents.
@@ -36,8 +36,40 @@ namespace AbstractModelNameSpace {
          * @return 
          */
         virtual AbstractTile * getTileInfo(int XoffSet, int YoffSet) = 0;
-    private:
         
+        /**
+         * Returns the current time in titan time.
+         * @return The time
+         */
+        Titan::TitanTime getTime() {
+            return CurrentTime;
+        }
+        
+        /**
+         * Attempts to add an event to the event queue. If the event occured prior to the current time then this will fail.
+         * @param event The event to add
+         * @return The result of adding it.
+         */
+        virtual bool AddEvent(AbstractEvent event) = 0;
+        
+        /**
+         * A helper method so that the abstractEvent can get tiles without an explicit function, and can instead use a function pointer.
+         * @param model The Model that the event propegated from.
+         * @param XoffSet The X-offSet that is of interest from the top left corner
+         * @param YoffSet The Y-offSet that is of interest from the top left corner
+         * @return The Abstract Tile of interest.
+         * @thows Cast Exception if the void* is not of type AbstractModel or its dependents.
+         */
+        static  AbstractTile * EventHelper(void* model, int XoffSet, int YoffSet) {
+            //Attempt to cast
+            AbstractModel *Model = (AbstractModel)model;
+            return Model->getTileInfo(XoffSet, YoffSet);
+        }
+    private:
+        /**
+         * The current time in the simulation, Event cannot occur before this time.
+         */
+        Titan::TitanTime CurrentTime;
     };
 }
 #endif	/* ABSTRACTMODEL_H */
