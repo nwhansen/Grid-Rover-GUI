@@ -12,6 +12,11 @@
         <itemPath>include/AbstractModel.h</itemPath>
         <itemPath>include/AbstractTile.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f4"
+                     displayName="AbstractThingNameSpace"
+                     projectFiles="true">
+        <itemPath>AbstractThing.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f2" displayName="StackModelNameSpace" projectFiles="true">
         <itemPath>include/StackConsequence.h</itemPath>
         <itemPath>include/StackModel.h</itemPath>
