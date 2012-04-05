@@ -1,0 +1,769 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Grid Rover Design Document
+\end_layout
+
+\begin_layout Author
+by Team Samurai:
+\begin_inset Newline newline
+\end_inset
+
+Lucas Adam M.
+ Paul (00294068),
+\begin_inset Newline newline
+\end_inset
+
+Nathan Hansen (00637655),
+\begin_inset Newline newline
+\end_inset
+
+Cody Foltz (00712090),
+\begin_inset Newline newline
+\end_inset
+
+David Venable (00621000)
+\end_layout
+
+\begin_layout Abstract
+Grid Rover is to be an event-driven simulation/game, similar to a previous
+ game called Cassini, in which players program rovers to explore the surface
+ of a distant world.
+ It is intended to be instructive, educational, and fun.
+ Players will learn the basics of artificial intelligence programming as
+ they attempt to design a sensible and successful rover control program
+ in a programming language of their choice.
+ This document discusses in detail what Grid Rover is, and the high-level
+ design Team Samurai is using to implement it for the CS 3505 final project.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Project Summary
+\end_layout
+
+\begin_layout Standard
+Because it was inspired by an earlier project, any description of Grid Rover
+ should rightly begin with a discussion of its predecessor, Cassini.
+ Cassini was developed at the University of Utah and used in the High School
+ Computing Institute program (discontinued in 2004) as an educational tool.
+ As a game, it had a very unique play style.
+\end_layout
+
+\begin_layout Standard
+In most modern games, the use of a computer program to assist or even completely
+ take control of the play of a game is considered cheating, and is discouraged.
+ Cassini turned this idea on its head.
+ It presented players with the premise that NASA had included a rover on
+ the Huygens probe, bound for Saturn's moon Titan, and that they were in
+ charge of writing the high-level logic that would guide the rover across
+ Titan's surface.
+ The game itself would allow a player to directly control a rover, but the
+ purpose of this feature was to teach the player how a rover ought to behave.
+ The real challenge of the game was to write a program that could effectively
+ control the rover without any human intervention at all.
+\end_layout
+
+\begin_layout Standard
+Every action the rover performed had consequences, and those consequences
+ affected the overall outcome of the game.
+ Since NASA had sent this rover to Titan to explore in the first place,
+ one of the goals of the game was to visit as much of Titan's surface as
+ possible, and to interact with as many things as possible.
+ However, another goal was to keep the rover operational for as long as
+ possible.
+ One of the things that made Cassini a great game was that these goals were
+ contradictory - exploring is inherently dangerous, but you don't learn
+ much if your rover just hangs out around the lander.
+\end_layout
+
+\begin_layout Standard
+Cassini was a great game, and a superb learning tool, but it had some shortcomin
+gs.
+ First of all, it was written in Common LISP.
+ LISP is indeed a powerful language, but there aren't a lot of programmers
+ who are conversant in it, and so maintaining Cassini would have become
+ problematic over time.
+ Another consequence of the implementation language was the fact that players
+ were more or less forced to write their rover-control programs in LISP.
+ Again, LISP is well-suited to expert systems and artificial intelligence,
+ but then so are many other languages and it seemed a shame that none of
+ those were options to potential players.
+ Finally, Cassini really only ran on the CADE machines, since it depended
+ on a certain directory structure that may have been difficult to reproduce
+ elsewhere.
+\end_layout
+
+\begin_layout Standard
+Grid Rover is intended to answer these shortcomings, and expand on the success
+ of Cassini, both as a game and as an educational tool.
+ Succinctly, with this in mind, Grid Rover is a modern, portable, open-source
+ clone of Cassini that allows its players to write rover-control programs
+ in any language they like.
+ It is an event-driven simulation of a NASA probe on another world, exploring,
+ discovering, and trying to survive as long as possible against long odds.
+\end_layout
+
+\begin_layout Section
+Features
+\end_layout
+
+\begin_layout Standard
+Cassini was a rich application, with many features - many more than we could
+ reasonably hope to recreate for Grid Rover in a few short weeks.
+ We have taken our favorites and divided them into two categories.
+ The Key Features are those we feel are absolutely essential to the spirit
+ of the game.
+ We hope to implement at least these by the end of the project-proper.
+ The Wish-list Features are those features we would like to implement if
+ we are able, but could live without if time did not permit.
+\end_layout
+
+\begin_layout Subsection
+Key Features
+\end_layout
+
+\begin_layout Itemize
+The game will have a GUI that at least shows an overhead view of a fictional
+ Titan, divided into square tiles, and indicates the position of the rover
+ and the lander.
+\end_layout
+
+\begin_layout Itemize
+There will be a way to select an external program to control the rover.
+ That program will be able to issue the commands described below.
+\end_layout
+
+\begin_layout Itemize
+The game will have some way to create a simulated world for a rover to explore
+ (either by reading a data file, or generating data randomly).
+\end_layout
+
+\begin_layout Itemize
+A move command will, if successful, cause the rover to move in the given
+ direction, along with any consequences of that action (like draining the
+ rover's battery, points being awarded for visiting a new square, or the
+ rover falling off a cliff).
+\end_layout
+
+\begin_layout Itemize
+A look command will provide a description of the tile the rover is currently
+ in and any objects the rover can perceive.
+\end_layout
+
+\begin_layout Itemize
+A collect command will take the specified object from the tile the rover
+ is in and place it in the rover's inventory (assuming the rover can carry
+ it).
+\end_layout
+
+\begin_layout Itemize
+A drop command will take the specified object from the rover's inventory
+ and put it in the tile.
+\end_layout
+
+\begin_layout Itemize
+A deliver command will, if the rover is in the same square as a lander,
+ take the specified object from the rover's inventory, give it to the lander,
+ and award points to the owner of the 
+\emph on
+lander
+\emph default
+ according to how interesting the object was.
+\end_layout
+
+\begin_layout Itemize
+The game will end, conceptually, when the rover runs out of battery.
+\end_layout
+
+\begin_layout Itemize
+When the game ends, a score will be reported to the player and the rover
+ control program.
+\end_layout
+
+\begin_layout Subsection
+Wish-list Features
+\end_layout
+
+\begin_layout Itemize
+Every action the rover performs will have a realistic energy cost, which
+ will be deducted from its battery supply.
+\end_layout
+
+\begin_layout Itemize
+A rover on the same tile as a friendly lander may issue a recharge command
+ to completely refill its battery a limited number of times.
+\end_layout
+
+\begin_layout Itemize
+Custom worlds and object-sets can be created and saved as data files which
+ the game can load and use.
+\end_layout
+
+\begin_layout Itemize
+A tweak command will cause the rover to attempt to fiddle with the specified
+ object, with consequences depending on the object itself.
+\end_layout
+
+\begin_layout Itemize
+A rover may suffer damage or wear to its parts, impairing its performance.
+ For example, if a rover's robotic arm is damaged, it may not be able to
+ collect, drop, or deliver objects anymore.
+\end_layout
+
+\begin_layout Itemize
+If a spare part is available, a rover may effect a repair on itself, replacing
+ a broken module with a working one.
+\end_layout
+
+\begin_layout Itemize
+Attributes of objects will only be visible (reported to the rover control
+ program) if those objects are illuminated.
+\end_layout
+
+\begin_layout Itemize
+Different attributes of objects may only be visible under certain spectra
+ of light/sound.
+\end_layout
+
+\begin_layout Itemize
+Rovers have emitters and sensors that allow them to produce, and detect
+ various spectra of light/sound.
+\end_layout
+
+\begin_layout Itemize
+Customizable inventory management.
+ Sharks with laser beams.
+\end_layout
+
+\begin_layout Section
+Team Member Priorities
+\end_layout
+
+\begin_layout Standard
+The different parts of Grid Rover are quite interdependent, and separating
+ responsibilities has proved rather challenging.
+ It will be worth reviewing the underlying design to adequately explain
+ how we attempted to divide the work.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename BasicProgramDiagram.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:High-level-design-overview"
+
+\end_inset
+
+High-level design overview
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We intend to implement Grid Rover as an event-driven simulation, with a
+ simple priority queue, sorted by in-game time and date, acting as the event
+ queue.
+ The main engine component will keep track of the map, the event queue,
+ and a list of rovers it knows about in the game.
+ It won't know anything at all about how to transform these things - it
+ will only pop events off of the queue and apply them.
+ Events will be responsible for actually effecting changes on the simulated
+ world, and will do so according to their type.
+ There will be a 
+\begin_inset Quotes eld
+\end_inset
+
+TravelEvent
+\begin_inset Quotes erd
+\end_inset
+
+, for example, that will cause a rover to move from one square to a neighboring
+ square.
+ Map tiles will contain lists of all of the Things in them.
+ Things, like rocks, watermelons, martians, rovers, the TARDIS, will be
+ represented as objects in memory with certain attributes and methods, such
+ as 
+\begin_inset Quotes eld
+\end_inset
+
+pointValue
+\begin_inset Quotes erd
+\end_inset
+
+ for how many points the object is worth if delivered to a lander.
+ A diagram of this high-level view of Grid Rover's design is presented in
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:High-level-design-overview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Armed with this diagram, Team Samurai drew some initial lines of responsibility
+ for each team member.
+ Nathan Hansen has claimed the western kingdom, and the lands of the engine,
+ Map, event queue, and IPC between the game and user programs.
+ Lucas Paul conquered the southern principality of Events.
+ Cody Foltz came to power in the south-easterly empire of Things, Lander
+ and Rover through a bloodless coup.
+ Finally, David Venable committed seppuku by missing team meetings, and
+ was left as sole custodian of whatever the other three couldn't handle
+ on their own.
+\end_layout
+
+\begin_layout Standard
+The GUI is a special case.
+ Thanks to a previous project (hw4), it is largely functional.
+ At a critical point, it will become necessary to adapt it to be useful
+ to the new game design, and this will be a team effort.
+ After that, any additional modifications will be done by the team member
+ who requires them.
+ Therefore, the GUI is the responsibility of the entire team.
+\end_layout
+
+\begin_layout Section
+Software Processes
+\end_layout
+
+\begin_layout Standard
+Team Samurai is still in the process of cementing its software processes
+ and work-flow.
+ It is clear there will need to be some significant decisions made in short
+ order, but the following have been decided already.
+\end_layout
+
+\begin_layout Itemize
+The code will be hosted on GitHub, in a central git repository.
+\end_layout
+
+\begin_layout Itemize
+The team will organize their efforts via ScrumDo.
+\end_layout
+
+\begin_layout Itemize
+A minimal feature set will be implemented as quickly as possible, and features
+ added incrementally.
+\end_layout
+
+\begin_layout Itemize
+Pair programming will be utilized, especially for large, interdependent
+ changes to the code.
+\end_layout
+
+\begin_layout Itemize
+As much as possible, the team will work at the same time, where everyone
+ can talk to everyone else.
+ When it is not possible to meet physically, the team will use Mumble for
+ voice-chat.
+\end_layout
+
+\begin_layout Itemize
+Unit testing will be automated, and preferably part of the build system.
+\end_layout
+
+\begin_layout Section*
+Appendix A: Use Cases
+\end_layout
+
+\begin_layout Subsection*
+Starting a game
+\end_layout
+
+\begin_layout Standard
+Primary actor: Regular Grid Rover user.
+\end_layout
+
+\begin_layout Standard
+A user starts the game.
+ The GUI comes up and prompts the user for a rover program executable.
+ The user browses to the location of an executable.
+ The game begins and the GUI loads the map, placing the rover and lander
+ initially in the same tile.
+\end_layout
+
+\begin_layout Subsection*
+Direct control game
+\end_layout
+
+\begin_layout Standard
+Primary actor: Regular Grid Rover user.
+\end_layout
+
+\begin_layout Standard
+In the Grid Rover GUI, the user presses the 
+\begin_inset Quotes eld
+\end_inset
+
+Step
+\begin_inset Quotes erd
+\end_inset
+
+ button.
+ The direct control program prompts the user for a command.
+ The user types a command into the direct-control program.
+ The direct-control program forwards the command to Grid Rover.
+\end_layout
+
+\begin_layout Subsection*
+Rover Control Program
+\end_layout
+
+\begin_layout Standard
+Primary actor: Regular Grid Rover User
+\end_layout
+
+\begin_layout Standard
+User will read the api documentation.
+ They will then design a program in their preferred language, that can write
+ to the command console.
+ User starts the game.
+\end_layout
+
+\begin_layout Subsection*
+Move command
+\end_layout
+
+\begin_layout Standard
+Primary actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the rover-control program for a command.
+ The rover-control program sends 
+\begin_inset Quotes eld
+\end_inset
+
+move east
+\begin_inset Quotes erd
+\end_inset
+
+ back to Grid Rover.
+ The rover in-game attempts to move 1 tile to the east; the result of the
+ move is reported the the control program.
+\end_layout
+
+\begin_layout Subsection*
+Look command
+\end_layout
+
+\begin_layout Standard
+Primary actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the rover-control program for a command.
+ The rover program sends 
+\begin_inset Quotes eld
+\end_inset
+
+look
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Grid Rover sends to the rover-control program a description of the tile
+ the in-game rover occupies, and descriptions of all of the other objects
+ in that same tile, to the degree the rover can perceive them.
+\end_layout
+
+\begin_layout Subsection*
+Collect command
+\end_layout
+
+\begin_layout Standard
+Primary actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the rover-control program for a command.
+ The rover-control program sends 
+\begin_inset Quotes eld
+\end_inset
+
+collect 12345
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The rover in-game attempts to pick up and carry an object in its same tile
+ with id 12345; the result of the collect is reported the the control program.
+\end_layout
+
+\begin_layout Subsection*
+Drop command
+\end_layout
+
+\begin_layout Standard
+Primary actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the rover-control program for a command.
+ The rover-control program sends 
+\begin_inset Quotes eld
+\end_inset
+
+drop 12345
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The rover in-game attempts to drop an object with id 12345 from its inventory;
+ the result of the drop is reported the the control program.
+\end_layout
+
+\begin_layout Subsection*
+Deliver command
+\end_layout
+
+\begin_layout Standard
+Primary actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the rover-control program for a command.
+ The rover-control program sends 
+\begin_inset Quotes eld
+\end_inset
+
+deliver 12345
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The rover in-game attempts to give an object with id 12345 from its inventory
+ to a lander in its same tile; the result of the deliver is reported the
+ the control program.
+\end_layout
+
+\begin_layout Subsection*
+Game over
+\end_layout
+
+\begin_layout Standard
+Primary actor: Regular Grid Rover user.
+\end_layout
+
+\begin_layout Standard
+The user presses the 
+\begin_inset Quotes eld
+\end_inset
+
+Step
+\begin_inset Quotes erd
+\end_inset
+
+ button.
+ The rover in-game runs out of battery.
+ The game ends.
+ A score is reported to the user.
+\end_layout
+
+\begin_layout Subsection*
+Recharge
+\end_layout
+
+\begin_layout Standard
+Primary actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the rover-control program for a command.
+ The rover-control program sends 
+\begin_inset Quotes eld
+\end_inset
+
+recharge
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The rover in-game attempts to recharge its batteries from a friendly lander
+ in the same tile.
+\end_layout
+
+\begin_layout Subsection*
+Tweak
+\end_layout
+
+\begin_layout Standard
+Primary Actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the control program for a command.
+ The rover-control program sends 
+\begin_inset Quotes eld
+\end_inset
+
+tweak 12345
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The Rover in game attempts to tweak object; the result of the tweak is
+ reported the the control program.
+\end_layout
+
+\begin_layout Subsection*
+Precarious rock
+\end_layout
+
+\begin_layout Standard
+Primary actor: Rover-control program.
+\end_layout
+
+\begin_layout Standard
+Grid Rover prompts the rover-control program for a command.
+ The rover-control program sends 
+\begin_inset Quotes eld
+\end_inset
+
+tweak 86
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The rover in-game tweaks object 86 in its same tile, which happens to be
+ a precarious rock.
+ The rock falls on the rover, destroying it; this fact is reported to the
+ rover-control program.
+ The game ends.
+ A score is reported to the rover-control program.
+\end_layout
+
+\end_body
+\end_document
