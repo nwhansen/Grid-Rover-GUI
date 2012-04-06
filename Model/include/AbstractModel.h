@@ -92,7 +92,7 @@ namespace AbstractModelNameSpace {
         /**
          * The Communication with the rover. All communication must be contained and used by this object.
          */
-        AbstractRoverInterface CommProtacal;
+        AbstractRoverInterface CommPortal;
     };
 }
 

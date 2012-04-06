@@ -18,13 +18,13 @@ std::string robot_filename = "";
 AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
     int pipe_in[2], pipe_out[2];
     if (pipe(pipe_in))
-        Error(true, "Couldn't setup pipe_in for robot " + robot_filename, "Robot::start_process");
+        Error(true, "Couldn't setup pipe_in for robot " + filename, "Robot::start_process");
 
     if (pipe(pipe_out))
-        Error(true, "Couldn't setup pipe_out for robot " + robot_filename, "Robot::start_process");
+        Error(true, "Couldn't setup pipe_out for robot " + filename, "Robot::start_process");
 
     if ((pid = fork()) < 0)
-        Error(true, "Couldn't fork childprocess for robot " + robot_filename, "Robot::start_process");
+        Error(true, "Couldn't fork childprocess for robot " + filename, "Robot::start_process");
 
     if (pid == 0) // Child process, to be the new robot
     {
@@ -64,10 +64,10 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
         
         int old;
         if ((old = getpriority(PRIO_PROCESS, 0)) == -1)
-            Error(true, "Couldn't get priority for robot " + robot_filename,
+            Error(true, "Couldn't get priority for robot " + filename,
                 "Robot::start_process, child");
         if (setpriority(PRIO_PROCESS, 0, old + 1) == -1)
-            Error(true, "Couldn't set priority for robot " + robot_filename,
+            Error(true, "Couldn't set priority for robot " + filename,
                 "Robot::start_process, child");
 
         // Close all pipes not belonging to the robot
@@ -77,10 +77,10 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
         running = true;
         if (execl(robot_filename.c_str(), robot_filename.c_str(), NULL) == -1) //Maybe.
             // we are in another process so exiting does not solve the problem
-            Error(true, "Couldn't open robot " + robot_filename,
+            Error(true, "Couldn't open robot " + filename,
                 "Robot::start_process, child");
         running = false;
-        Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + robot_filename,
+        Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + filename,
                 "Robot::start_process, child");
     } else {
         close(pipe_out[0]); // Close input side of pipe_out
@@ -122,11 +122,7 @@ bool AbstractRoverInterface::SendRoverCommand(std::string& roverCommand){
 
 void AbstractRoverInterface::CloseConnection() {
     //Term the robot.
-    if(!running) return;
-    if(write(pipes[0], EXIT_ROVER, sizeof(EXIT_ROVER))){
-        //error!
-        return;
-    }
+    SendRoverCommand(EXIT_ROVER);
     close(pipes[0]);
     close(pipes[1]);
     running = false;

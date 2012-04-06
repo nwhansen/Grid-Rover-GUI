@@ -21,8 +21,17 @@ namespace AbstractModelNameSpace {
     class AbstractRoverInterface {
     public:
         virtual ~AbstractRoverInterface();
-        AbstractRoverInterface(std::string& roverName);
+        /**
+         * Constructs and forks the child process (rover-control program) all messages are blocking.
+         * @param roverName The Rover Filename.
+         */
+        AbstractRoverInterface(std::string& roverfilename);
         std::string getRoverCommand();
+        /**
+         * Send a message to the rover. Must be properly formated
+         * @param roverCommand The command to send
+         * @return The Result of the message.
+         */
         bool SendRoverCommand(std::string& roverCommand);
         /**
          * Closes and terminates the rover.
