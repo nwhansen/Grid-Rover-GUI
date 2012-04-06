@@ -8,16 +8,17 @@
 #ifndef ABSTRACTMODEL_H
 #define	ABSTRACTMODEL_H
 #include "TitanTime.h"
+#include "AbstractRoverInterface.h"
 //project includes
+
 class AbstractEvent;
-class AbstractRoverInterface;
 
 namespace AbstractModelNameSpace {
 
     /**
      * A non threaded version of a map. 
      */
-    class AbstractModel {
+    class AbstractEngine {
     public:
 
         /**
@@ -70,8 +71,7 @@ namespace AbstractModelNameSpace {
          */
         static AbstractTile * EventAddHelper(void* model, int XoffSet, int YoffSet) {
             //Attempt to cast
-            AbstractModel *Model = (AbstractModel) model;
-            return Model->getTileInfo(XoffSet, YoffSet);
+            return ((AbstractEngine)model)->getTileInfo(XoffSet, YoffSet);
         }
         
         /**
@@ -80,9 +80,10 @@ namespace AbstractModelNameSpace {
          * @throws Cast Exception if the model is not of type AbstractModel or its derivatives
          */
         static void EventEndHelper(void* model) {
-            ((AbstractModel*)model)->EndGame();
+            ((AbstractEngine*)model)->EndGame();
         }
     private:
+        
         /**
          * The current time in the simulation, Event cannot occur before this time.
          */
