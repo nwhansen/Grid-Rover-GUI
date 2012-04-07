@@ -16,13 +16,19 @@ void Error(bool, std::string);
 std::string robot_filename = "";
 
 AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
+    //Attempt to get the logger The thread will stall if 
+    log->aquireLogger(log);
+    if(log->activeLogger() == 0){
+        //Die?
+        throw 1;
+    }
     int pipe_in[2], pipe_out[2];
     if (pipe(pipe_in))
         Error(true, "Couldn't setup pipe_in for robot " + filename, "Robot::start_process");
 
     if (pipe(pipe_out))
         Error(true, "Couldn't setup pipe_out for robot " + filename, "Robot::start_process");
-
+    
     if ((pid = fork()) < 0)
         Error(true, "Couldn't fork childprocess for robot " + filename, "Robot::start_process");
 

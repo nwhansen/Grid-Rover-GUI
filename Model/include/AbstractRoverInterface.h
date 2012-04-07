@@ -12,6 +12,8 @@
 #include <sys/resource.h>
 #include <sys/types.h>
 #include <stdio.h>
+#include "Logger.h"
+
 namespace AbstractModelNameSpace {
 
     /**
@@ -40,6 +42,7 @@ namespace AbstractModelNameSpace {
         
     private:
 #define EXIT_ROVER "GAME OVER"
+        Logging::Logger* log;
         bool running;
         int pipes[2];
         pid_t pid;
