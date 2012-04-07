@@ -40,7 +40,7 @@ namespace AbstractModelNameSpace {
          */
         void CloseConnection();
         
-    private:
+    private: 
 #define EXIT_ROVER "GAME OVER"
         Logging::Logger* log;
         bool running;

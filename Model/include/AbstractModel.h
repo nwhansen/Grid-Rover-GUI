@@ -59,7 +59,7 @@ namespace AbstractModelNameSpace {
          * @param event The event to add
          * @return The result of adding it.
          */
-        virtual bool AddEvent(AbstractEvent event) = 0;
+        virtual bool AddEvent(AbstractEvent event) = 0; 
 
         /**
          * A helper method so that the abstractEvent can get tiles without an explicit function, and can instead use a function pointer.

@@ -51,7 +51,7 @@ namespace Logging {
          * This will not create a logger. It will time out after 5 seconds and return without modifying the variable
          * @param toAssign the logger pointer to assign the active logger.
          */
-        static void aquireLogger(Logger*& toAssign);
+        static void aquireLogger(Logger*& toAssign); 
         
     private:
         static Logger* ActiveLogger = 0;
