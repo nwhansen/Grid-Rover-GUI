@@ -14,6 +14,9 @@
         <itemPath>include/AbstractRoverInterface.h</itemPath>
         <itemPath>include/AbstractTile.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f4" displayName="Logging" projectFiles="true">
+        <itemPath>include/Logger.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f2" displayName="StackModelNameSpace" projectFiles="true">
         <itemPath>include/StackConsequence.h</itemPath>
         <itemPath>include/StackModel.h</itemPath>
@@ -32,6 +35,7 @@
                    projectFiles="true">
       <logicalFolder name="source" displayName="source" projectFiles="true">
       </logicalFolder>
+      <itemPath>source/Logger.C</itemPath>
       <itemPath>source/StackConsequence.C</itemPath>
       <itemPath>source/StackModel.C</itemPath>
       <itemPath>source/StackTile.C</itemPath>
