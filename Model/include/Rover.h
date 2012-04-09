@@ -8,11 +8,21 @@
 #ifndef ROVER_H
 #define	ROVER_H
 
+#include "AbstractThing.h"
+#include <vector>
+
+using namespace std;
+using namespace AbstractThingNameSpace;
+
 namespace ThingNameSpace{
     
     class Rover{
         
     private:
+        
+        vector<AbstractThing> inventory;
+        unsigned int score;
+        unsigned int inventoryVolume;
         
     public:
         
