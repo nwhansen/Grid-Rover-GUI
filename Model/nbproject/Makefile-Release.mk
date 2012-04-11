@@ -35,10 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/AbstractRoverInterface.o \
-	${OBJECTDIR}/source/StackTile.o \
-	${OBJECTDIR}/source/Logger.o \
-	${OBJECTDIR}/source/StackConsequence.o \
-	${OBJECTDIR}/source/StackModel.o
+	${OBJECTDIR}/source/Logger.o
 
 
 # C Compiler Flags
@@ -70,25 +67,10 @@ ${OBJECTDIR}/source/AbstractRoverInterface.o: source/AbstractRoverInterface.C
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AbstractRoverInterface.o source/AbstractRoverInterface.C
 
-${OBJECTDIR}/source/StackTile.o: source/StackTile.C 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StackTile.o source/StackTile.C
-
 ${OBJECTDIR}/source/Logger.o: source/Logger.C 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
-
-${OBJECTDIR}/source/StackConsequence.o: source/StackConsequence.C 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StackConsequence.o source/StackConsequence.C
-
-${OBJECTDIR}/source/StackModel.o: source/StackModel.C 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StackModel.o source/StackModel.C
 
 # Subprojects
 .build-subprojects:

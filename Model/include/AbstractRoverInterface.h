@@ -13,12 +13,13 @@
 #include <sys/types.h>
 #include <stdio.h>
 #include "Logger.h"
+#include <pthread.h>
 
 namespace AbstractModelNameSpace {
 
     /**
-     * An interface with the rover. This provides a full implementation, as the types of rover is not 
-     * important to this class. No inheritance should be needed.
+     * An interface with the rover. Different None Abstract Rover Interfaces should only modify the Send Formatted Message.
+     * 
      */
     class AbstractRoverInterface {
     public:
@@ -34,13 +35,15 @@ namespace AbstractModelNameSpace {
          * @param roverCommand The command to send
          * @return The Result of the message.
          */
-        bool SendRoverCommand(std::string& roverCommand);
+        bool SendRoverCommand( const std::string& roverCommand);
         /**
          * Closes and terminates the rover.
          */
         void CloseConnection();
         
-    private:
+        virtual bool SendFormattedMessage(std::string& command, std::string& args ...);
+        
+    private: 
 #define EXIT_ROVER "GAME OVER"
         Logging::Logger* log;
         bool running;
