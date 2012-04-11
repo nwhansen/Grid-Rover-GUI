@@ -16,17 +16,20 @@ namespace Logging {
 
     class Logger {
     public:
-
         /**
          * The Current active logger. As only one should ever be opened.
          */
         static Logger* activeLogger() {
-            return ActiveLogger;
+            return Logger::ActiveLogger;
         }
         /**
          * Create a logger object. If another active logger exists throws an exception.
          */
         Logger();
+        /**
+         * Though Shall not COPY!
+         * Throws an exception don't do it.
+         */
         Logger(const Logger& orig);
         /**
          * Attempts to open the logs specified by the paths. If either logger cannot be opened this will fail and close all connections.
@@ -35,17 +38,18 @@ namespace Logging {
          * @param errorLog The Error Log
          * @return The result of opening the logs
          */
-        bool openLogs(std::string messageLog, std::string errorLog);
+        bool openLogs(std::string& messageLog, std::string& errorLog);
+        
         virtual ~Logger();
         
-        void Error(bool console, std::string& message);
+        void Error(bool console, const std::string& message);
         
         /**
          * Log a Message to the Message log
          * @param console Write the console 
          * @param message The message to write to the log
          */
-        void Message(bool console, std::string& message);
+        void Message(bool console, const std::string& message);
         /**
          * Attempts to aquire a logger. Will not create a logger. 
          * This will not create a logger. It will time out after 5 seconds and return without modifying the variable
@@ -54,11 +58,11 @@ namespace Logging {
         static void aquireLogger(Logger*& toAssign); 
         
     private:
-        static Logger* ActiveLogger = 0;
+        static Logger* ActiveLogger;
         pthread_mutex_t lock;
         std::ofstream ErrorLog;
         std::ofstream MessageLog;
-        std::string constructMessage(std::string& message);
+        std::string constructMessage(const std::string& message);
     };
 }
 #endif	/* LOGGER_H */

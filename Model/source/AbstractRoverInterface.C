@@ -10,27 +10,31 @@
 #include <sys/stat.h>
 #include <stdarg.h> 
 #include <stdio.h>
+#include <unistd.h>
+
+void func() {
+    
+}
 
 using namespace AbstractModelNameSpace;
-void Error(bool, std::string);
-std::string robot_filename = "";
 
 AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
     //Attempt to get the logger The thread will stall if 
+    
     log->aquireLogger(log);
-    if(log->activeLogger() == 0){
+    if (log->activeLogger() == 0) {
         //Die?
         throw 1;
     }
     int pipe_in[2], pipe_out[2];
     if (pipe(pipe_in))
-        Error(true, "Couldn't setup pipe_in for robot " + filename, "Robot::start_process");
+        log->Error(true,std::string("Couldn't setup pipe_in for rover " + filename));
 
     if (pipe(pipe_out))
-        Error(true, "Couldn't setup pipe_out for robot " + filename, "Robot::start_process");
-    
+        log->Error(true, std::string("Couldn't setup pipe_out for rover " + filename));
+
     if ((pid = fork()) < 0)
-        Error(true, "Couldn't fork childprocess for robot " + filename, "Robot::start_process");
+        log->Error(true, std::string("Couldn't fork child process for rover " + filename));
 
     if (pid == 0) // Child process, to be the new robot
     {
@@ -42,56 +46,26 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
         dup2(pipe_in[1], STDOUT_FILENO);
         close(pipe_in[0]);
 
-        // Make the pipes non-blocking
-        //Not using non_blocking
-        //        if (use_non_blocking) {
-        //            int pd_flags;
-        //            if ((pd_flags = fcntl(pipe_out[0], F_GETFL, 0)) == -1)
-        //                Error(true, "Couldn't get pd_flags for pipe_out in robot " + robot_filename,
-        //                    "Robot::start_process, child");
-        //            pd_flags |= O_NONBLOCK;
-        //            if (fcntl(pipe_out[0], F_SETFL, pd_flags) == -1)
-        //                Error(true, "Couldn't change pd_flags for pipe_out in robot " + robot_filename,
-        //                    "Robot::start_process, child");
-        //
-        //
-        //            if ((pd_flags = fcntl(pipe_in[1], F_GETFL, 0)) == -1)
-        //                Error(true, "Couldn't get pd_flags for pipe_in in robot " + robot_filename,
-        //                    "Robot::start_process, child");
-        //            pd_flags |= O_NONBLOCK;
-        //            if (fcntl(pipe_in[1], F_SETFL, pd_flags) == -1)
-        //                Error(true, "Couldn't change pd_flags for pipe_in in robot " + robot_filename,
-        //                    "Robot::start_process, child");
-        //        }
-
-        // Check file attributes
-
-        // Lower priority by one
-        
         int old;
         if ((old = getpriority(PRIO_PROCESS, 0)) == -1)
-            Error(true, "Couldn't get priority for robot " + filename,
-                "Robot::start_process, child");
+            log->Error(true, "Couldn't get priority for rover " + filename);
         if (setpriority(PRIO_PROCESS, 0, old + 1) == -1)
-            Error(true, "Couldn't set priority for robot " + filename,
-                "Robot::start_process, child");
+            log->Error(true, "Couldn't set priority for rover " + filename);
 
         // Close all pipes not belonging to the robot
         //Todo: Get pipe cleaning complete.
 
         // Execute process. Should not return!
         running = true;
-        if (execl(robot_filename.c_str(), robot_filename.c_str(), NULL) == -1) //Maybe.
+        if (execl(filename.c_str(), filename.c_str(), NULL) == -1) //Maybe.
             // we are in another process so exiting does not solve the problem
-            Error(true, "Couldn't open robot " + filename,
-                "Robot::start_process, child");
+            log->Error(true, "Couldn't open robot " + filename);
         running = false;
-        Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + filename,
-                "Robot::start_process, child");
+        log->Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + filename);
     } else {
         close(pipe_out[0]); // Close input side of pipe_out
         close(pipe_in[1]); // Close output side of pipe_in
-
+        
         pipes[0] = pipe_out[1];
         pipes[1] = pipe_in[0];
 
@@ -105,30 +79,30 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
     select(FD_SETSIZE, NULL, NULL, NULL, &timeout);
 }
 
-
 std::string AbstractRoverInterface::getRoverCommand() {
     //Buffers
     char buffer[1024];
-    if (read(pipes[1], buffer, sizeof(buffer)) < 0){
-        //Error! quit
+    if (read(pipes[1], buffer, sizeof (buffer)) < 0) {
+        log->Error(false, "Unable to read from robot. Sent null terminating character");
         return NULL;
     }
     return std::string(buffer);
 }
 
-bool AbstractRoverInterface::SendRoverCommand(std::string& roverCommand){
-    if(write(pipes[0], roverCommand.c_str(), roverCommand.size())){
+bool AbstractRoverInterface::SendRoverCommand(const std::string& roverCommand) {
+    if (write(pipes[0], roverCommand.c_str(), roverCommand.size())) {
         //TODO: ERROR REPORT
-        //Error report to log
+        log->Error(true, "Unable to send message! Unknown reason");
         return false;
     }
     //Log something maybe.
+    log->Message(false, "Sent message to rover");
     return true;
 }
 
 void AbstractRoverInterface::CloseConnection() {
     //Term the robot.
-    SendRoverCommand(EXIT_ROVER);
+    SendRoverCommand(std::string(EXIT_ROVER));
     close(pipes[0]);
     close(pipes[1]);
     running = false;
@@ -136,5 +110,40 @@ void AbstractRoverInterface::CloseConnection() {
 
 AbstractRoverInterface::~AbstractRoverInterface() {
     //Term the rover
-    
+
+}
+//using a socket pair instead.
+#include <sys/types.h>
+#include <sys/socket.h>
+#define DATA1 "In Xanadu, did Kublai Khan..." 
+#define DATA2 "A stately pleasure dome decree..."
+void ex() {
+    int sockets[2], child;
+    char buf[1024];
+
+    if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockets) < 0) {
+        perror("opening stream socket pair");
+        exit(1);
+    }
+
+    if ((child = fork()) == -1)
+        perror("fork");
+    else if (child) { 
+        /* This is the parent. */
+        close(sockets[0]);
+        if (read(sockets[1], buf, sizeof (buf)) < 0)
+            perror("reading stream message");
+        printf("-->%s\n", buf);
+        if (write(sockets[1], DATA2, sizeof (DATA2)) < 0)
+            perror("writing stream message");
+        close(sockets[1]);
+    } else { /* This is the child. */
+        close(sockets[1]);
+        if (write(sockets[0], DATA1, sizeof (DATA1)) < 0)
+            perror("writing stream message");
+        if (read(sockets[0], buf, sizeof (buf)) < 0)
+            perror("reading stream message");
+        printf("-->%s\n", buf);
+        close(sockets[0]);
+    }
 }

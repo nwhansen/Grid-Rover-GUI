@@ -82,6 +82,7 @@ namespace AbstractModelNameSpace {
         static void EventEndHelper(void* model) {
             ((AbstractEngine*)model)->EndGame();
         }
+        
     private:
         
         /**

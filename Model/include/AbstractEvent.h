@@ -15,6 +15,7 @@ namespace AbstractModelNameSpace {
      * from one square to another, to a rock falling, to Game Over.
      */
     class AbstractEvent {
+        
     public:
         /**
          * This method will apply the effects of this Event to the game state.
@@ -35,7 +36,9 @@ namespace AbstractModelNameSpace {
          * @return
          */
         virtual bool operator >(const AbstractEvent &other) const = 0;
+   
     }
+    
 }
 
 #endif /* ABSTRACTEVENT_H */
