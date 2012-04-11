@@ -23,8 +23,15 @@ namespace ThingNameSpace{
         vector<AbstractThing> inventory;
         unsigned int score;
         unsigned int inventoryVolume;
+        unsigned int maxInventoryVolume;
+        unsigned int maxCharge;
+        unsigned int currentCharge;
         
     public:
+        
+        bool AddThingToInventory(AbstractThing item);
+        bool RemoveThingFromInventory(int ID);
+        bool IncreaseScore(int points);
         
     };
 

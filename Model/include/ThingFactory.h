@@ -32,6 +32,7 @@ namespace ThingNameSpace{
         
         GenerateThings(string filename);
         
+        //Methods to obtain abstract thing objects.
         AbstractThing GetThingAt(int index);
         AbstractThing GetThingWithID(int id);
         AbstractThing GetRandomThing();
