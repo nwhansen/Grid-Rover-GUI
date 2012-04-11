@@ -112,6 +112,7 @@ AbstractRoverInterface::~AbstractRoverInterface() {
     //Term the rover
 
 }
+/*
 //using a socket pair instead.
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -129,7 +130,6 @@ void ex() {
     if ((child = fork()) == -1)
         perror("fork");
     else if (child) { 
-        /* This is the parent. */
         close(sockets[0]);
         if (read(sockets[1], buf, sizeof (buf)) < 0)
             perror("reading stream message");
@@ -137,7 +137,7 @@ void ex() {
         if (write(sockets[1], DATA2, sizeof (DATA2)) < 0)
             perror("writing stream message");
         close(sockets[1]);
-    } else { /* This is the child. */
+    } else { 
         close(sockets[1]);
         if (write(sockets[0], DATA1, sizeof (DATA1)) < 0)
             perror("writing stream message");
@@ -147,3 +147,5 @@ void ex() {
         close(sockets[0]);
     }
 }
+*/
+        
