@@ -9,10 +9,12 @@
 #define	ROVER_H
 
 #include "AbstractThing.h"
+#include "AbstractTile.h"
 #include <vector>
 
 using namespace std;
 using namespace AbstractThingNameSpace;
+using namespace AbstractModelNameSpace;
 
 namespace ThingNameSpace{
     
@@ -32,6 +34,8 @@ namespace ThingNameSpace{
         bool AddThingToInventory(AbstractThing item);
         bool RemoveThingFromInventory(int ID);
         bool IncreaseScore(int points);
+        
+        bool Travel(AbstractTile *pointA, AbstractTile *pointB);
         
     };
 
