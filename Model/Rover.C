@@ -21,9 +21,24 @@ bool Rover::Travel(AbstractTile *pointA, AbstractTile *pointB){
 }
 
 
-bool Rover::AddThingToInventory(AbstractThing item);
-bool Rover::RemoveThingFromInventory(int ID);
-bool Rover::IncreaseScore(int points);
+bool Rover::AddThingToInventory(AbstractThing item){
+    
+    if(item.GetVolume() + inventoryVolume <= maxInventoryVolume){
+        inventory.push_back(item);
+        return true;
+    } else {
+        return false;
+    }
+}
+bool Rover::RemoveThingFromInventory(int ID){
+    
+}
+bool Rover::IncreaseScore(int points){
+    score += points;
+}
 
+bool Rover::RemoveThingFromInventory(AbstractThing item){
+    
+}
 
 

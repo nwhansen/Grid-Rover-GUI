@@ -33,6 +33,7 @@ namespace ThingNameSpace{
         
         bool AddThingToInventory(AbstractThing item);
         bool RemoveThingFromInventory(int ID);
+        bool RemoveThingFromInventory(AbstractThing item);
         bool IncreaseScore(int points);
         
         bool Travel(AbstractTile *pointA, AbstractTile *pointB);

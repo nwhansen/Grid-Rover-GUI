@@ -2,11 +2,12 @@
 
 using namespace ThingNameSpace;
 
-Thing()
+Thing::Thing()
 {
     
 }
-Thing(int mass, int density, int collectPointValue, int discoverPointValue){
+Thing::Thing(int mass, int density, int collectPointValue, int discoverPointValue) 
+        : AbstractThing(mass, density, collectPointValue, discoverPointValue){
     
 }
 

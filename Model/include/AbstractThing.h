@@ -42,6 +42,7 @@ namespace AbstractThingNameSpace{
         int GetWeight(){return weight;};
         int GetMass(){return mass;};
         int GetDensity(){return density;};
+        int GetVolume(){return volume;};
         int GetCollectPointValue(){return collectPointValue;};
         int GetDiscoverPointValue(){return discoverPointValue;};
         string GetThingDiscription(){return discription;};
