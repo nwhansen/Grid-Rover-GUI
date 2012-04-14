@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include "Logger.h"
 #include <pthread.h>
+#include "Communication.h"
 
 namespace AbstractModelNameSpace {
 
@@ -41,8 +42,9 @@ namespace AbstractModelNameSpace {
          */
         void CloseConnection();
         
-        virtual bool SendFormattedMessage(std::string& command, std::string& args ...);
+        virtual bool SendFormattedMessage(Communication& toSend);
         
+        virtual Communication RecieveFormattedMessage();
     private: 
 #define EXIT_ROVER "GAME OVER"
         Logging::Logger* log;

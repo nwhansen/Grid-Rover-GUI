@@ -12,6 +12,8 @@
         <itemPath>source/AbstractRoverInterface.C</itemPath>
         <itemPath>include/AbstractRoverInterface.h</itemPath>
         <itemPath>include/AbstractTile.h</itemPath>
+        <itemPath>source/RoverCommunication.C</itemPath>
+        <itemPath>include/RoverCommunication.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="Logging" projectFiles="true">
         <itemPath>include/Logger.h</itemPath>
@@ -47,6 +49,8 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>source/Communication.C</itemPath>
+    <itemPath>include/Communication.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>

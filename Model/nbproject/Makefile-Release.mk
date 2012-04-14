@@ -34,8 +34,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/source/Communication.o \
 	${OBJECTDIR}/source/AbstractRoverInterface.o \
-	${OBJECTDIR}/source/Logger.o
+	${OBJECTDIR}/source/Logger.o \
+	${OBJECTDIR}/source/RoverCommunication.o
 
 
 # C Compiler Flags
@@ -62,6 +64,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -mno-cygwin -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/source/Communication.o: source/Communication.C 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Communication.o source/Communication.C
+
 ${OBJECTDIR}/source/AbstractRoverInterface.o: source/AbstractRoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
@@ -71,6 +78,11 @@ ${OBJECTDIR}/source/Logger.o: source/Logger.C
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
+
+${OBJECTDIR}/source/RoverCommunication.o: source/RoverCommunication.C 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/RoverCommunication.o source/RoverCommunication.C
 
 # Subprojects
 .build-subprojects:
