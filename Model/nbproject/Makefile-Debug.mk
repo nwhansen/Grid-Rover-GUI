@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc.exe
-CCC=g++.exe
-CXX=g++.exe
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
-AS=as.exe
+AS=as
 
 # Macros
-CND_PLATFORM=Cygwin-Windows
+CND_PLATFORM=GNU-Linux-x86
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -58,11 +58,11 @@ LDLIBSOPTIONS=-lpthread -lglib-2.0
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -mno-cygwin -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
 ${OBJECTDIR}/source/Communication.o: source/Communication.C 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -72,12 +72,12 @@ ${OBJECTDIR}/source/Communication.o: source/Communication.C
 ${OBJECTDIR}/source/AbstractRoverInterface.o: source/AbstractRoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AbstractRoverInterface.o source/AbstractRoverInterface.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AbstractRoverInterface.o source/AbstractRoverInterface.C
 
 ${OBJECTDIR}/source/Logger.o: source/Logger.C 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
 
 ${OBJECTDIR}/source/RoverCommunication.o: source/RoverCommunication.C 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -90,7 +90,7 @@ ${OBJECTDIR}/source/RoverCommunication.o: source/RoverCommunication.C
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so
 
 # Subprojects
 .clean-subprojects:
