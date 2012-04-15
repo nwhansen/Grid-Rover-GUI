@@ -45,7 +45,7 @@ namespace AbstractModelNameSpace {
         virtual bool SendFormattedMessage(Communication& toSend);
         
         virtual Communication RecieveFormattedMessage();
-    private: 
+    protected: 
 #define EXIT_ROVER "GAME OVER"
         Logging::Logger* log;
         bool running;
