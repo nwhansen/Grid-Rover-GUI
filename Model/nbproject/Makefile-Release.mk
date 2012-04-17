@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=g++
-CXX=g++
+CC=gcc.exe
+CCC=g++.exe
+CXX=g++.exe
 FC=gfortran
-AS=as
+AS=as.exe
 
 # Macros
-CND_PLATFORM=Cygwin_4.x-Windows
+CND_PLATFORM=Cygwin-Windows
 CND_CONF=Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -34,11 +34,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/source/ThingFactory.o \
-	${OBJECTDIR}/Rover.o \
+	${OBJECTDIR}/source/Communication.o \
 	${OBJECTDIR}/source/AbstractRoverInterface.o \
 	${OBJECTDIR}/source/Logger.o \
-	${OBJECTDIR}/source/Thing.o
+	${OBJECTDIR}/source/RoverCommunication.o
 
 
 # C Compiler Flags
@@ -63,17 +62,12 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -mno-cygwin -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/source/ThingFactory.o: source/ThingFactory.C 
+${OBJECTDIR}/source/Communication.o: source/Communication.C 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/ThingFactory.o source/ThingFactory.C
-
-${OBJECTDIR}/Rover.o: Rover.C 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Communication.o source/Communication.C
 
 ${OBJECTDIR}/source/AbstractRoverInterface.o: source/AbstractRoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -85,10 +79,10 @@ ${OBJECTDIR}/source/Logger.o: source/Logger.C
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
 
-${OBJECTDIR}/source/Thing.o: source/Thing.C 
+${OBJECTDIR}/source/RoverCommunication.o: source/RoverCommunication.C 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Thing.o source/Thing.C
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/RoverCommunication.o source/RoverCommunication.C
 
 # Subprojects
 .build-subprojects:

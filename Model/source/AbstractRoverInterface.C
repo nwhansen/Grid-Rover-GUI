@@ -82,11 +82,12 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
 std::string AbstractRoverInterface::getRoverCommand() {
     //Buffers
     char buffer[1024];
-    if (read(pipes[1], buffer, sizeof (buffer)) < 0) {
+    size_t totalRead;
+    if (totalRead = read(pipes[1], buffer, sizeof (buffer)) < 0) {
         log->Error(false, "Unable to read from robot. Sent null terminating character");
         return NULL;
     }
-    return std::string(buffer);
+    return std::string(buffer, totalRead);
 }
 
 bool AbstractRoverInterface::SendRoverCommand(const std::string& roverCommand) {

@@ -60,7 +60,7 @@ namespace AbstractModelNameSpace {
          * @return The result of adding it.
          */
         virtual bool AddEvent(AbstractEvent event) = 0; 
-
+        
         /**
          * A helper method so that the abstractEvent can get tiles without an explicit function, and can instead use a function pointer.
          * @param model The Model that the event propegated from.
@@ -83,7 +83,7 @@ namespace AbstractModelNameSpace {
             ((AbstractEngine*)model)->EndGame();
         }
         
-    private:
+    protected:
         
         /**
          * The current time in the simulation, Event cannot occur before this time.
