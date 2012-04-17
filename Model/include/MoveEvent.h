@@ -13,7 +13,7 @@
 #include "TitanTime.h"
 #include "Rover.h"
 
-namespace EventNameSpace {
+namespace Model {
 
     /**
      * Represents a movement event in the game.
@@ -37,7 +37,7 @@ namespace EventNameSpace {
         ThingNameSpace::Rover& rover;
         AbstractModelNameSpace::AbstractTile* origin;
         AbstractModelNameSpace::AbstractTile* destination;
-    }
+    };
 }
 
 #endif /* EVENT_H */
