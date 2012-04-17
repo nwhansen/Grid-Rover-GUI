@@ -14,9 +14,9 @@
 
 namespace Model {
 
-    typedef void(*GameOver_t)();
-    typedef AbstractModelNameSpace::AbstractTile(*GetTile_t)(int, int);
-    typedef void(*InsertEvent_t)(AbstractModelNameSpace::AbstractEvent);
+    typedef void(*GameOver_t)(void*);
+    typedef AbstractModelNameSpace::AbstractTile(*GetTile_t)(void*, int, int);
+    typedef void(*InsertEvent_t)(void*, Event);
 
     /**
      * Represents an event in the game. Could be anything from a rover moving
@@ -28,10 +28,12 @@ namespace Model {
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        Event(Titan::TitanTime time,
+        Event(void* m,
+              Titan::TitanTime time,
               GameOver_t gameover,
               GetTile_t gettile,
-              InsertEvent_t insertevent) : completionTime(time),
+              InsertEvent_t insertevent) : model(m),
+                                           completionTime(time),
                                            gameOver(gameover),
                                            getTile(gettile),
                                            insertEvent(insertevent)
@@ -56,6 +58,7 @@ namespace Model {
         }
 
     private:
+        void* model;
         Titan::TitanTime completionTime;
         GameOver_t gameOver;
         GetTile_t getTile;
