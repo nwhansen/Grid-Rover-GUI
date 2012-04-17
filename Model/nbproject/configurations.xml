@@ -9,6 +9,7 @@
                      projectFiles="true">
         <itemPath>include/AbstractEvent.h</itemPath>
         <itemPath>include/AbstractModel.h</itemPath>
+        <itemPath>source/AbstractRoverInterface.C</itemPath>
         <itemPath>include/AbstractRoverInterface.h</itemPath>
         <itemPath>include/AbstractTile.h</itemPath>
       </logicalFolder>
@@ -23,8 +24,6 @@
       <logicalFolder name="f3" displayName="TitanNamespace" projectFiles="true">
         <itemPath>include/TitanTime.h</itemPath>
       </logicalFolder>
-      <itemPath>include/Communication.h</itemPath>
-      <itemPath>include/RoverCommunication.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -35,10 +34,7 @@
                    projectFiles="true">
       <logicalFolder name="source" displayName="source" projectFiles="true">
       </logicalFolder>
-      <itemPath>source/AbstractRoverInterface.C</itemPath>
-      <itemPath>source/Communication.C</itemPath>
       <itemPath>source/Logger.C</itemPath>
-      <itemPath>source/RoverCommunication.C</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"

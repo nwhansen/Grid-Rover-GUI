@@ -9,19 +9,37 @@
 #define	THINGFACTORY_H
 
 #include <stdlib.h>
+#include <vector>
+#include <string>
+#include <cstdlib>
+
+#include "AbstractThing.h"
+
+using namespace std;
+using namespace AbstractThingNameSpace;
 
 namespace ThingNameSpace{
     
     class ThingFactory{
         
     private:
-        
+        vector<AbstractThing> objectList;
+        string objectXMLDataFile;
+    
     public :
         
+        ThingFactory();
+        ThingFactory(string filename);
+        
+        GenerateThings(string filename);
+        
+        //Methods to obtain abstract thing objects.
+        AbstractThing GetThingAt(int index);
+        AbstractThing GetThingWithID(int id);
+        AbstractThing GetRandomThing();
         
     };
 
 }
 
 #endif	/* THINGFACTORY_H */
-
