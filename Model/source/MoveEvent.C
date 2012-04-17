@@ -11,7 +11,7 @@
 #include "TitanTime.h"
 #include "Rover.h"
 
-namespace EventNameSpace {
+namespace Model {
 
     MoveEvent::MoveEvent(Titan::TitanTime time,
               GameOver_t gameover,
