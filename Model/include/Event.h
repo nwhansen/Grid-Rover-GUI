@@ -12,7 +12,7 @@
 #include "AbstractTile.h"
 #include "TitanTime.h"
 
-namespace EventNameSpace {
+namespace Model {
 
     typedef void(*GameOver_t)();
     typedef AbstractModelNameSpace::AbstractTile(*GetTile_t)(int, int);
@@ -22,7 +22,7 @@ namespace EventNameSpace {
      * Represents an event in the game. Could be anything from a rover moving
      * from one square to another, to a rock falling, to Game Over.
      */
-    class Event : public AbstractModelNameSpace::AbstractEvent {
+    class Event{
     public:
         /**
          * Create a new event with given completion time. When fired, it will
@@ -60,7 +60,7 @@ namespace EventNameSpace {
         GameOver_t gameOver;
         GetTile_t getTile;
         InsertEvent_t insertEvent;
-    }
+    };
 }
 
 #endif /* EVENT_H */
