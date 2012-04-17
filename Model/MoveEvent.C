@@ -6,24 +6,23 @@
  */
 
 #include "Event.h"
+#include "Engine.h"
 #include "Tile.h"
 #include "MoveEvent.h"
 #include "TitanTime.h"
 #include "Rover.h"
+#include "RoverInterface.h"
 
 namespace Model {
 
-    MoveEvent::MoveEvent(void* m,
+    MoveEvent::MoveEvent(Engine* m,
               Titan::TitanTime time,
-              GameOver_t gameover,
-              GetTile_t gettile,
-              InsertEvent_t insertevent,
               Rover& rover,
-              char direction) : Event(time, gameover, gettile, insertevent),
+              char direction) : Event(m, time),
                                 rover(rover) {
         newx = rover.GetXCoord();
         newy = rover.GetYCoord();
-        origin = (*getTile)(model, newx, newy);
+        origin = engine->getTileInfo(newx, newy);
         switch (direction){
             case 'n':
                 newy--;
@@ -38,7 +37,7 @@ namespace Model {
                 newx--;
                 break;
         }
-        destination = (*getTile)(model, newx, newy);
+        destination = engine->getTileInfo(newx, newy);
     }
 
     bool MoveEvent::fire() {

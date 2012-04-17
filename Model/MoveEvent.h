@@ -12,8 +12,11 @@
 #include "Tile.h"
 #include "TitanTime.h"
 #include "Rover.h"
+#include "RoverInterface.h"
 
 namespace Model {
+
+    class Engine;
 
     /**
      * Represents a movement event in the game.
@@ -24,11 +27,8 @@ namespace Model {
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        MoveEvent(void* m,
+        MoveEvent(Engine* m,
                   Titan::TitanTime time,
-                  GameOver_t gameover,
-                  GetTile_t gettile,
-                  InsertEvent_t insertevent,
                   Rover& rover,
                   char direction);
 
