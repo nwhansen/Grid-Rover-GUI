@@ -5,4 +5,11 @@
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/Cody%20Foltz/Documents/QtProjects/rover/Model/include/Rover.h</file>
+        <file>file:/C:/Users/Cody%20Foltz/Documents/QtProjects/rover/Model/include/Thing.h</file>
+        <file>file:/C:/Users/Cody%20Foltz/Documents/QtProjects/rover/Model/include/AbstractThing.h</file>
+        <file>file:/C:/Users/Cody%20Foltz/Documents/QtProjects/rover/Model/source/Thing.C</file>
+        <file>file:/C:/Users/Cody%20Foltz/Documents/QtProjects/rover/Model/include/ThingFactory.h</file>
+    </open-files>
 </project-private>
