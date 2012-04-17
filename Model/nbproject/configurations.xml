@@ -4,25 +4,20 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="f1"
-                     displayName="AbstactModelNameSpace"
-                     projectFiles="true">
-        <itemPath>include/AbstractEvent.h</itemPath>
-        <itemPath>include/AbstractModel.h</itemPath>
-        <itemPath>source/AbstractRoverInterface.C</itemPath>
-        <itemPath>include/AbstractRoverInterface.h</itemPath>
-        <itemPath>include/AbstractTile.h</itemPath>
-      </logicalFolder>
       <logicalFolder name="f4" displayName="Logging" projectFiles="true">
         <itemPath>include/Logger.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="f2" displayName="StackModelNameSpace" projectFiles="true">
-        <itemPath>include/StackConsequence.h</itemPath>
-        <itemPath>include/StackModel.h</itemPath>
-        <itemPath>include/StackTile.h</itemPath>
+      <logicalFolder name="f5" displayName="Model" projectFiles="true">
+        <itemPath>Communication.h</itemPath>
+        <itemPath>Engine.h</itemPath>
+        <itemPath>Rover.h</itemPath>
+        <itemPath>RoverInterface.h</itemPath>
+        <itemPath>Thing.h</itemPath>
+        <itemPath>ThingFactory.h</itemPath>
+        <itemPath>Tile.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="TitanNamespace" projectFiles="true">
-        <itemPath>include/TitanTime.h</itemPath>
+        <itemPath>TitanTime.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -32,9 +27,18 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="source" displayName="source" projectFiles="true">
+      <logicalFolder name="f2" displayName="Logger" projectFiles="true">
+        <itemPath>Logger.C</itemPath>
       </logicalFolder>
-      <itemPath>source/Logger.C</itemPath>
+      <logicalFolder name="f1" displayName="Model" projectFiles="true">
+        <itemPath>Engine.C</itemPath>
+        <itemPath>MoveEvent.C</itemPath>
+        <itemPath>Rover.C</itemPath>
+        <itemPath>RoverInterface.C</itemPath>
+        <itemPath>Thing.C</itemPath>
+        <itemPath>ThingFactory.C</itemPath>
+        <itemPath>Tile.C</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"

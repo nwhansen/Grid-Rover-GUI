@@ -8,10 +8,19 @@
 #ifndef TILE_H
 #define	TILE_H
 #include <vector>
-class Thing;
+#include "Thing.h"
 
 namespace Model {
-    class TileIterator;
+    
+    class TileIterator {
+        //THESE MUST BE IMPLIMENTED PROIR TO USING THE ABSTRACTILE
+    public:
+        void operator ++();
+        bool operator ==(const TileIterator& other);
+    private:
+        std::vector<Thing>* items;
+    };
+    
     class Tile {
     public:
         Tile();
@@ -20,40 +29,33 @@ namespace Model {
          * Delete an item in the collection. 
          * @param toDelete
          */
-        virtual void deleteItem(Thing* toDelete);
+        void deleteItem(Thing* toDelete);
         /**
          * Check if the tile contains an item
          * @param toCompare
          */
-        virtual void contains(Thing* toCompare);
+        void contains(Thing* toCompare);
         /**
          * Add an item to the collection.
          * @param toAdd
          */
-        virtual void addItem(Thing* toAdd);
+        void addItem(Thing* toAdd);
         /**
          * A method to begin iteration over a collection of the Abstract Tile
          * @return 
-         */ 
-        virtual TileIterator begin();
+         */
+        TileIterator begin();
         /**
          * An iterator to define the end of a collection
          * @return 
          */
-        virtual TileIterator end();
-        
+        TileIterator end();
+
     private:
         std::vector<Thing*> items;
         TileIterator* itr;
     };
-    class TileIterator {
-        //THESE MUST BE IMPLIMENTED PROIR TO USING THE ABSTRACTILE
-    public:
-        virtual void operator ++();
-        virtual bool operator ==(const TileIterator& other);
-    private:
-        std::vector<Thing>* items;
-    };
+
 }
 
 #endif	/* TILE_H */
