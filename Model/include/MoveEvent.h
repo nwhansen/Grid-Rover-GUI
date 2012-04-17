@@ -9,7 +9,7 @@
 #define	MOVEEVENT_H
 
 #include "Event.h"
-#include "AbstractTile.h"
+#include "Tile.h"
 #include "TitanTime.h"
 #include "Rover.h"
 
@@ -24,19 +24,21 @@ namespace Model {
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        MoveEvent(Titan::TitanTime time,
+        MoveEvent(void* m,
+                  Titan::TitanTime time,
                   GameOver_t gameover,
                   GetTile_t gettile,
                   InsertEvent_t insertevent,
-                  ThingNameSpace::Rover& rover,
+                  Rover& rover,
                   char direction);
 
         bool fire();
 
     private:
-        ThingNameSpace::Rover& rover;
-        AbstractModelNameSpace::AbstractTile* origin;
-        AbstractModelNameSpace::AbstractTile* destination;
+        Rover& rover;
+        Tile* origin;
+        Tile* destination;
+        int newx, newy;
     };
 }
 
