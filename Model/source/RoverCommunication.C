@@ -20,7 +20,7 @@ bool RoverCommunication::SendFormattedMessage(AbstractModelNameSpace::Communicat
             toWrite << toSend.arguments[i] << std::endl;
         } else toWrite << toSend.arguments[i] << " ";
     }
-    this->SendRoverCommand(toWrite.str());
+   return this->SendRoverCommand(toWrite.str());
 }
 
 AbstractModelNameSpace::Communication RoverCommunication::RecieveFormattedMessage(){

@@ -19,7 +19,7 @@ std::string Logger::constructMessage(const std::string& message) {
     std::stringstream stream;
     time_t now = time(NULL);
     stream << "[" << convertTime(&now) << "] " << message;
-
+    return stream.str();
 }
 Logger::Logger() {
     //Ok lets do this
@@ -61,6 +61,7 @@ bool Logger::openLogs(std::string& messageLog, std::string& errorLog) {
             MessageLog.close();
         return false;
     }
+    return true;
 }
 
 Logger::Logger(const Logger& orig) {

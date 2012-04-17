@@ -16,21 +16,25 @@ namespace Logging {
 
     class Logger {
     public:
+        
         /**
          * The Current active logger. As only one should ever be opened.
          */
         static Logger* activeLogger() {
             return Logger::ActiveLogger;
         }
+        
         /**
          * Create a logger object. If another active logger exists throws an exception.
          */
         Logger();
+        
         /**
          * Though Shall not COPY!
          * Throws an exception don't do it.
          */
         Logger(const Logger& orig);
+        
         /**
          * Attempts to open the logs specified by the paths. If either logger cannot be opened this will fail and close all connections.
          * Also if the log files are the same the logger will return false with no logs opened.
@@ -50,6 +54,7 @@ namespace Logging {
          * @param message The message to write to the log
          */
         void Message(bool console, const std::string& message);
+        
         /**
          * Attempts to aquire a logger. Will not create a logger. 
          * This will not create a logger. It will time out after 5 seconds and return without modifying the variable

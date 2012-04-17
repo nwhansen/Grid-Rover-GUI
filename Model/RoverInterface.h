@@ -5,31 +5,34 @@
  * Created on April 4, 2012, 10:31 AM
  */
 
-#ifndef ABSTRACTROVERINTERFACE_H
-#define	ABSTRACTROVERINTERFACE_H
+#ifndef ROVERINTERFACE_H
+#define	ROVERINTERFACE_H
 #include <string>
 #include <stdarg.h>
+#include <pthread.h>
 #include <sys/resource.h>
 #include <sys/types.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <sstream>
+
 #include "Logger.h"
-#include <pthread.h>
 #include "Communication.h"
 
-namespace AbstractModelNameSpace {
+namespace Model {
 
     /**
      * An interface with the rover. Different None Abstract Rover Interfaces should only modify the Send Formatted Message.
      * 
      */
-    class AbstractRoverInterface {
+    class RoverInterface {
     public:
-        virtual ~AbstractRoverInterface();
+        virtual ~RoverInterface();
         /**
          * Constructs and forks the child process (rover-control program) all messages are blocking.
          * @param roverName The Rover Filename.
          */
-        AbstractRoverInterface(std::string& roverfilename);
+        RoverInterface(std::string& roverfilename);
         std::string getRoverCommand();
         /**
          * Send a message to the rover. Must be properly formated
@@ -41,11 +44,10 @@ namespace AbstractModelNameSpace {
          * Closes and terminates the rover.
          */
         void CloseConnection();
-        
-        virtual bool SendFormattedMessage(Communication& toSend);
-        
-        virtual Communication RecieveFormattedMessage();
-    protected: 
+        bool SendFormattedMessage(Communication& toSend);
+        Communication RecieveFormattedMessage();
+    private: 
+        std::stringstream remaining;
 #define EXIT_ROVER "GAME OVER"
         Logging::Logger* log;
         bool running;

@@ -5,22 +5,19 @@
  * Created on April 4, 2012, 10:31 AM
  */
 
-#include "AbstractRoverInterface.h"
+#include "RoverInterface.h"
 #include <sys/resource.h>
 #include <sys/stat.h>
 #include <stdarg.h> 
 #include <stdio.h>
 #include <unistd.h>
 
-void func() {
-    
-}
 
-using namespace AbstractModelNameSpace;
+using namespace Model;
 
-AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
+RoverInterface::RoverInterface(std::string& filename) {
     //Attempt to get the logger The thread will stall if 
-    
+
     log->aquireLogger(log);
     if (log->activeLogger() == 0) {
         //Die?
@@ -28,7 +25,7 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
     }
     int pipe_in[2], pipe_out[2];
     if (pipe(pipe_in))
-        log->Error(true,std::string("Couldn't setup pipe_in for rover " + filename));
+        log->Error(true, std::string("Couldn't setup pipe_in for rover " + filename));
 
     if (pipe(pipe_out))
         log->Error(true, std::string("Couldn't setup pipe_out for rover " + filename));
@@ -65,7 +62,7 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
     } else {
         close(pipe_out[0]); // Close input side of pipe_out
         close(pipe_in[1]); // Close output side of pipe_in
-        
+
         pipes[0] = pipe_out[1];
         pipes[1] = pipe_in[0];
 
@@ -79,7 +76,7 @@ AbstractRoverInterface::AbstractRoverInterface(std::string& filename) {
     select(FD_SETSIZE, NULL, NULL, NULL, &timeout);
 }
 
-std::string AbstractRoverInterface::getRoverCommand() {
+std::string RoverInterface::getRoverCommand() {
     //Buffers
     char buffer[1024];
     size_t totalRead;
@@ -90,7 +87,7 @@ std::string AbstractRoverInterface::getRoverCommand() {
     return std::string(buffer, totalRead);
 }
 
-bool AbstractRoverInterface::SendRoverCommand(const std::string& roverCommand) {
+bool RoverInterface::SendRoverCommand(const std::string& roverCommand) {
     if (write(pipes[0], roverCommand.c_str(), roverCommand.size())) {
         //TODO: ERROR REPORT
         log->Error(true, "Unable to send message! Unknown reason");
@@ -101,17 +98,69 @@ bool AbstractRoverInterface::SendRoverCommand(const std::string& roverCommand) {
     return true;
 }
 
-void AbstractRoverInterface::CloseConnection() {
+void RoverInterface::CloseConnection() {
     //Term the robot.
+    if (this->running)return;
     SendRoverCommand(std::string(EXIT_ROVER));
     close(pipes[0]);
     close(pipes[1]);
     running = false;
 }
 
-AbstractRoverInterface::~AbstractRoverInterface() {
-    //Term the rover
+std::vector<std::string> split(const std::string &s, char delim);
 
+bool RoverInterface::SendFormattedMessage(Communication& toSend) {
+    std::stringstream toWrite(toSend.command);
+    toWrite << " ";
+    for (unsigned int i = 0; i < toSend.arguments.size(); i++) {
+        if (i == (toSend.arguments.size() - 1)) {
+            toWrite << toSend.arguments[i] << std::endl;
+        } else toWrite << toSend.arguments[i] << " ";
+    }
+    return this->SendRoverCommand(toWrite.str());
+}
+
+Communication RoverInterface::RecieveFormattedMessage() {
+    //This is going to suck...
+    //We need to read from the buffer and only send back one formated command. if we get more we will need to cache the info.
+    remaining << this->getRoverCommand();
+    //Utilizing get line 
+    std::string roverMessage;
+    std::getline(remaining, roverMessage);
+    //Ok lets try this.
+    //Lets assume only valid communication.
+    if (roverMessage.length() == 0)
+        return Communication();
+    //Lets splot this shit!
+    std::vector<std::string> brokenMessage = split(roverMessage, ' ');
+    if (brokenMessage.size() == 0)
+        return Communication();
+    Communication message;
+    message.command = brokenMessage[0];
+    //Start at one to skip the first element. There is most likely an easier way to do this but it works for now.
+    for (unsigned int i = 1; i < brokenMessage.size(); i++) {
+        message.arguments.push_back(brokenMessage[i]);
+    }
+    return message;
+}
+
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
+std::vector<std::string> split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    return split(s, delim, elems);
+}
+
+RoverInterface::~RoverInterface() {
+    //Term the rover
+    CloseConnection();
 }
 /*
 //using a socket pair instead.
@@ -148,5 +197,5 @@ void ex() {
         close(sockets[0]);
     }
 }
-*/
-        
+ */
+
