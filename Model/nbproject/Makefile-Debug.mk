@@ -34,22 +34,19 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/source/Communication.o \
-	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/source/StackTile.o \
-	${OBJECTDIR}/source/Logger.o \
+	${OBJECTDIR}/Logger.o \
+	${OBJECTDIR}/Tile.o \
 	${OBJECTDIR}/Engine.o \
-	${OBJECTDIR}/source/RoverCommunication.o \
 	${OBJECTDIR}/RoverInterface.o \
-	${OBJECTDIR}/source/StackEngine.o
+	${OBJECTDIR}/main.o
 
 
 # C Compiler Flags
-CFLAGS=-m32
+CFLAGS=-lpthread
 
 # CC Compiler Flags
-CCFLAGS=-m32
-CXXFLAGS=-m32
+CCFLAGS=
+CXXFLAGS=
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -58,55 +55,40 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lpthread
+LDLIBSOPTIONS=-lpthread -lglib-2.0
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/model.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/model.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/model ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -mno-cygwin -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/source/Communication.o: source/Communication.C 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Communication.o source/Communication.C
-
-${OBJECTDIR}/main.o: main.C 
+${OBJECTDIR}/Logger.o: Logger.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.C
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.C
 
-${OBJECTDIR}/source/StackTile.o: source/StackTile.C 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/Tile.o: Tile.C 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StackTile.o source/StackTile.C
-
-${OBJECTDIR}/source/Logger.o: source/Logger.C 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
 
 ${OBJECTDIR}/Engine.o: Engine.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/Engine.o Engine.C
-
-${OBJECTDIR}/source/RoverCommunication.o: source/RoverCommunication.C 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/RoverCommunication.o source/RoverCommunication.C
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Engine.o Engine.C
 
 ${OBJECTDIR}/RoverInterface.o: RoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoverInterface.o RoverInterface.C
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoverInterface.o RoverInterface.C
 
-${OBJECTDIR}/source/StackEngine.o: source/StackEngine.C 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/main.o: main.c 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StackEngine.o source/StackEngine.C
+	$(COMPILE.c) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
 
 # Subprojects
 .build-subprojects:
@@ -114,7 +96,7 @@ ${OBJECTDIR}/source/StackEngine.o: source/StackEngine.C
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/model.exe
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
 
 # Subprojects
 .clean-subprojects:
