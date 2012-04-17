@@ -24,7 +24,8 @@ namespace Model {
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        MoveEvent(Titan::TitanTime time,
+        MoveEvent(void* m,
+                  Titan::TitanTime time,
                   GameOver_t gameover,
                   GetTile_t gettile,
                   InsertEvent_t insertevent,
@@ -37,6 +38,7 @@ namespace Model {
         ThingNameSpace::Rover& rover;
         AbstractModelNameSpace::AbstractTile* origin;
         AbstractModelNameSpace::AbstractTile* destination;
+        int newx, newy;
     };
 }
 
