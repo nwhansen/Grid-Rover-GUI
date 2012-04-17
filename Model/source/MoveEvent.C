@@ -6,7 +6,7 @@
  */
 
 #include "Event.h"
-#include "AbstractTile.h"
+#include "Tile.h"
 #include "MoveEvent.h"
 #include "TitanTime.h"
 #include "Rover.h"
@@ -18,7 +18,7 @@ namespace Model {
               GameOver_t gameover,
               GetTile_t gettile,
               InsertEvent_t insertevent,
-              ThingNameSpace::Rover& rover,
+              Rover& rover,
               char direction) : Event(time, gameover, gettile, insertevent),
                                 rover(rover) {
         newx = rover.GetXCoord();

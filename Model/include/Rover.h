@@ -8,21 +8,20 @@
 #ifndef ROVER_H
 #define	ROVER_H
 
-#include "AbstractThing.h"
+#include "Thing.h"
 #include "AbstractTile.h"
 #include <vector>
 
 using namespace std;
-using namespace AbstractThingNameSpace;
-using namespace AbstractModelNameSpace;
+using namespace Model;
 
-namespace ThingNameSpace{
+namespace Model{
     
     class Rover{
         
     private:
         
-        vector<AbstractThing> inventory;
+        vector<Thing> inventory;
         unsigned int score;
         unsigned int inventoryVolume;
         unsigned int maxInventoryVolume;
@@ -31,12 +30,15 @@ namespace ThingNameSpace{
         
     public:
         
-        bool AddThingToInventory(AbstractThing item);
+        bool AddThingToInventory(Thing item);
         bool RemoveThingFromInventory(int ID);
-        bool RemoveThingFromInventory(AbstractThing item);
+        bool RemoveThingFromInventory(Thing item);
         bool IncreaseScore(int points);
+                
+        int GetXCoord();
+        int GetYCoord();
         
-        bool Travel(AbstractTile *pointA, AbstractTile *pointB);
+        SetXCoords(int x, int y);
         
     };
 

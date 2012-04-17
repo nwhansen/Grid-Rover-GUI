@@ -8,14 +8,13 @@
 #ifndef EVENT_H
 #define	EVENT_H
 
-#include "AbstractEvent.h"
-#include "AbstractTile.h"
+#include "Tile.h"
 #include "TitanTime.h"
 
 namespace Model {
 
     typedef void(*GameOver_t)(void*);
-    typedef AbstractModelNameSpace::AbstractTile(*GetTile_t)(void*, int, int);
+    typedef Tile(*GetTile_t)(void*, int, int);
     typedef void(*InsertEvent_t)(void*, Event);
 
     /**

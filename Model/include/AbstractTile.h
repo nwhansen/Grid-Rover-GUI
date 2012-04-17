@@ -8,7 +8,7 @@
 #ifndef ABSTRACTTILE_H
 #define	ABSTRACTTILE_H
 #include <vector>
-#include "AbstractThing.h"
+#include "Thing.h"
 namespace AbstractModelNameSpace {
     class AbstractTileIterator;
     class AbstractTile {
