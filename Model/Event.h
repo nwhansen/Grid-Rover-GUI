@@ -13,6 +13,8 @@
 
 namespace Model {
 
+    class Engine;
+
     typedef void(*GameOver_t)(void*);
     typedef Tile(*GetTile_t)(void*, int, int);
     typedef void(*InsertEvent_t)(void*, Event);
@@ -27,15 +29,8 @@ namespace Model {
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        Event(void* m,
-              Titan::TitanTime time,
-              GameOver_t gameover,
-              GetTile_t gettile,
-              InsertEvent_t insertevent) : model(m),
-                                           completionTime(time),
-                                           gameOver(gameover),
-                                           getTile(gettile),
-                                           insertEvent(insertevent)
+        Event(Engine* m,
+              Titan::TitanTime time) : model(m)
         {}
 
         /**
@@ -57,11 +52,8 @@ namespace Model {
         }
 
     private:
-        void* model;
+        Engine* engine;
         Titan::TitanTime completionTime;
-        GameOver_t gameOver;
-        GetTile_t getTile;
-        InsertEvent_t insertEvent;
     };
 }
 
