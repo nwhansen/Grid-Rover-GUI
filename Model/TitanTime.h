@@ -68,6 +68,11 @@ namespace Titan {
             return Days;
         }
         
+        TitanTime operator +(TitanTime const &left, TitanTime const &right) {
+        	return TitanTime(left.Days + right.Days + (left.Hours + right.Hours + (left.Minutes + right.Minutes) % 60) % 24,
+        					 left.Hours + right.Hours + (left.Minutes + right.Minutes) % 60,
+        					 left.Minutes + right.Minutes);
+        }
         
         bool operator ==(TitanTime const &other) const {
             return this->Days == other.Days &&

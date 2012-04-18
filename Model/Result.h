@@ -8,22 +8,25 @@
 #ifndef RESULT_H
 #define	RESULT_H
 
-enum ResultType {
-    Move, Get, Look, Fail
-};
+namespace Model {
 
-class Result {
-public:
-    Result(ResultType type);
-    Result(const Result& orig);
-    virtual ~Result();
-    ResultType getResultType();
-    
-private:
-    ResultType me;
-    char dir;
-    
-};
+    enum ResultType {
+        Move, Get, Look, Fail
+    };
+
+    class Result {
+    public:
+        Result(ResultType type);
+        Result(const Result& orig);
+        virtual ~Result();
+        ResultType getResultType();
+        
+    private:
+        ResultType me;
+        char dir;
+        
+    };
+}
 
 #endif	/* RESULT_H */
 
