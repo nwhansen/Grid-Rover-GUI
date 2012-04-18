@@ -31,11 +31,17 @@ namespace Model{
         ThingFactory();
         ThingFactory(string filename);
         
+        ///Populates the Factory with every Thing that has a possibility of being 
+        ///in the game world.
         GenerateThings(string filename);
         
-        //Methods to obtain abstract thing objects.
+        //Methods to obtain thing objects.
         Thing GetThingAt(int index);
         Thing GetThingWithID(int id);
+        
+        //Obtains a random Thing object.  All Thing object currently have equal chances
+        //of being returned. If this is called enough times, it is possible to have every
+        ///Thing return at some point.
         Thing GetRandomThing();
         
     };

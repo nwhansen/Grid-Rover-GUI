@@ -21,11 +21,11 @@ namespace Model {
     private:
 
         vector<Thing> inventory;
-        unsigned int score;
-        unsigned int inventoryVolume;
-        unsigned int maxInventoryVolume;
-        unsigned int maxCharge;
-        unsigned int currentCharge;
+        int score;
+        int inventoryVolume;
+        int maxInventoryVolume;
+        int maxCharge;
+        int currentCharge;
         RoverInterface interface;
         int xCoord;
         int yCoord;
@@ -48,14 +48,25 @@ namespace Model {
         ///Returns true if the Rover contains said item and is now removed.
         ///Returns false if the Rover does NOT contain said item initially. 
         bool RemoveThingFromInventory(int ID);
+        
+        ///The same as using Remove with ID as the parameter.
         bool RemoveThingFromInventory(Thing item);
+        
+        ///Change the score by a specified amount.
+        ///ie. if the score is 5 and points is 2 then the score would now be 7.
+        /// if the score is 7 and points is -6 then the score would now be 1.
         bool IncreaseScore(int points);
 
+        ///Gets the X Coordinate where the rover resides within the map.
         int GetXCoord();
+        
+        ///Gets the Y Coordinate where the rover resides within the map.
         int GetYCoord();
 
+        ///Sets the X and Y Coordinates where the rover resides within the map.
         bool SetXCoords(int x, int y);
 
+        ///Returns the RoverInterface object for this rover.
         RoverInterface GetRoverInterface(){return interface;};
 
     };

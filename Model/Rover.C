@@ -22,6 +22,8 @@ bool Rover::RemoveThingFromInventory(int ID){
     }
     return false;
 }
+
+
 bool Rover::IncreaseScore(int points){
     score += points;
 }
