@@ -10,6 +10,7 @@
 
 #include "Tile.h"
 #include "TitanTime.h"
+#include "Result.h"
 
 namespace Model {
 
@@ -32,6 +33,11 @@ namespace Model {
         Event(Engine* m,
               Titan::TitanTime time) : model(m)
         {}
+        
+        /**
+         * Fire this event, applying its effects to the game state.
+         */
+        ResultType fire();
 
         /**
          * Define what it means to be less than another Event

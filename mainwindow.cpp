@@ -48,11 +48,18 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
     scene = new QGraphicsScene;
-    populateScene(10,10);
+    roverX = 530;
+    roverY = 530;
+    populateScene(10,10);    
 
     View *view = new View("World");
     view->view()->setScene(scene);
     connect(view->refreshButton, SIGNAL(clicked()), this, SLOT(reloadMap()));
+    //move the rover around using buttons
+    connect(view->upButton, SIGNAL(clicked()), this, SLOT(moveRoverU()));
+    connect(view->downButton, SIGNAL(clicked()), this, SLOT(moveRoverD()));
+    connect(view->rightButton, SIGNAL(clicked()), this, SLOT(moveRoverR()));
+    connect(view->leftButton, SIGNAL(clicked()), this, SLOT(moveRoverL()));
 
 
     QHBoxLayout *layout = new QHBoxLayout;
@@ -73,7 +80,7 @@ void MainWindow::populateScene(int width, int height)
     //Needs to interact with model to get tile types and location.
 
     QPixmap lake(":/lake"), plain(":/plain"),
-            mountain(":/mountain"), rugged(":/rugged");
+            mountain(":/mountain"), rugged(":/rugged"), rover(":/rover");
     QGraphicsPixmapItem *item = NULL;
     //Build maps from bottom left corner to top right corner
     for(int w = 0; w < width; w++){
@@ -99,6 +106,8 @@ void MainWindow::populateScene(int width, int height)
             scene->addItem(item);
         }
     }
+
+    placeRover();
     /*QGraphicsPixmapItem *item = new QGraphicsPixmapItem(image);
     item->setPos(QPointF(0, 0));
 
@@ -133,3 +142,38 @@ void MainWindow::reloadMap(){
     }
     populateScene(10,10);
 }
+
+void MainWindow::placeRover(){
+    QPixmap roverPic(":/rover");
+    rover = new QGraphicsPixmapItem(roverPic);
+    rover->setPos(QPointF(roverX,roverY));
+    scene->addItem(rover);
+}
+void MainWindow::moveRoverU() {
+    roverX = roverX;
+    if(roverY>=100)
+        roverY = roverY-100;
+    rover->setPos(QPointF(roverX,roverY));
+}
+
+void MainWindow::moveRoverD() {
+    roverX = roverX;
+    if(roverY<=900)
+    roverY = roverY+100;
+    rover->setPos(QPointF(roverX,roverY));
+}
+
+void MainWindow::moveRoverL() {
+    if(roverX>=100)
+        roverX = roverX-100;
+    roverY = roverY;
+    rover->setPos(QPointF(roverX,roverY));
+}
+
+void MainWindow::moveRoverR() {
+    if(roverX<=900)
+        roverX = roverX+100;
+    roverY = roverY;
+    rover->setPos(QPointF(roverX,roverY));
+}
+

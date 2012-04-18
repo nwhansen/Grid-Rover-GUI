@@ -11,17 +11,17 @@
 #include "MoveEvent.h"
 #include "TitanTime.h"
 #include "Rover.h"
-#include "RoverInterface.h"
+#include "Result.h"
 
 namespace Model {
 
     MoveEvent::MoveEvent(Engine* m,
               Titan::TitanTime time,
-              Rover& rover,
+              Rover* r,
               char direction) : Event(m, time),
-                                rover(rover) {
-        newx = rover.GetXCoord();
-        newy = rover.GetYCoord();
+                                rover(r) {
+        newx = rover->GetXCoord();
+        newy = rover->GetYCoord();
         origin = engine->getTileInfo(newx, newy);
         switch (direction){
             case 'n':
@@ -40,12 +40,12 @@ namespace Model {
         destination = engine->getTileInfo(newx, newy);
     }
 
-    bool MoveEvent::fire() {
-        if (!origin.contains(&rover)) return false;
-        origin->deleteItem(&rover);
-        destination->addItem(&rover);
+    ResultType MoveEvent::fire() {
+        if (!origin.contains(rover)) return Fail;
+        origin->deleteItem(rover);
+        destination->addItem(rover);
         rover.SetCoords(newx, newy);
-        return true;
+        return Move;
     }
 
 }

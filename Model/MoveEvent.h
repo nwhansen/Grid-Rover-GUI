@@ -12,7 +12,7 @@
 #include "Tile.h"
 #include "TitanTime.h"
 #include "Rover.h"
-#include "RoverInterface.h"
+#include "Result.h"
 
 namespace Model {
 
@@ -29,13 +29,13 @@ namespace Model {
          */
         MoveEvent(Engine* m,
                   Titan::TitanTime time,
-                  Rover& rover,
+                  Rover* r,
                   char direction);
 
-        bool fire();
+        ResultType fire();
 
     private:
-        Rover& rover;
+        Rover* rover;
         Tile* origin;
         Tile* destination;
         int newx, newy;

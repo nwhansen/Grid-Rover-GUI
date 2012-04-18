@@ -114,7 +114,7 @@ ${OBJECTDIR}/MoveEvent.o: MoveEvent.C
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so
 
 # Subprojects
 .clean-subprojects:

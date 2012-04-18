@@ -10,5 +10,6 @@
         <file alias="mountain">images/mountain.png</file>
         <file alias="plain">images/plain.png</file>
         <file alias="rugged">images/rugged.png</file>
+        <file alias="rover">images/Nasa40.png</file>
     </qresource>
 </RCC>
