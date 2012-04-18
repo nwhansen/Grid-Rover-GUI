@@ -23,7 +23,7 @@ namespace Model{
     class ThingFactory{
         
     private:
-        vector<AbstractThing> objectList;
+        vector<Thing> objectList;
         string objectXMLDataFile;
     
     public :
@@ -34,9 +34,9 @@ namespace Model{
         GenerateThings(string filename);
         
         //Methods to obtain abstract thing objects.
-        AbstractThing GetThingAt(int index);
-        AbstractThing GetThingWithID(int id);
-        AbstractThing GetRandomThing();
+        Thing GetThingAt(int index);
+        Thing GetThingWithID(int id);
+        Thing GetRandomThing();
         
     };
 

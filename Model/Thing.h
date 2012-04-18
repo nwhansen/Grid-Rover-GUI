@@ -27,6 +27,7 @@ namespace Model{
         int collectPointValue;
         int discoverPointValue;
         string discription;
+        int ID;
         
         //Set Methods
         SetWeight(int weight){this->weight = weight;};
@@ -47,6 +48,7 @@ namespace Model{
         int GetDiscoverPointValue(){return discoverPointValue;};
         string GetThingDiscription(){return discription;};
         string GetName(){return name;};
+        int GetID(){return ID;};
 
         //Constructors
         Thing();
