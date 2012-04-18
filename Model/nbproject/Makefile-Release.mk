@@ -34,19 +34,15 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-<<<<<<< HEAD
 	${OBJECTDIR}/Logger.o \
 	${OBJECTDIR}/Rover.o \
+	${OBJECTDIR}/pugixml.o \
 	${OBJECTDIR}/Tile.o \
 	${OBJECTDIR}/Thing.o \
 	${OBJECTDIR}/Engine.o \
 	${OBJECTDIR}/ThingFactory.o \
 	${OBJECTDIR}/RoverInterface.o \
 	${OBJECTDIR}/MoveEvent.o
-=======
-	${OBJECTDIR}/source/AbstractRoverInterface.o \
-	${OBJECTDIR}/source/Logger.o
->>>>>>> 5100d1078f69ef680801ef61f53348b7b2a67d32
 
 
 # C Compiler Flags
@@ -73,16 +69,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/source/AbstractRoverInterface.o: source/AbstractRoverInterface.C 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/Logger.o: Logger.C 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AbstractRoverInterface.o source/AbstractRoverInterface.C
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.C
 
-<<<<<<< HEAD
 ${OBJECTDIR}/Rover.o: Rover.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
+
+${OBJECTDIR}/pugixml.o: pugixml.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/pugixml.o pugixml.cpp
 
 ${OBJECTDIR}/Tile.o: Tile.C 
 	${MKDIR} -p ${OBJECTDIR}
@@ -113,12 +113,6 @@ ${OBJECTDIR}/MoveEvent.o: MoveEvent.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/MoveEvent.o MoveEvent.C
-=======
-${OBJECTDIR}/source/Logger.o: source/Logger.C 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
->>>>>>> 5100d1078f69ef680801ef61f53348b7b2a67d32
 
 # Subprojects
 .build-subprojects:

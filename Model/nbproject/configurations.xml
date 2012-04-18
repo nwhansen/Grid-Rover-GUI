@@ -16,6 +16,10 @@
         <itemPath>ThingFactory.h</itemPath>
         <itemPath>Tile.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f1" displayName="Parser" projectFiles="true">
+        <itemPath>pugiconfig.hpp</itemPath>
+        <itemPath>pugixml.hpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="f3" displayName="TitanNamespace" projectFiles="true">
         <itemPath>TitanTime.h</itemPath>
       </logicalFolder>
@@ -38,6 +42,9 @@
         <itemPath>Thing.C</itemPath>
         <itemPath>ThingFactory.C</itemPath>
         <itemPath>Tile.C</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="Parser" projectFiles="true">
+        <itemPath>pugixml.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"

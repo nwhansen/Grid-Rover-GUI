@@ -14,6 +14,7 @@
 #include <cstdlib>
 
 #include "Thing.h"
+#include "pugixml.hpp"
 
 using namespace std;
 using namespace Model;
