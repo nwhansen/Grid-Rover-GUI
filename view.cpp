@@ -133,6 +133,22 @@ View::View(const QString &name, QWidget *parent)
     refreshButton->setChecked(false);
     refreshButton->setEnabled(true);
 
+    upButton = new QToolButton;
+    upButton->setText(tr("Up"));
+    upButton->setEnabled(true);
+
+    downButton = new QToolButton;
+    downButton->setText(tr("Down"));
+    downButton->setEnabled(true);
+
+    leftButton = new QToolButton;
+    leftButton->setText(tr("Left"));
+    leftButton->setEnabled(true);
+
+    rightButton = new QToolButton;
+    rightButton->setText(tr("Right"));
+    rightButton->setEnabled(true);
+
     label2 = new QLabel(tr("Pointer Mode"));
 
     selectModeButton = new QToolButton;
@@ -170,6 +186,13 @@ View::View(const QString &name, QWidget *parent)
     //The button Layout
     labelLayout->addWidget(label);
     labelLayout->addWidget(refreshButton);
+
+    //Temporary buttons!
+    labelLayout->addWidget(upButton);
+    labelLayout->addWidget(downButton);
+    labelLayout->addWidget(leftButton);
+    labelLayout->addWidget(rightButton);
+    //Back to business.
 
     labelLayout->addStretch();
     labelLayout->addWidget(label2);

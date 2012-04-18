@@ -43,6 +43,7 @@
 #define MAINWINDOW_H
 
 #include <QtGui/qwidget.h>
+#include <QtGui>
 #include "dummymodel.h"
 
 QT_FORWARD_DECLARE_CLASS(QGraphicsScene)
@@ -56,13 +57,20 @@ class MainWindow : public QWidget
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = 0);
+
 private slots:
     void reloadMap();
+    void moveRoverU();
+    void moveRoverD();
+    void moveRoverR();
+    void moveRoverL();
 
 private:
     void setupMatrix();
     void populateScene(int width, int height);
-    
+    void placeRover();
+    int roverX, roverY;
+    QGraphicsPixmapItem *rover;
     DummyModel dummy;
     QGraphicsScene *scene;
     QSplitter *h1Splitter;
