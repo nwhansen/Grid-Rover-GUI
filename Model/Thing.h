@@ -12,7 +12,7 @@
 #include <vector>
 
 using namespace std;
-
+typedef unsigned int uint;
 namespace Model {
 
     class Thing {

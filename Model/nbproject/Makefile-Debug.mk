@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc.exe
-CCC=g++.exe
-CXX=g++.exe
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
-AS=as.exe
+AS=as
 
 # Macros
-CND_PLATFORM=Cygwin-Windows
+CND_PLATFORM=GNU-Linux-x86
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Logger.o \
 	${OBJECTDIR}/Rover.o \
+	${OBJECTDIR}/pugixml.o \
 	${OBJECTDIR}/Tile.o \
 	${OBJECTDIR}/Thing.o \
 	${OBJECTDIR}/Engine.o \
@@ -62,51 +63,56 @@ LDLIBSOPTIONS=-lpthread -lglib-2.0
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -mno-cygwin -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
 ${OBJECTDIR}/Logger.o: Logger.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.C
 
 ${OBJECTDIR}/Rover.o: Rover.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
+
+${OBJECTDIR}/pugixml.o: pugixml.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/pugixml.o pugixml.cpp
 
 ${OBJECTDIR}/Tile.o: Tile.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
 
 ${OBJECTDIR}/Thing.o: Thing.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Thing.o Thing.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Thing.o Thing.C
 
 ${OBJECTDIR}/Engine.o: Engine.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Engine.o Engine.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Engine.o Engine.C
 
 ${OBJECTDIR}/ThingFactory.o: ThingFactory.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/ThingFactory.o ThingFactory.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/ThingFactory.o ThingFactory.C
 
 ${OBJECTDIR}/RoverInterface.o: RoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoverInterface.o RoverInterface.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoverInterface.o RoverInterface.C
 
 ${OBJECTDIR}/MoveEvent.o: MoveEvent.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/MoveEvent.o MoveEvent.C
+	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/MoveEvent.o MoveEvent.C
 
 # Subprojects
 .build-subprojects:
@@ -114,7 +120,7 @@ ${OBJECTDIR}/MoveEvent.o: MoveEvent.C
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so
 
 # Subprojects
 .clean-subprojects:
