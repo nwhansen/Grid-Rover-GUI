@@ -72,7 +72,7 @@ RoverInterface::RoverInterface(std::string& filename) {
     struct timeval timeout;
     timeout.tv_sec = 0;
     timeout.tv_usec = 40000; //  1/25 s
-
+    running = true;
     select(FD_SETSIZE, NULL, NULL, NULL, &timeout);
 }
 
