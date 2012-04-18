@@ -15,10 +15,6 @@
 namespace Model {
 
     class Engine;
-    class Event;
-    typedef void(*GameOver_t)(void*);
-    typedef Tile(*GetTile_t)(void*, int, int);
-    typedef void(*InsertEvent_t)(void*, Event);
 
     /**
      * Represents an event in the game. Could be anything from a rover moving

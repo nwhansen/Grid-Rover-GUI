@@ -39,6 +39,7 @@ namespace Model {
                 break;
         }
         destination = engine->getTileInfo(newx, newy);
+        // TODO check for NULL
     }
 
     ResultType MoveEvent::fire() {
@@ -49,7 +50,7 @@ namespace Model {
         }
         origin->deleteItem(rover);
         destination->addItem(rover);
-        rover.SetCoords(newx, newy);
+        rover->SetCoords(newx, newy);
         return Move;
     }
 
