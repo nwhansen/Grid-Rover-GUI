@@ -36,7 +36,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Logger.o \
 	${OBJECTDIR}/Rover.o \
-	${OBJECTDIR}/pugixml.o \
 	${OBJECTDIR}/Tile.o \
 	${OBJECTDIR}/Thing.o \
 	${OBJECTDIR}/Engine.o \
@@ -78,11 +77,6 @@ ${OBJECTDIR}/Rover.o: Rover.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
-
-${OBJECTDIR}/pugixml.o: pugixml.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/pugixml.o pugixml.cpp
 
 ${OBJECTDIR}/Tile.o: Tile.C 
 	${MKDIR} -p ${OBJECTDIR}

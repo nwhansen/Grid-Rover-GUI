@@ -10,6 +10,7 @@
 
 #include "Thing.h"
 #include "RoverInterface.h"
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -32,9 +33,8 @@ namespace Model {
         
 
     public:
-        Rover(int mass, int density, int collectPointValue,
-                int discoverPointValue, RoverInterface roverInterface) : Thing(int mass, int density, int collectPointValue, int discoverPointValue) {
-            interface = roverInterface;
+        Rover(uint id,uint mass, uint density, uint collectPointValue,
+                uint discoverPointValue, std::string roverFile) : Thing(id,mass,density, collectPointValue, discoverPointValue), interface(roverFile) {
         }
         
         ///Adds a Thing into the rover's inventory.
@@ -67,7 +67,7 @@ namespace Model {
         bool SetXCoords(int x, int y);
 
         ///Returns the RoverInterface object for this rover.
-        RoverInterface GetRoverInterface(){return interface;};
+        RoverInterface* GetRoverInterface(){return &interface;};
 
     };
 
