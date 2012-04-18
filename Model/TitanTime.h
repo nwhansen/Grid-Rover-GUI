@@ -67,11 +67,11 @@ namespace Titan {
         unsigned int getNumberOfDays() {
             return Days;
         }
-        
-        TitanTime operator +(TitanTime const &left, TitanTime const &right) {
-        	return TitanTime(left.Days + right.Days + (left.Hours + right.Hours + (left.Minutes + right.Minutes) % 60) % 24,
-        					 left.Hours + right.Hours + (left.Minutes + right.Minutes) % 60,
-        					 left.Minutes + right.Minutes);
+        //Rewrite.... someday
+        TitanTime operator +(TitanTime const &right) const {
+        	return TitanTime(this->Days + right.Days + (this->Hours + right.Hours + (this->Minutes + right.Minutes) % 60) % 24,
+        					 this->Hours + right.Hours + (this->Minutes + right.Minutes) % 60,
+        					 this->Minutes + right.Minutes);
         }
         
         bool operator ==(TitanTime const &other) const {

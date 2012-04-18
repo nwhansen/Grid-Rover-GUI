@@ -15,7 +15,7 @@
 namespace Model {
 
     class Engine;
-
+    class Event;
     typedef void(*GameOver_t)(void*);
     typedef Tile(*GetTile_t)(void*, int, int);
     typedef void(*InsertEvent_t)(void*, Event);
@@ -24,16 +24,17 @@ namespace Model {
      * Represents an event in the game. Could be anything from a rover moving
      * from one square to another, to a rock falling, to Game Over.
      */
-    class Event{
+    class Event {
     public:
+
         /**
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        Event(Engine* m,
-              Titan::TitanTime time) : model(m)
-        {}
-        
+        Event(Engine* e,
+                Titan::TitanTime time) : engine(e), completionTime(time) {
+        }
+
         /**
          * Fire this event, applying its effects to the game state.
          */
@@ -44,8 +45,10 @@ namespace Model {
          * @param other
          * @return
          */
-        bool operator <(const AbstractModelNameSpace::AbstractEvent &other) {
-            return completionTime < other.completionTime;
+        bool operator<(const Event &other) const {
+            //There is only one operator defined for TitanTime, so just flip the items such that the 
+            //Operation is inverted.
+            return other.completionTime > completionTime;
         }
 
         /**
@@ -53,7 +56,7 @@ namespace Model {
          * @param other
          * @return
          */
-        bool operator >(const AbstractModelNameSpace::AbstractEvent &other) {
+        bool operator>(const Event &other) const {
             return completionTime > other.completionTime;
         }
 

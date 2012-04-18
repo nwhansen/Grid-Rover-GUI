@@ -29,13 +29,13 @@ namespace Model{
         string discription;
         
         //Set Methods
-        SetWeight(int weight){this->weight = weight;};
-        SetMass(int mass){this->mass = mass;};
-        SetDensity(int density){this->density = density;};
-        SetCollectPointValue(int collectPointValue){this->collectPointValue =collectPointValue;};
-        SetDiscoverPointValue(int discoverPointValue){this->discoverPointValue = discoverPointValue;};
-        SetVolume(int volume){this->volume = volume;};
-        SetName(string name){this->name = name;};
+        void SetWeight(int weight){this->weight = weight;};
+        void SetMass(int mass){this->mass = mass;};
+        void SetDensity(int density){this->density = density;};
+        void SetCollectPointValue(int collectPointValue){this->collectPointValue =collectPointValue;};
+        void SetDiscoverPointValue(int discoverPointValue){this->discoverPointValue = discoverPointValue;};
+        void SetVolume(int volume){this->volume = volume;};
+        void SetName(string name){this->name = name;};
         
     public:
         //Get Methods
@@ -57,7 +57,7 @@ namespace Model{
         // 1 = this became a new thing;
         // 2 = this created a thing;  Call method GetChild() to obtain the child;
         // 3 = disaster was created. ie. Rock hit rover, thing exploded in rover's "face";
-        virtual int Tweak() = 0;
+        virtual int Tweak();
     };
 
 }

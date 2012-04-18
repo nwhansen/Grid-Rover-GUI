@@ -6,22 +6,53 @@
  */
 
 #include "Engine.h"
-void Engine::LoadEngine(int width, int height, String& roverfile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile, String& mapFile) : player1(roverfile){
-    this->Width = width;
-    this->Height = height;
+
+Engine::~Engine() {
+    for (int i = 0; i < Width; i++) {
+        delete[] Map[i];
+    }
+    delete[] Map;
+}
+
+void Engine::LoadEngine(int width, int height, String& roverfile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile, String& mapFile) {
+    Width = width;
+    Height = height;
     Factory.GenerateThings(thingsLibrary);
+    Logs.openLogs(messageLog, errorLog);
+    Map = new Tile*[Width];
+    for (int i = 0; i < Width; i++) {
+        Map[i] = new Tile[Height];
+    }
+    for (int j = 0; j < Width; j++) {
+        for (int i = 0; i < Height; i++) {
+            //Map[i][j];
+        }
+    }
+}
+
+Result Engine::next() {
+   Event tmp = EventQueue.top();
+   //Ok lets do the work
+   EventQueue.pop();
+   return tmp.fire();
+}
+
+Tile* Engine::getTileInfo(int XoffSet, int YoffSet) {
+    //Check bounds
+    if(XoffSet >= Width || YoffSet >= Height) return NULL;
+    return &(Map[XoffSet][YoffSet]);
+}
+
+void Engine::EndGame() {
     
 }
-Result* Engine::next(){
-}
-Tile * Engine::getTileInfo(int XoffSet, int YoffSet){
-}
-void Engine::EndGame(){
-}
-bool Engine::AddEvent(Event event){
+
+bool Engine::AddEvent(Event event) {
     //
 }
-Rover* Engine::GetRover(int player){
-    return &(this->player1);
+
+Rover* Engine::GetRover(int player) {
+    if(player1 == 0)
+        return &(this->player1);
 }
 

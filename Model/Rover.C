@@ -2,10 +2,10 @@
 
 using namespace Model;
 
-bool Rover::AddThingToInventory(AbstractThing item){
+bool Rover::AddThingToInventory(Thing* item){
     
-    if(item.GetVolume() + inventoryVolume <= maxInventoryVolume){
-        inventory.push_back(item);
+    if(item->GetVolume() + inventoryVolume <= maxInventoryVolume){
+        inventory.push_back((*item));
         return true;
     } else {
         return false;
@@ -18,7 +18,7 @@ bool Rover::IncreaseScore(int points){
     score += points;
 }
 
-bool Rover::RemoveThingFromInventory(AbstractThing item){
+bool Rover::RemoveThingFromInventory(Thing* item){
     
 }
 

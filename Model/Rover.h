@@ -26,18 +26,18 @@ namespace Model {
         unsigned int currentCharge;
     public:
         Rover(int mass, int density, int collectPointValue,
-                int discoverPointValue) : Thing(int mass, int density, int collectPointValue, int discoverPointValue) {
+                int discoverPointValue) : Thing(mass, density, collectPointValue, discoverPointValue) {
             
         }
-        bool AddThingToInventory(Thing item);
+        bool AddThingToInventory(Thing* item);
         bool RemoveThingFromInventory(int ID);
-        bool RemoveThingFromInventory(Thing item);
+        bool RemoveThingFromInventory(Thing* item);
         bool IncreaseScore(int points);
 
         int GetXCoord();
         int GetYCoord();
 
-        SetXCoords(int x, int y);
+        void SetXCoords(int x, int y);
 
         
 

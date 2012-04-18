@@ -12,11 +12,14 @@
 
 namespace Model {
     
+    enum TileType {
+        Mountain, Plain, Rugged, Lake
+    };
+    
     class TileIterator {
-        //THESE MUST BE IMPLIMENTED PROIR TO USING THE ABSTRACTILE
     public:
         void operator ++();
-        bool operator ==(const TileIterator& other);
+        bool operator <(const TileIterator& other);
     private:
         std::vector<Thing>* items;
     };
@@ -24,6 +27,7 @@ namespace Model {
     class Tile {
     public:
         Tile();
+        void setProperties(TileType);
         virtual ~Tile();
         /**
          * Delete an item in the collection. 
@@ -34,7 +38,7 @@ namespace Model {
          * Check if the tile contains an item
          * @param toCompare
          */
-        void contains(Thing* toCompare);
+        bool contains(Thing* toCompare);
         /**
          * Add an item to the collection.
          * @param toAdd
@@ -52,6 +56,7 @@ namespace Model {
         TileIterator end();
 
     private:
+        TileType type;
         std::vector<Thing*> items;
         TileIterator* itr;
     };

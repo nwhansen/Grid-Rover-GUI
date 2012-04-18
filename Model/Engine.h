@@ -22,8 +22,9 @@ namespace Model {
 
     class Engine {
     public:
-        void LoadEngine(int width, int height, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile = "", String& mapFile = "");
-        Result* next();
+        virtual ~Engine();
+        void LoadEngine(int width, int height,String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile = "", String& mapFile = "");
+        Result next();
         Tile * getTileInfo(int XoffSet, int YoffSet);
         void EndGame();
         bool AddEvent(Event event);
@@ -32,8 +33,11 @@ namespace Model {
         ThingFactory Factory;
         int Width, Height;
         Tile** Map;
+        //int player1;
         Rover player1;
-        Logging::Logger logs;
+        Logging::Logger Logs;
+        
+        std::priority_queue< Event, std::vector<Event>, std::greater<Event> > EventQueue;
     };
 }
 
