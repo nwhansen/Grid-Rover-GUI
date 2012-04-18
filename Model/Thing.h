@@ -5,17 +5,17 @@
  * Created on April 5, 2012, 12:55 PM
  */
 
-#ifndef ABSTRACTTHING_H
-#define	ABSTRACTTHING_H
+#ifndef THING_H
+#define	THING_H
 
 #include <string>
 #include <vector>
 
 using namespace std;
 
-namespace AbstractThingNameSpace{
+namespace Model{
 
-    class AbstractThing{
+    class Thing{
 
     protected:
         
@@ -49,8 +49,8 @@ namespace AbstractThingNameSpace{
         string GetName(){return name;};
 
         //Constructors
-        AbstractThing();
-        AbstractThing(int mass, int density, int collectPointValue, int discoverPointValue);
+        Thing();
+        Thing(int mass, int density, int collectPointValue, int discoverPointValue);
 
         // Method will return an integer based on the results of the tweak.
         // 0 = no change;
@@ -61,4 +61,4 @@ namespace AbstractThingNameSpace{
     };
 
 }
-#endif	/* ABSTRACTTHING_H */
+#endif	/* THING_H */

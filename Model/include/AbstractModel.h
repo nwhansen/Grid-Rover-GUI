@@ -7,11 +7,19 @@
 
 #ifndef ABSTRACTMODEL_H
 #define	ABSTRACTMODEL_H
+
+#include <string>
+
 #include "TitanTime.h"
 #include "AbstractRoverInterface.h"
-//project includes
+#include "AbstractTile.h"
+#include "Logger.h"
+#include "AbstractEvent.h"
 
-class AbstractEvent;
+
+//class AbstractEvent;
+//Bad practice but i love the upercase string, also string is used enough i like to not type std::, and i don't want std:: appended as we are using our own namespace
+typedef std::string String;
 
 namespace AbstractModelNameSpace {
 
@@ -20,7 +28,19 @@ namespace AbstractModelNameSpace {
      */
     class AbstractEngine {
     public:
-
+        AbstractEngine() {
+            throw 0;
+        }
+        AbstractEngine(const AbstractModelNameSpace::AbstractEngine&) {
+            throw 0;
+        }
+        /**
+         * Loads the engine with the configuration files.
+         * @param configFile
+         * @param thingslibrary
+         * @param mapfile Optional 
+         */
+        virtual void LoadEngine(String& configFile, String& thingslibrary,String& errorLog, String& messageLog, String& mapfile = "") = 0;
         /**
          * The Consequence of the call will retrieve various "consequences" 
          *      A move from the user program.
@@ -39,14 +59,14 @@ namespace AbstractModelNameSpace {
          * @param YoffSet
          * @return 
          */
-        virtual AbstractTile * getTileInfo(int XoffSet, int YoffSet) = 0;
+        virtual AbstractTile* getTileInfo(int XoffSet, int YoffSet) = 0;
 
         /**
          * Returns the current time in titan time.
          * @return The time
          */
         Titan::TitanTime getTime() {
-            return CurrentTime;
+            return (*CurrentTime);
         }
         
         /**
@@ -59,7 +79,7 @@ namespace AbstractModelNameSpace {
          * @param event The event to add
          * @return The result of adding it.
          */
-        virtual bool AddEvent(AbstractEvent event) = 0; 
+        virtual bool AddEvent(AbstractEvent* event) = 0; 
         
         /**
          * A helper method so that the abstractEvent can get tiles without an explicit function, and can instead use a function pointer.
@@ -71,7 +91,7 @@ namespace AbstractModelNameSpace {
          */
         static AbstractTile * EventAddHelper(void* model, int XoffSet, int YoffSet) {
             //Attempt to cast
-            return ((AbstractEngine)model)->getTileInfo(XoffSet, YoffSet);
+            return ((AbstractEngine*)model)->getTileInfo(XoffSet, YoffSet);
         }
         
         /**
@@ -84,16 +104,16 @@ namespace AbstractModelNameSpace {
         }
         
     protected:
-        
+        Logging::Logger* Logger;
         /**
          * The current time in the simulation, Event cannot occur before this time.
          */
-        Titan::TitanTime CurrentTime;
+        Titan::TitanTime* CurrentTime;
 
         /**
          * The Communication with the rover. All communication must be contained and used by this object.
          */
-        AbstractRoverInterface CommPortal;
+        AbstractRoverInterface* CommPortal;
     };
 }
 

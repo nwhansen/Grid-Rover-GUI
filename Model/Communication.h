@@ -9,7 +9,7 @@
 #define	COMMUNICATION_H
 #include <string>
 #include <vector>
-namespace AbstractModelNameSpace {
+namespace Model {
 
     class Communication {
     public:

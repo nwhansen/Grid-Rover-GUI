@@ -8,15 +8,17 @@
 #ifndef EVENT_H
 #define	EVENT_H
 
-#include "AbstractEvent.h"
-#include "AbstractTile.h"
+#include "Tile.h"
 #include "TitanTime.h"
+#include "Result.h"
 
 namespace Model {
 
-    typedef void(*GameOver_t)();
-    typedef AbstractModelNameSpace::AbstractTile(*GetTile_t)(int, int);
-    typedef void(*InsertEvent_t)(AbstractModelNameSpace::AbstractEvent);
+    class Engine;
+
+    typedef void(*GameOver_t)(void*);
+    typedef Tile(*GetTile_t)(void*, int, int);
+    typedef void(*InsertEvent_t)(void*, Event);
 
     /**
      * Represents an event in the game. Could be anything from a rover moving
@@ -28,14 +30,14 @@ namespace Model {
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        Event(Titan::TitanTime time,
-              GameOver_t gameover,
-              GetTile_t gettile,
-              InsertEvent_t insertevent) : completionTime(time),
-                                           gameOver(gameover),
-                                           getTile(gettile),
-                                           insertEvent(insertevent)
+        Event(Engine* m,
+              Titan::TitanTime time) : model(m)
         {}
+        
+        /**
+         * Fire this event, applying its effects to the game state.
+         */
+        ResultType fire();
 
         /**
          * Define what it means to be less than another Event
@@ -56,10 +58,8 @@ namespace Model {
         }
 
     private:
+        Engine* engine;
         Titan::TitanTime completionTime;
-        GameOver_t gameOver;
-        GetTile_t getTile;
-        InsertEvent_t insertEvent;
     };
 }
 

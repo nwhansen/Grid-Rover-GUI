@@ -13,12 +13,12 @@
 #include <string>
 #include <cstdlib>
 
-#include "AbstractThing.h"
+#include "Thing.h"
 
 using namespace std;
-using namespace AbstractThingNameSpace;
+using namespace Model;
 
-namespace ThingNameSpace{
+namespace Model{
     
     class ThingFactory{
         

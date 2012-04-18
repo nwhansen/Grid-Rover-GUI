@@ -8,11 +8,12 @@
 #ifndef ABSTRACTTILE_H
 #define	ABSTRACTTILE_H
 #include <vector>
-#include "AbstractThing.h"
+#include "Thing.h"
 namespace AbstractModelNameSpace {
     class AbstractTileIterator;
     class AbstractTile {
     public:
+        virtual ~AbstractTile();
         /**
          * Delete an item in the collection. 
          * @param toDelete
@@ -32,14 +33,15 @@ namespace AbstractModelNameSpace {
          * A method to begin iteration over a collection of the Abstract Tile
          * @return 
          */ 
-        virtual AbstractTileIterator begin() = 0;
+        virtual AbstractTileIterator* begin() = 0;
         /**
          * An iterator to define the end of a collection
          * @return 
          */
-        virtual AbstractTileIterator end() = 0;
-    protected:
+        virtual AbstractTileIterator* end() = 0;
         
+    protected:
+        AbstractTileIterator* itr;
     };
     class AbstractTileIterator {
         //THESE MUST BE IMPLIMENTED PROIR TO USING THE ABSTRACTILE

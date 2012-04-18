@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=g++
-CXX=g++
+CC=gcc.exe
+CCC=g++.exe
+CXX=g++.exe
 FC=gfortran
-AS=as
+AS=as.exe
 
 # Macros
-CND_PLATFORM=GNU-Linux-x86
+CND_PLATFORM=Cygwin-Windows
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -34,8 +34,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/source/AbstractRoverInterface.o \
-	${OBJECTDIR}/source/Logger.o
+	${OBJECTDIR}/Logger.o \
+	${OBJECTDIR}/Rover.o \
+	${OBJECTDIR}/Tile.o \
+	${OBJECTDIR}/Thing.o \
+	${OBJECTDIR}/Engine.o \
+	${OBJECTDIR}/ThingFactory.o \
+	${OBJECTDIR}/RoverInterface.o \
+	${OBJECTDIR}/MoveEvent.o
 
 
 # C Compiler Flags
@@ -56,21 +62,51 @@ LDLIBSOPTIONS=-lpthread -lglib-2.0
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.so -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -mno-cygwin -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/source/AbstractRoverInterface.o: source/AbstractRoverInterface.C 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/Logger.o: Logger.C 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AbstractRoverInterface.o source/AbstractRoverInterface.C
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.C
 
-${OBJECTDIR}/source/Logger.o: source/Logger.C 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/Rover.o: Rover.C 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
+
+${OBJECTDIR}/Tile.o: Tile.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
+
+${OBJECTDIR}/Thing.o: Thing.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Thing.o Thing.C
+
+${OBJECTDIR}/Engine.o: Engine.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Engine.o Engine.C
+
+${OBJECTDIR}/ThingFactory.o: ThingFactory.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/ThingFactory.o ThingFactory.C
+
+${OBJECTDIR}/RoverInterface.o: RoverInterface.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoverInterface.o RoverInterface.C
+
+${OBJECTDIR}/MoveEvent.o: MoveEvent.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude  -MMD -MP -MF $@.d -o ${OBJECTDIR}/MoveEvent.o MoveEvent.C
 
 # Subprojects
 .build-subprojects:

@@ -34,8 +34,19 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+<<<<<<< HEAD
+	${OBJECTDIR}/Logger.o \
+	${OBJECTDIR}/Rover.o \
+	${OBJECTDIR}/Tile.o \
+	${OBJECTDIR}/Thing.o \
+	${OBJECTDIR}/Engine.o \
+	${OBJECTDIR}/ThingFactory.o \
+	${OBJECTDIR}/RoverInterface.o \
+	${OBJECTDIR}/MoveEvent.o
+=======
 	${OBJECTDIR}/source/AbstractRoverInterface.o \
 	${OBJECTDIR}/source/Logger.o
+>>>>>>> 5100d1078f69ef680801ef61f53348b7b2a67d32
 
 
 # C Compiler Flags
@@ -67,10 +78,47 @@ ${OBJECTDIR}/source/AbstractRoverInterface.o: source/AbstractRoverInterface.C
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AbstractRoverInterface.o source/AbstractRoverInterface.C
 
+<<<<<<< HEAD
+${OBJECTDIR}/Rover.o: Rover.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
+
+${OBJECTDIR}/Tile.o: Tile.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
+
+${OBJECTDIR}/Thing.o: Thing.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Thing.o Thing.C
+
+${OBJECTDIR}/Engine.o: Engine.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Engine.o Engine.C
+
+${OBJECTDIR}/ThingFactory.o: ThingFactory.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/ThingFactory.o ThingFactory.C
+
+${OBJECTDIR}/RoverInterface.o: RoverInterface.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoverInterface.o RoverInterface.C
+
+${OBJECTDIR}/MoveEvent.o: MoveEvent.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/MoveEvent.o MoveEvent.C
+=======
 ${OBJECTDIR}/source/Logger.o: source/Logger.C 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logger.o source/Logger.C
+>>>>>>> 5100d1078f69ef680801ef61f53348b7b2a67d32
 
 # Subprojects
 .build-subprojects:

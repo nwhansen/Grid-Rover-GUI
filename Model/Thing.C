@@ -1,13 +1,13 @@
 #include "Thing.h"
 
-using namespace ThingNameSpace;
+using namespace Model;
 
 Thing::Thing()
 {
     
 }
 Thing::Thing(int mass, int density, int collectPointValue, int discoverPointValue) 
-        : AbstractThing(mass, density, collectPointValue, discoverPointValue){
+{
     
 }
 
