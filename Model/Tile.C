@@ -9,31 +9,50 @@
 
 using namespace Model;
 
-Tile::Tile() {
+Tile::Tile() : type(Mountain){
+    //Can't do nothing since dealing with malloc is evil.
+    //default to mountain. just to be safe
+}
 
+void Tile::setProperties(TileType t){
+    type = t;
 }
 
 Tile::~Tile() {
 }
 
 void Tile::deleteItem(Thing* toDelete) {
+    for(std::vector<Thing* >::iterator i = items.begin(); i < items.end(); i++){
+        if(*i == toDelete){
+            items.erase(i);
+        }
+    }
 }
 
-void Tile::contains(Thing* toCompare) {
+bool Tile::contains(Thing* toCompare) {
+    for(std::vector<Thing* >::iterator i = items.begin(); i < items.end(); i++){
+        if(*i == toCompare){
+            return true;
+        }
+    }
+    return false;
 }
 
 void Tile::addItem(Thing* toAdd) {
+    items.push_back(toAdd);
 }
 
 TileIterator Tile::begin() {
+    //
 }
 
 TileIterator Tile::end() {
+    //
 }
 
 void TileIterator::operator ++() {
 }
 
-bool TileIterator::operator ==(const TileIterator& other) {
+bool TileIterator::operator <(const TileIterator& other) {
 }
 
