@@ -1,5 +1,5 @@
 /*
- * File:   MoveEvent.c
+ * File:   MoveEvent.C
  * Author: Lucas Adam M. Paul
  *
  * Created on 2012/04/14 18:34:28
@@ -9,6 +9,7 @@
 #include "Engine.h"
 #include "Tile.h"
 #include "MoveEvent.h"
+#include "GetCommandEvent.h"
 #include "TitanTime.h"
 #include "Rover.h"
 #include "Result.h"
@@ -41,7 +42,11 @@ namespace Model {
     }
 
     ResultType MoveEvent::fire() {
-        if (!origin.contains(rover)) return Fail;
+        Titan::TitanTime delay(0, 0, 1);
+        engine->AddEvent(GetCommandEvent(m, time + delay));
+        if (!origin.contains(rover)) {
+            return Fail;
+        }
         origin->deleteItem(rover);
         destination->addItem(rover);
         rover.SetCoords(newx, newy);

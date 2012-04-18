@@ -10,6 +10,7 @@
 #include "TitanTime.h"
 #include "Engine.h"
 #include "GetCommandEvent.h"
+#include "MoveEvent.h"
 #include "Rover.h"
 #include "RoverInterface.h"
 #include "Result.h"
