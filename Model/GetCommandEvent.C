@@ -24,7 +24,7 @@ namespace Model {
         RoverInterface* ri = rover->GetRoverInterface();
 		Communication comm = ri->RecieveFormattedMessage();
 		if (comm.command.compare("move") == 0) {
-			if (comm.arguments.size > 0 && comm.arguments.front().length() > 0) {
+			if (comm.arguments.size() > 0 && comm.arguments.front().length() > 0) {
 				char direction = tolower(comm.arguments.front()[0]);
 				if (direction == 'e' || direction == 'n' || direction == 's' || direction == 'w') {
 					Titan::TitanTime traveltime(0,0,20);

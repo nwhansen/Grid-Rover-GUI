@@ -6,7 +6,7 @@ Thing::Thing()
 {
     
 }
-Thing::Thing(int mass, int density, int collectPointValue, int discoverPointValue) 
+Thing::Thing(uint id, uint mass, uint density, uint collectPointValue, uint discoverPointValue) 
 {
     
 }

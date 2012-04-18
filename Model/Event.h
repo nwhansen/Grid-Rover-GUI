@@ -15,10 +15,6 @@
 namespace Model {
 
     class Engine;
-    class Event;
-    typedef void(*GameOver_t)(void*);
-    typedef Tile(*GetTile_t)(void*, int, int);
-    typedef void(*InsertEvent_t)(void*, Event);
 
     /**
      * Represents an event in the game. Could be anything from a rover moving
@@ -38,7 +34,7 @@ namespace Model {
         /**
          * Fire this event, applying its effects to the game state.
          */
-        ResultType fire();
+        virtual ResultType fire() {};
 
         /**
          * Define what it means to be less than another Event
@@ -60,7 +56,7 @@ namespace Model {
             return completionTime > other.completionTime;
         }
 
-    private:
+    protected:
         Engine* engine;
         Titan::TitanTime completionTime;
     };

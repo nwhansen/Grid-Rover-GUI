@@ -12,45 +12,92 @@
 #include <vector>
 
 using namespace std;
+typedef unsigned int uint;
+namespace Model {
 
-namespace Model{
-
-    class Thing{
-
+    class Thing {
     protected:
-        
+
         string name;
-        int weight;
-        int mass;
-        int density;
-        int volume;
-        int collectPointValue;
-        int discoverPointValue;
+        uint weight;
+        uint mass;
+        uint density;
+        uint ID;
+        uint volume;
+        uint collectPointValue;
+        uint discoverPointValue;
         string discription;
-        
         //Set Methods
-        void SetWeight(int weight){this->weight = weight;};
-        void SetMass(int mass){this->mass = mass;};
-        void SetDensity(int density){this->density = density;};
-        void SetCollectPointValue(int collectPointValue){this->collectPointValue =collectPointValue;};
-        void SetDiscoverPointValue(int discoverPointValue){this->discoverPointValue = discoverPointValue;};
-        void SetVolume(int volume){this->volume = volume;};
-        void SetName(string name){this->name = name;};
-        
+
+        void SetWeight(uint weight) {
+            this->weight = weight;
+        };
+
+        void SetMass(uint mass) {
+            this->mass = mass;
+        };
+
+        void SetDensity(uint density) {
+            this->density = density;
+        };
+
+        void SetCollectPointValue(uint collectPointValue) {
+            this->collectPointValue = collectPointValue;
+        };
+
+        void SetDiscoverPointValue(uint discoverPointValue) {
+            this->discoverPointValue = discoverPointValue;
+        };
+
+        void SetVolume(uint volume) {
+            this->volume = volume;
+        };
+
+        void SetName(string name) {
+            this->name = name;
+        };
+
     public:
         //Get Methods
-        int GetWeight(){return weight;};
-        int GetMass(){return mass;};
-        int GetDensity(){return density;};
-        int GetVolume(){return volume;};
-        int GetCollectPointValue(){return collectPointValue;};
-        int GetDiscoverPointValue(){return discoverPointValue;};
-        string GetThingDiscription(){return discription;};
-        string GetName(){return name;};
 
+        uint GetWeight() {
+            return weight;
+        };
+
+        uint GetMass() {
+            return mass;
+        };
+
+        uint GetDensity() {
+            return density;
+        };
+
+        uint GetVolume() {
+            return volume;
+        };
+
+        uint GetCollectPointValue() {
+            return collectPointValue;
+        };
+
+        uint GetDiscoverPointValue() {
+            return discoverPointValue;
+        };
+
+        uint GetID() {
+            return ID;
+        };
+
+        string GetThingDiscription() {
+            return discription;
+        };
+
+        string GetName() {
+            return name;
+        };
         //Constructors
         Thing();
-        Thing(int mass, int density, int collectPointValue, int discoverPointValue);
+        Thing(uint id,uint mass, uint density, uint collectPointValue, uint discoverPointValue);
 
         // Method will return an integer based on the results of the tweak.
         // 0 = no change;

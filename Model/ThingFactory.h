@@ -34,7 +34,7 @@ namespace Model{
         
         ///Populates the Factory with every Thing that has a possibility of being 
         ///in the game world.
-        GenerateThings(string filename);
+        void GenerateThings(string filename);
         
         //Methods to obtain thing objects.
         Thing GetThingAt(int index);

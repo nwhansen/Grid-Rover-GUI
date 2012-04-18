@@ -14,8 +14,8 @@ bool Rover::AddThingToInventory(Thing item){
 bool Rover::RemoveThingFromInventory(int ID){
  
     int count = inventory.size();
-    for(int i = 0; i < count; i++){
-        if(inventory[i].GetID() == ID){
+    for(std::vector<Thing >::iterator  i = inventory.begin(); i < inventory.end(); i++){
+        if((*i).GetID() == ID){
             inventory.erase(i);
             return true;
         }

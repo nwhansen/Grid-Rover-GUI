@@ -39,17 +39,18 @@ namespace Model {
                 break;
         }
         destination = engine->getTileInfo(newx, newy);
+        // TODO check for NULL
     }
 
     ResultType MoveEvent::fire() {
         Titan::TitanTime delay(0, 0, 1);
-        engine->AddEvent(GetCommandEvent(m, time + delay));
-        if (!origin.contains(rover)) {
+        engine->AddEvent(GetCommandEvent(engine, completionTime + delay));
+        if (!origin->contains(rover)) {
             return Fail;
         }
         origin->deleteItem(rover);
         destination->addItem(rover);
-        rover.SetCoords(newx, newy);
+        rover->SetXCoords(newx, newy);
         return Move;
     }
 

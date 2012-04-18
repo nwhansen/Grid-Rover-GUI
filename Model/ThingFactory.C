@@ -4,14 +4,13 @@ using namespace Model;
 
 
 ThingFactory::ThingFactory(){
-    this->objectList = new vector<Thing>();
 }
         
 ThingFactory::ThingFactory(string filename){
     
 }
         
-ThingFactory::GenerateThings(string filename){
+void ThingFactory::GenerateThings(string filename){
     
 }
         
