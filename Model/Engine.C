@@ -9,6 +9,8 @@
 #include "cstdlib"
 
 
+String Engine::empty("");
+
 Engine::~Engine() {
     for (int i = 0; i < Width; i++) {
         delete[] Map[i];
@@ -17,8 +19,7 @@ Engine::~Engine() {
 }
 
 Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile, String& mapFile) 
-                : player1(1, 0, 0, 0, 0, roverFile), Width(width), Height(height) {
-    Factory.GenerateThings(thingsLibrary);
+                : player1(1, 0, 0, 0, 0, roverFile), Width(width), Height(height), Factory(thingsLibrary) {
     Logs.openLogs(messageLog, errorLog);
 
     Map = new Tile*[Width];

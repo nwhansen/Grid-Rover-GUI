@@ -18,6 +18,7 @@
 #include "ThingFactory.h"
 
 typedef std::string String;
+
 namespace Model {
     struct Sorter {
         bool operator()(Event* m1, Event* m2) {
@@ -26,8 +27,8 @@ namespace Model {
     };
     class Engine {
     public:
-        
-        Engine(int width, int height, String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile = "", String& mapFile = "");
+        static String empty;
+        Engine(int width, int height, String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile = empty, String& mapFile = empty);
         
         virtual ~Engine();
         ResultType next();
