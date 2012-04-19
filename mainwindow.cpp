@@ -44,6 +44,13 @@
 
 #include <QtGui>
 #include <iostream>
+
+String empty("");
+String physobjs("Model/Data/physical_objects.xml");
+String errlog("error.log");
+String msglog("messages.log");
+String rvrprog("blah.sh");
+
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
@@ -67,6 +74,8 @@ MainWindow::MainWindow(QWidget *parent)
     setLayout(layout);
 
     setWindowTitle(tr("Grid Rover Map Viewer"));
+
+    engine = new Engine(10, 10, rvrprog, physobjs, errlog, msglog, empty, empty);
 }
 
 
@@ -83,29 +92,29 @@ void MainWindow::populateScene(int width, int height)
             mountain(":/mountain"), rugged(":/rugged"), rover(":/rover");
     QGraphicsPixmapItem *item = NULL;
     //Build maps from bottom left corner to top right corner
-    for(int w = 0; w < width; w++){
-        for(int h = 0; h < height; h++){
-            switch(dummy.getTile(w,h)){
-                case Mountain:
-                    item = new QGraphicsPixmapItem(mountain);
-                    break;
-                case Lake:
-                    item = new QGraphicsPixmapItem(lake);
-                    break;
-                case Plain:
-                    item = new QGraphicsPixmapItem(plain);
-                    break;
-                case Rugged:
-                    item = new QGraphicsPixmapItem(rugged);
-                    break;
-                default:
-                    std::cerr << "Unexpected Tile selected! correct code";
-                    item = NULL;
-            }
-            item->setPos(QPointF(w * lake.width(), h * mountain.height()));
-            scene->addItem(item);
-        }
-    }
+//    for(int w = 0; w < width; w++){
+//        for(int h = 0; h < height; h++){
+//            switch(engine->getTile(w,h)){
+//                case Mountain:
+//                    item = new QGraphicsPixmapItem(mountain);
+//                    break;
+//                case Lake:
+//                    item = new QGraphicsPixmapItem(lake);
+//                    break;
+//                case Plain:
+//                    item = new QGraphicsPixmapItem(plain);
+//                    break;
+//                case Rugged:
+//                    item = new QGraphicsPixmapItem(rugged);
+//                    break;
+//                default:
+//                    std::cerr << "Unexpected Tile selected! correct code";
+//                    item = NULL;
+//            }
+//            item->setPos(QPointF(w * lake.width(), h * mountain.height()));
+//            scene->addItem(item);
+//        }
+//    }
 
     placeRover();
     /*QGraphicsPixmapItem *item = new QGraphicsPixmapItem(image);
