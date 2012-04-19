@@ -24,15 +24,16 @@ namespace Model {
         /**
          * Create a new event with given completion time.
          */
-        LookEvent(Engine* m,
-                  Titan::TitanTime time) : Event(m, time);
+        GameOverEvent(Engine* m, Titan::TitanTime time) : Event(m, time) {
+            
+        }
 
         ResultType fire() {
             engine->EndGame();
         }
 
     private:
-    }
+    };
 }
 
 #endif /* GAMEOVEREVENT_H */

@@ -87,6 +87,10 @@ namespace Titan {
                     this->Hours > other.Hours : (this->Minutes != Minutes) ? //Check Minutes
                     this->Minutes > other.Minutes : false; //They are equal in all effects therefor it is not greater.
         }
+        
+        bool operator <(TitanTime const &other) const {
+            return other > (*this);
+        }
     private:
         unsigned int Days, Hours, Minutes;
         //A titan day is 15.945 earth days. 

@@ -34,7 +34,8 @@ namespace Model {
         /**
          * Fire this event, applying its effects to the game state.
          */
-        virtual ResultType fire() {};
+        virtual ResultType fire() {
+        };
 
         /**
          * Define what it means to be less than another Event
@@ -56,6 +57,9 @@ namespace Model {
             return completionTime > other.completionTime;
         }
 
+        Titan::TitanTime fireTime() {
+            return completionTime;
+        }
     protected:
         Engine* engine;
         Titan::TitanTime completionTime;

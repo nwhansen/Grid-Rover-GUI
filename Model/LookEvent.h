@@ -22,22 +22,21 @@ namespace Model {
      */
     class LookEvent : public Event {
     public:
+
         /**
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        LookEvent(Engine* m,
-                  Titan::TitanTime time,
-                  Rover* r,
-                  int objid) : Event(m, time),
-                               rover(r);
+        LookEvent(Engine* m, Titan::TitanTime time, Rover* r, int objid) : Event(m, time), rover(r) {
+
+        };
 
         ResultType fire();
 
     private:
         Rover* rover;
         int target;
-    }
+    };
 }
 
 #endif /* LOOKEVENT_H */
