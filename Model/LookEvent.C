@@ -14,18 +14,26 @@
 #include "Rover.h"
 #include "RoverInterface.h"
 #include "Result.h"
+#include <sstream>
 
 using namespace Model;
 
 ResultType LookEvent::fire() {
     Titan::TitanTime delay(0, 0, 1);
-    engine->AddEvent(new GetCommandEvent(m, completionTime.plus(delay)));
+    engine->AddEvent(new GetCommandEvent(engine, completionTime.plus(delay)));
     int x = rover->GetXCoord();
     int y = rover->GetYCoord();
     Tile* roverTile = engine->getTileInfo(x, y);
     RoverInterface* ri = rover->GetRoverInterface();
     for (TileIterator i = roverTile->begin(); i != roverTile->end(); ++i) {
-        ri->SendRoverCommand("Thing: " + i->GetID() + "\n");
+    	Communication c;
+    	c.command = "lookresult";
+    	c.arguments.push_back("thing");
+    	std::ostringstream oss;
+		oss << (*i).GetID();
+    	c.arguments.push_back(oss.str());
+    	ri->SendFormattedMessage(c);
+        //ri->SendRoverCommand(std::string("Thing: ") + (*i).GetID() + std::string("\n"));
     }
     return Look;
 }
