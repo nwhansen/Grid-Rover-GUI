@@ -28,7 +28,7 @@ namespace Model {
                 char direction = tolower(comm.arguments.front()[0]);
                 if (direction == 'e' || direction == 'n' || direction == 's' || direction == 'w') {
                     Titan::TitanTime traveltime(0, 0, 20);
-                    engine->AddEvent(MoveEvent(engine, time + traveltime, rover, direction));
+                    engine->AddEvent(new MoveEvent(engine, completionTime.plus(traveltime), rover, direction));
                     valid = true;
                 }
             }
@@ -38,7 +38,7 @@ namespace Model {
         }
         if (!valid) {
             Titan::TitanTime penaltytime(0, 0, 1);
-            engine->AddEvent(GetCommandEvent(engine, time + penaltytime));
+            engine->AddEvent(new GetCommandEvent(engine, completionTime.plus(penaltytime)));
             return Fail;
         }
         return Get;

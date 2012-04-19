@@ -42,8 +42,8 @@ Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, 
         }
     }
     //Add one minute delay to the rover command and enqueue the end game after 3 titan days.
-    EventQueue.push(new GameOverEvent(this, Titan::TitanTime(3, 0, 0) + currentTime));
-    EventQueue.push(new GetCommandEvent(this, Titan::TitanTime(0, 0, 1) + currentTime));
+    EventQueue.push(new GameOverEvent(this, Titan::TitanTime(3, 0, 0).plus(currentTime)));
+    EventQueue.push(new GetCommandEvent(this, Titan::TitanTime(0, 0, 1).plus(currentTime)));
     inProgress = true;
 }
 

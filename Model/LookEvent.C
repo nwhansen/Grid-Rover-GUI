@@ -19,7 +19,7 @@ using namespace Model;
 
 ResultType LookEvent::fire() {
     Titan::TitanTime delay(0, 0, 1);
-    engine->AddEvent(GetCommandEvent(m, time + delay));
+    engine->AddEvent(new GetCommandEvent(m, completionTime.plus(delay)));
     int x = rover->GetXCoord();
     int y = rover->GetYCoord();
     Tile* roverTile = engine->getTileInfo(x, y);

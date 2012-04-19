@@ -44,7 +44,7 @@ namespace Model {
 
     ResultType MoveEvent::fire() {
         Titan::TitanTime delay(0, 0, 1);
-        engine->AddEvent(new GetCommandEvent(engine, completionTime + delay));
+        engine->AddEvent(new GetCommandEvent(engine, completionTime.plus(delay)));
         if (!origin->contains(rover)) {
             return Fail;
         }
