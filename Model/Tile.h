@@ -34,6 +34,8 @@ namespace Model {
         Tile();
         void setProperties(TileType);
         virtual ~Tile();
+        
+        TileType getTileType() { return this->type; };
         /**
          * Delete an item in the collection. 
          * @param toDelete

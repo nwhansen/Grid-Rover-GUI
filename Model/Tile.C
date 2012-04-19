@@ -68,7 +68,7 @@ void TileIterator::operator ++() {
 bool TileIterator::operator !=(const TileIterator& other) {
     if(other.items != this->items) {
         //Well aint this a problem
-        return false; //Technically its a problem....
+        return true; //Technically its a problem....
         //As the loop will never terminate but i guess this object can never equal another if
         //There collection is not the same
     }

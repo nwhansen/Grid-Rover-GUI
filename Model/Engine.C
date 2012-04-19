@@ -29,10 +29,16 @@ Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, 
     for (int i = 0; i < Width; i++) {
         Map[i] = new Tile[Height];
     }
+    bool isplaced = false;
     for (int j = 0; j < Width; j++) {
         for (int i = 0; i < Height; i++) {
             //Select random map tile and convert it.
-            Map[i][j].setProperties(Tile::to_tile_enum(rand() % 4));
+            Map[j][i].setProperties(Tile::to_tile_enum(rand() % 4));
+            //If we have about the center then do this.
+            if( (Height/2) == i && (Width/2) == j && !isplaced){ //Not doesn't check if tile is invalid.
+                Map[j][i].addItem(&player1);
+                isplaced = true;
+            }
         }
     }
     //Add one minute delay to the rover command and enqueue the end game after 3 titan days.
@@ -46,23 +52,25 @@ ResultType Engine::next() {
     Event* tmp = EventQueue.top();
     EventQueue.pop();
     ResultType t = tmp->fire();
+    currentTime = tmp->fireTime();
     delete tmp;
     return t;
 }
 
 Tile* Engine::getTileInfo(int XoffSet, int YoffSet) {
     //Check bounds
-    if (XoffSet >= Width || YoffSet >= Height) return NULL;
+    if (XoffSet >= Width || YoffSet >= Height || !inProgress) return NULL;
     return &(Map[XoffSet][YoffSet]);
 }
 
 void Engine::EndGame() {
-    if (EventQueue.empty()) return;
-    Event *event;
-    while (!EventQueue.empty()) {
-        event = EventQueue.top();
-        EventQueue.pop();
-        delete event;
+    if (!EventQueue.empty()) {
+        Event *event;
+        while (!EventQueue.empty()) {
+            event = EventQueue.top();
+            EventQueue.pop();
+            delete event;
+        }
     }
     inProgress = false;
 }

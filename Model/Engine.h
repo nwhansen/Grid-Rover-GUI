@@ -32,6 +32,17 @@ namespace Model {
     class Engine {
     public:
         static String empty;
+        /**
+         * Construct the engine, The engine 0,0 tile is at the top right of the map.
+         * @param width the width of the map.
+         * @param height how deep the map is.
+         * @param roverFile The program to start.
+         * @param thingsLibrary The library the program should get items from.
+         * @param errorLog The error log to load. Note always appends to the log.
+         * @param messageLog The message log to load. Always appends to the log.
+         * @param configFile The config file, this can be empty.
+         * @param mapFile The map control file, this can be empty.
+         */
         Engine(int width, int height, String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile = empty, String& mapFile = empty);
         /**
          * Clean up out mess.
