@@ -6,6 +6,8 @@
  */
 
 #include "Engine.h"
+#include "cstdlib"
+
 
 Engine::~Engine() {
     for (int i = 0; i < Width; i++) {
@@ -25,9 +27,11 @@ Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, 
     }
     for (int j = 0; j < Width; j++) {
         for (int i = 0; i < Height; i++) {
-            //Map[i][j];
+            //Select random map tile and convert it.
+            Map[i][j].setProperties(rand() % 4);
         }
     }
+    
 }
 
 ResultType Engine::next() {

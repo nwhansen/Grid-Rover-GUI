@@ -9,11 +9,11 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=libModel.dll
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/libModel.dll
+CND_ARTIFACT_NAME_Debug=model
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/model
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=libModel.dll.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/libModel.dll.tar
+CND_PACKAGE_NAME_Debug=model.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/model.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
