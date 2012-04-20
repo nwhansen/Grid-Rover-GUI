@@ -129,8 +129,6 @@ View::View(const QString &name, QWidget *parent)
 
     refreshButton = new QToolButton;
     refreshButton->setText(tr("Regenerate"));
-    refreshButton->setCheckable(true);
-    refreshButton->setChecked(false);
     refreshButton->setEnabled(true);
 
     upButton = new QToolButton;
