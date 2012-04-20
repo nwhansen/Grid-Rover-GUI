@@ -18,20 +18,20 @@ using namespace Model;
 RoverInterface::RoverInterface(std::string& filename) {
     //Attempt to get the logger The thread will stall if 
 
-    log->aquireLogger(log);
-    if (log->activeLogger() == 0) {
-        //Die?
-        throw 1;
-    }
+//    log->aquireLogger(log);
+//    if (log->activeLogger() == 0) {
+//        //Die?
+//        throw 1;
+//    }
     int pipe_in[2], pipe_out[2];
-    if (pipe(pipe_in))
-        log->Error(true, std::string("Couldn't setup pipe_in for rover " + filename));
+    if (pipe(pipe_in));
+//        log->Error(true, std::string("Couldn't setup pipe_in for rover " + filename));
 
-    if (pipe(pipe_out))
-        log->Error(true, std::string("Couldn't setup pipe_out for rover " + filename));
+    if (pipe(pipe_out));
+//        log->Error(true, std::string("Couldn't setup pipe_out for rover " + filename));
 
-    if ((pid = fork()) < 0)
-        log->Error(true, std::string("Couldn't fork child process for rover " + filename));
+    if ((pid = fork()) < 0);
+//        log->Error(true, std::string("Couldn't fork child process for rover " + filename));
 
     if (pid == 0) // Child process, to be the new robot
     {
@@ -44,21 +44,21 @@ RoverInterface::RoverInterface(std::string& filename) {
         close(pipe_in[0]);
 
         int old;
-        if ((old = getpriority(PRIO_PROCESS, 0)) == -1)
-            log->Error(true, "Couldn't get priority for rover " + filename);
-        if (setpriority(PRIO_PROCESS, 0, old + 1) == -1)
-            log->Error(true, "Couldn't set priority for rover " + filename);
+        if ((old = getpriority(PRIO_PROCESS, 0)) == -1);
+//            log->Error(true, "Couldn't get priority for rover " + filename);
+        if (setpriority(PRIO_PROCESS, 0, old + 1) == -1);
+//            log->Error(true, "Couldn't set priority for rover " + filename);
 
         // Close all pipes not belonging to the robot
         //Todo: Get pipe cleaning complete.
 
         // Execute process. Should not return!
         running = true;
-        if (execl(filename.c_str(), filename.c_str(), NULL) == -1) //Maybe.
+        if (execl(filename.c_str(), filename.c_str(), NULL) == -1) ;//Maybe.
             // we are in another process so exiting does not solve the problem
-            log->Error(true, "Couldn't open robot " + filename);
+//            log->Error(true, "Couldn't open robot " + filename);
         running = false;
-        log->Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + filename);
+//        log->Error(true, "Robot didn't execute, SHOULD NEVER HAPPEN!, error for " + filename);
     } else {
         close(pipe_out[0]); // Close input side of pipe_out
         close(pipe_in[1]); // Close output side of pipe_in
@@ -81,7 +81,7 @@ std::string RoverInterface::getRoverCommand() {
     char buffer[1024];
     size_t totalRead;
     if (totalRead = read(pipes[1], buffer, sizeof (buffer)) < 0) {
-        log->Error(false, "Unable to read from robot. Sent null terminating character");
+//        log->Error(false, "Unable to read from robot. Sent null terminating character");
         return NULL;
     }
     return std::string(buffer, totalRead);
@@ -90,11 +90,11 @@ std::string RoverInterface::getRoverCommand() {
 bool RoverInterface::SendRoverCommand(const std::string& roverCommand) {
     if (write(pipes[0], roverCommand.c_str(), roverCommand.size())) {
         //TODO: ERROR REPORT
-        log->Error(true, "Unable to send message! Unknown reason");
+//        log->Error(true, "Unable to send message! Unknown reason");
         return false;
     }
     //Log something maybe.
-    log->Message(false, "Sent message to rover");
+//    log->Message(false, "Sent message to rover");
     return true;
 }
 
