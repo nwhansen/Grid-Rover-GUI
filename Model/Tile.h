@@ -11,24 +11,31 @@
 #include "Thing.h"
 
 namespace Model {
-    
+
     enum TileType {
         Mountain, Plain, Rugged, Lake
     };
-    
+
     class TileIterator {
     public:
+        TileIterator(std::vector<Thing* > * myCollection, uint start);
+        Thing& operator *();
         void operator ++();
-        bool operator <(const TileIterator& other);
+        bool operator !=(const TileIterator& other);
+
+
     private:
-        std::vector<Thing>* items;
+        std::vector<Thing* >* items;
+        uint pos;
     };
-    
+
     class Tile {
     public:
         Tile();
         void setProperties(TileType);
         virtual ~Tile();
+        
+        TileType getTileType() { return this->type; };
         /**
          * Delete an item in the collection. 
          * @param toDelete
@@ -55,6 +62,14 @@ namespace Model {
          */
         TileIterator end();
 
+        static TileType to_tile_enum(int i) {
+            switch (i) {
+                case 0: return Mountain;
+                case 1: return Plain;
+                case 2: return Rugged;
+                case 3: return Lake;
+            }
+        }
     private:
         TileType type;
         std::vector<Thing*> items;

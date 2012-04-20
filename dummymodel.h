@@ -5,25 +5,25 @@
 #include <stdlib.h>
 
 
-enum TileType {
-    Lake, Plain, Mountain, Rugged
-};
-class DummyModel
-{
-public:
-    DummyModel();
+//enum TileType {
+//    Lake, Plain, Mountain, Rugged
+//};
+//class DummyModel
+//{
+//public:
+//    DummyModel();
 
-    /**
-      * Get a tile located at X and Y.
-      *
-      */
-    TileType getTile(int x, int y);
+//    /**
+//      * Get a tile located at X and Y.
+//      *
+//      */
+//    TileType getTile(int x, int y);
 
-private:
-    //Random Numbers
+//private:
+//    //Random Numbers
 
-    //
-};
+//    //
+//};
 
 
 #endif // DUMMYMODEL_H

@@ -9,11 +9,11 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=libModel.so
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/libModel.so
+CND_ARTIFACT_NAME_Debug=libmodel.a
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/libmodel.a
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=libModel.so.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/libModel.so.tar
+CND_PACKAGE_NAME_Debug=Model.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/Model.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin_4.x-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin_4.x-Windows

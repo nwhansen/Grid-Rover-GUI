@@ -41,7 +41,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/Engine.o \
 	${OBJECTDIR}/ThingFactory.o \
 	${OBJECTDIR}/RoverInterface.o \
-	${OBJECTDIR}/MoveEvent.o
+	${OBJECTDIR}/MoveEvent.o\
+	${OBJECTDIR}/GetCommandEvent.o\
+	${OBJECTDIR}/LookEvent.o
 
 
 # C Compiler Flags
@@ -109,6 +111,16 @@ ${OBJECTDIR}/MoveEvent.o: nbproject/Makefile-${CND_CONF}.mk MoveEvent.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/MoveEvent.o MoveEvent.C
+
+${OBJECTDIR}/GetCommandEvent.o: nbproject/Makefile-${CND_CONF}.mk GetCommandEvent.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/GetCommandEvent.o GetCommandEvent.C
+
+${OBJECTDIR}/LookEvent.o: nbproject/Makefile-${CND_CONF}.mk LookEvent.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/LookEvent.o LookEvent.C
 
 # Subprojects
 .build-subprojects:

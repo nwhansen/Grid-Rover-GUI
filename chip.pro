@@ -1,5 +1,10 @@
 RESOURCES += images.qrc
 
+INCLUDEPATH += Model
+
+LIBS += -lmodel
+LIBS += -LModel/dist/Debug/GNU-Linux-x86/
+
 HEADERS += mainwindow.h view.h  \
     dummymodel.h
 SOURCES += main.cpp \

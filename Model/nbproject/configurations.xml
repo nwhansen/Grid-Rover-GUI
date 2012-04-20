@@ -5,7 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="f4" displayName="Logging" projectFiles="true">
-        <itemPath>include/Logger.h</itemPath>
+        <itemPath>Logger.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f5" displayName="Model" projectFiles="true">
         <itemPath>Communication.h</itemPath>
@@ -44,7 +44,6 @@
         <itemPath>Tile.C</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="Parser" projectFiles="true">
-        <itemPath>pugixml.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -64,10 +63,11 @@
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="Debug" type="2">
+    <conf name="Debug" type="3">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
+        <rebuildPropChanged>true</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
@@ -81,12 +81,8 @@
             <pElem>include</pElem>
           </incDir>
         </ccTool>
-        <linkerTool>
-          <linkerLibItems>
-            <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
-            <linkerLibLibItem>glib-2.0</linkerLibLibItem>
-          </linkerLibItems>
-        </linkerTool>
+        <archiverTool>
+        </archiverTool>
       </compileType>
     </conf>
     <conf name="Release" type="2">

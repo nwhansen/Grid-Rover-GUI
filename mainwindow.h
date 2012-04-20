@@ -44,7 +44,9 @@
 
 #include <QtGui/qwidget.h>
 #include <QtGui>
-#include "dummymodel.h"
+//#include "dummymodel.h"
+#include "Engine.h"
+#include "Rover.h"
 
 QT_FORWARD_DECLARE_CLASS(QGraphicsScene)
 QT_FORWARD_DECLARE_CLASS(QGraphicsView)
@@ -71,10 +73,12 @@ private:
     void placeRover();
     int roverX, roverY;
     QGraphicsPixmapItem *rover;
-    DummyModel dummy;
+    //DummyModel dummy;
     QGraphicsScene *scene;
     QSplitter *h1Splitter;
     QSplitter *h2Splitter;
+    Engine* engine;
+    Rover* roverObj;
 };
 
 #endif

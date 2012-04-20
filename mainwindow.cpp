@@ -42,8 +42,18 @@
 #include "mainwindow.h"
 #include "view.h"
 
+#include "Tile.h"
+
 #include <QtGui>
 #include <iostream>
+#include "Rover.h"
+
+String empty("");
+String physobjs("Model/Data/physical_objects.xml");
+String errlog("error.log");
+String msglog("messages.log");
+String rvrprog("blah.sh");
+
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
@@ -67,6 +77,10 @@ MainWindow::MainWindow(QWidget *parent)
     setLayout(layout);
 
     setWindowTitle(tr("Grid Rover Map Viewer"));
+
+    engine = new Engine(10, 10, rvrprog, physobjs, errlog, msglog, empty, empty);
+
+    roverObj = engine->GetRover(0);
 }
 
 
@@ -85,7 +99,8 @@ void MainWindow::populateScene(int width, int height)
     //Build maps from bottom left corner to top right corner
     for(int w = 0; w < width; w++){
         for(int h = 0; h < height; h++){
-            switch(dummy.getTile(w,h)){
+            Tile* tile = engine->getTileInfo(w,h);
+            switch(tile->getTileType()){
                 case Mountain:
                     item = new QGraphicsPixmapItem(mountain);
                     break;
@@ -104,10 +119,19 @@ void MainWindow::populateScene(int width, int height)
             }
             item->setPos(QPointF(w * lake.width(), h * mountain.height()));
             scene->addItem(item);
+
+            for(TileIterator i = tile->begin(); i!=tile->end(); ++i){
+                if(&(*i) == roverObj)
+                {
+                    roverX = roverObj->GetXCoord();
+                    roverY = roverObj->GetYCoord();
+                    placeRover();
+                }
+            }
         }
     }
 
-    placeRover();
+    //placeRover();
     /*QGraphicsPixmapItem *item = new QGraphicsPixmapItem(image);
     item->setPos(QPointF(0, 0));
 
