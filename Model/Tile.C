@@ -7,13 +7,7 @@
 
 #include "Tile.h"
 
-using namespace Model;
-
-Tile::Tile() : type(Mountain) {
-    //Can't do nothing since dealing with malloc is evil.
-    //default to mountain. just to be safe
-}
-
+using namespace Model;
 void Tile::setProperties(TileType t) {
     type = t;
 }

@@ -60,7 +60,6 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene;
     roverX = 530;
     roverY = 530;
-    populateScene(10,10);    
 
     View *view = new View("World");
     view->view()->setScene(scene);
@@ -81,6 +80,8 @@ MainWindow::MainWindow(QWidget *parent)
     engine = new Engine(10, 10, rvrprog, physobjs, errlog, msglog, empty, empty);
 
     roverObj = engine->GetRover(0);
+
+    populateScene(10,10);
 }
 
 

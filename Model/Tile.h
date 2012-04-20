@@ -31,11 +31,11 @@ namespace Model {
 
     class Tile {
     public:
-        Tile();
+        Tile() : type(Mountain) {}
         void setProperties(TileType);
         virtual ~Tile();
         
-        TileType getTileType() { return this->type; };
+        TileType getTileType() { return type; }
         /**
          * Delete an item in the collection. 
          * @param toDelete
