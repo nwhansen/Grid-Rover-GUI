@@ -159,13 +159,18 @@ void MainWindow::populateScene(int width, int height)
 }
 
 void MainWindow::reloadMap(){
-    QList<QGraphicsItem*> list = scene->items();
-    for(int i = 0; i < list.size(); i++){
-        QGraphicsItem* item = list.at(i);
-        scene->removeItem(item);
-        delete item;
+    if (engine->gameInProgress()) {
+        engine->next();
+        if (engine->gameInProgress()) {
+            QList<QGraphicsItem*> list = scene->items();
+            for(int i = 0; i < list.size(); i++){
+                QGraphicsItem* item = list.at(i);
+                scene->removeItem(item);
+                delete item;
+            }
+            populateScene(10,10);
+        }
     }
-    populateScene(10,10);
 }
 
 void MainWindow::placeRover(){
