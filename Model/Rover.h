@@ -33,10 +33,30 @@ namespace Model {
         
 
     public:
-        Rover(uint id,uint mass, uint density, uint collectPointValue,
-                uint discoverPointValue, std::string roverFile) : Thing(id,mass,density, collectPointValue, discoverPointValue), interface(roverFile) {
+        Rover(uint id, uint discoverPointValue, std::string roverFile) 
+                : Thing( "rover", id, collectPointValue(0), discoverPointValue), interface(roverFile) {
+                    
+                    score = 0;
+                    inventoryVolume = 0;
+                    xCoord = -1;
+                    yCoord = -1;
+                    maxCharge = 100;
+                    currentCharge = maxCharge;
+                    maxInventoryVolume = 100;
+                    
         }
         
+        int GetInventoryVolume();
+        int GetMaxCharge();
+        int GetCurrentCharge();
+        int GetMaxInventoryVolume();
+        
+        void SetToMaxCharge();
+        void DecreaseCharge(int amount);
+        void SetCharge(int charge);
+        
+                
+                
         ///Adds a Thing into the rover's inventory.
         ///Returns true if the item is successfully added to the inventory.
         ///Returns false if the item is unable to be added to the inventory.

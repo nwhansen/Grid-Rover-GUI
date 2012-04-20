@@ -19,27 +19,12 @@ namespace Model {
     protected:
 
         string name;
-        uint weight;
-        uint mass;
-        uint density;
         uint ID;
         uint volume;
         uint collectPointValue;
         uint discoverPointValue;
         string discription;
         //Set Methods
-
-        void SetWeight(uint weight) {
-            this->weight = weight;
-        };
-
-        void SetMass(uint mass) {
-            this->mass = mass;
-        };
-
-        void SetDensity(uint density) {
-            this->density = density;
-        };
 
         void SetCollectPointValue(uint collectPointValue) {
             this->collectPointValue = collectPointValue;
@@ -59,19 +44,6 @@ namespace Model {
 
     public:
         //Get Methods
-
-        uint GetWeight() {
-            return weight;
-        };
-
-        uint GetMass() {
-            return mass;
-        };
-
-        uint GetDensity() {
-            return density;
-        };
-
         uint GetVolume() {
             return volume;
         };
@@ -97,7 +69,7 @@ namespace Model {
         };
         //Constructors
         Thing();
-        Thing(uint id,uint mass, uint density, uint collectPointValue, uint discoverPointValue);
+        Thing(string name, uint id, uint collectPointValue, uint discoverPointValue);
 
         // Method will return an integer based on the results of the tweak.
         // 0 = no change;

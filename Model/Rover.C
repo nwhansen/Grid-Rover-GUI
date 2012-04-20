@@ -32,8 +32,8 @@ bool Rover::RemoveThingFromInventory(Thing item){
     RemoveThingFromInventory(item.GetID());
 }
 
-int Rover::GetXCoord(){return xCoord;};
-int Rover::GetYCoord(){return yCoord;};
+int Rover::GetXCoord(){return xCoord;}
+int Rover::GetYCoord(){return yCoord;}
 
 bool Rover::SetXCoords(int x, int y){
     
@@ -44,4 +44,13 @@ bool Rover::SetXCoords(int x, int y){
     xCoord = x;
     yCoord = y;
     return true;
-};
+}
+
+int Rover::GetInventoryVolume(){ return inventoryVolume;}
+int Rover::GetMaxCharge(){ return maxCharge;}
+int Rover::GetCurrentCharge(){return currentCharge;}
+int Rover::GetMaxInventoryVolume(){return maxInventoryVolume;}
+
+void Rover::SetToMaxCharge(){ currentCharge = maxCharge;}
+void Rover::DecreaseCharge(int amount){ currentCharge-=amount;}
+void Rover::SetCharge(int charge){currentCharge = charge;}
