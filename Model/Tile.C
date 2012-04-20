@@ -7,7 +7,8 @@
 
 #include "Tile.h"
 
-using namespace Model;
+using namespace Model;
+
 void Tile::setProperties(TileType t) {
     type = t;
 }
@@ -49,8 +50,8 @@ TileIterator::TileIterator(std::vector<Thing* > * myCollection, uint start) {
     pos = start;
 }
 
-Thing& TileIterator::operator *() {
-    Thing& badProgramming = *(items->at(pos));
+Thing* TileIterator::operator *() {
+    Thing* badProgramming = items->at(pos);
     return badProgramming;
 }
 
