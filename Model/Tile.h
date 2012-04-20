@@ -19,7 +19,7 @@ namespace Model {
     class TileIterator {
     public:
         TileIterator(std::vector<Thing* > * myCollection, uint start);
-        Thing& operator *();
+        Thing* operator *();
         void operator ++();
         bool operator !=(const TileIterator& other);
 
