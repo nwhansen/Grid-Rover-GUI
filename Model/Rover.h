@@ -34,7 +34,7 @@ namespace Model {
 
     public:
         Rover(uint id, uint discoverPointValue, std::string roverFile) 
-                : Thing( "rover", id, collectPointValue(0), discoverPointValue), interface(roverFile) {
+                : Thing( "rover", id, 0, discoverPointValue), interface(roverFile) {
                     
                     score = 0;
                     inventoryVolume = 0;
