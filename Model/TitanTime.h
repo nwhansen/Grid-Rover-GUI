@@ -82,6 +82,19 @@ namespace Titan {
         
         bool operator >(TitanTime const &other) const {
             //If the days are the same check the hours and same for hours
+            
+            if( Days == other.Days){
+                if(Hours == other.Hours){
+                    return Minutes > other.Minutes;
+                } else{
+                    return Hours > other.Hours;
+                }               
+            } else {
+                return Days > other.Days;
+            }
+            
+            
+            
             return (this->Days != other.Days) ? //Check Days 
                 this->Days > other.Days : (this->Hours != other.Hours) ? //Check Hours
                     this->Hours > other.Hours : (this->Minutes != Minutes) ? //Check Minutes
