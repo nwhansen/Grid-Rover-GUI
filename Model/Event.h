@@ -35,6 +35,7 @@ namespace Model {
          * Fire this event, applying its effects to the game state.
          */
         virtual ResultType fire() {
+            return Fail;
         };
 
         /**

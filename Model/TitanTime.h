@@ -31,9 +31,9 @@ namespace Titan {
         TitanTime(unsigned int days = 0,
                 unsigned int hours = 0,
                 unsigned int minutes = 0
-                ) : Days(days < 0 ? 0 : days),
-        Hours(hours < 0 ? 0 : hours),
-        Minutes(minutes < 0 ? 0 : minutes) {
+                ) : Days(days),
+        Hours(hours),
+        Minutes(minutes) {
 
         }
 

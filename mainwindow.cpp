@@ -122,7 +122,7 @@ void MainWindow::populateScene(int width, int height)
             scene->addItem(item);
 
             for(TileIterator i = tile->begin(); i!=tile->end(); ++i){
-                if(&(*i) == roverObj)
+                if((*i) == roverObj)
                 {
                     roverX = roverObj->GetXCoord();
                     roverY = roverObj->GetYCoord();

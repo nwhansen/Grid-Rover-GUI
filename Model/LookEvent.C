@@ -30,7 +30,7 @@ ResultType LookEvent::fire() {
     	c.command = "lookresult";
     	c.arguments.push_back("thing");
     	std::ostringstream oss;
-		oss << (*i).GetID();
+        oss << (*i)->GetID();
     	c.arguments.push_back(oss.str());
     	ri->SendFormattedMessage(c);
         //ri->SendRoverCommand(std::string("Thing: ") + (*i).GetID() + std::string("\n"));

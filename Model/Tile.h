@@ -18,15 +18,14 @@ namespace Model {
 
     class TileIterator {
     public:
-        TileIterator(std::vector<Thing* > * myCollection, uint start);
+        TileIterator(vector<Thing*>::iterator i);
         Thing* operator *();
         void operator ++();
         bool operator !=(const TileIterator& other);
 
 
     private:
-        std::vector<Thing* >* items;
-        uint pos;
+        vector<Thing*>::iterator pos;
     };
 
     class Tile {

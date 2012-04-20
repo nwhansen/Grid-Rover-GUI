@@ -38,35 +38,25 @@ void Tile::addItem(Thing* toAdd) {
 }
 
 TileIterator Tile::begin() {
-    return TileIterator(&items, 0);
+    return TileIterator(items.begin());
 }
 
 TileIterator Tile::end() {
-    return TileIterator(&items, items.size()-1);
+    return TileIterator(items.end());
 }
 
-TileIterator::TileIterator(std::vector<Thing* > * myCollection, uint start) {
-    items = myCollection;
-    pos = start;
+TileIterator::TileIterator(std::vector<Thing* >::iterator i) : pos(i) {
 }
 
 Thing* TileIterator::operator *() {
-    Thing* badProgramming = items->at(pos);
-    return badProgramming;
+    return *pos;
 }
 
 void TileIterator::operator ++() {
-    if(pos+1 == items->size()) return;
-    pos++;
+    ++pos;
 }
 
 bool TileIterator::operator !=(const TileIterator& other) {
-    if(other.items != this->items) {
-        //Well aint this a problem
-        return true; //Technically its a problem....
-        //As the loop will never terminate but i guess this object can never equal another if
-        //There collection is not the same
-    }
     return other.pos != this->pos;
 }
 
