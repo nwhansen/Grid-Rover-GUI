@@ -124,8 +124,8 @@ void MainWindow::populateScene(int width, int height)
             for(TileIterator i = tile->begin(); i!=tile->end(); ++i){
                 if((*i) == roverObj)
                 {
-                    roverX = roverObj->GetXCoord();
-                    roverY = roverObj->GetYCoord();
+                    roverX = roverObj->GetXCoord() * 100;
+                    roverY = roverObj->GetYCoord() * 100;
                     placeRover();
                 }
             }

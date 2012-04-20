@@ -37,6 +37,7 @@ Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, 
             //If we have about the center then do this.
             if( (Height/2) == i && (Width/2) == j && !isplaced){ //Not doesn't check if tile is invalid.
                 Map[j][i].addItem(&player1);
+                player1.SetXCoords(i, j);
                 isplaced = true;
             }
         }
@@ -88,5 +89,6 @@ bool Engine::AddEvent(Event* event) {
 Rover* Engine::GetRover(int player) {
     if (player == 0)
         return &(this->player1);
+//    return NULL;
 }
 
