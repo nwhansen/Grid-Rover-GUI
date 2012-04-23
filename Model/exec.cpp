@@ -9,7 +9,8 @@ int main(int argc, char** argv) {
 	while(true) {
 		//Wait for permission.
 		cin >> c;
-		switch(rand() % 4) {
+		
+		switch(rand() % 5) {
 			case 0: 
 				dir = 'n';
 				break;
@@ -21,6 +22,9 @@ int main(int argc, char** argv) {
 				break;
 			case 3:
 				dir = 'w';
+				break;
+			case 4:
+				dir = '\n';
 				break;
 		}
 		cout << "move " << dir << endl;
