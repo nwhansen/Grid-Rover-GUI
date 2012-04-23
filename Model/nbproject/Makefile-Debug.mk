@@ -42,7 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Thing.o \
 	${OBJECTDIR}/Engine.o \
 	${OBJECTDIR}/ThingFactory.o \
-	${OBJECTDIR}/Result.o \
 	${OBJECTDIR}/RoverInterface.o \
 	${OBJECTDIR}/MoveEvent.o
 
@@ -110,11 +109,6 @@ ${OBJECTDIR}/ThingFactory.o: nbproject/Makefile-${CND_CONF}.mk ThingFactory.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/ThingFactory.o ThingFactory.C
-
-${OBJECTDIR}/Result.o: nbproject/Makefile-${CND_CONF}.mk Result.C 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/Result.o Result.C
 
 ${OBJECTDIR}/RoverInterface.o: nbproject/Makefile-${CND_CONF}.mk RoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}

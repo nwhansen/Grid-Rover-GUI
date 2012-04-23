@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=g++
-CXX=g++
+CC=gcc.exe
+CCC=g++.exe
+CXX=g++.exe
 FC=gfortran
-AS=as
+AS=as.exe
 
 # Macros
-CND_PLATFORM=Cygwin_4.x-Windows
+CND_PLATFORM=Cygwin-Windows
 CND_CONF=Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -42,7 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Thing.o \
 	${OBJECTDIR}/Engine.o \
 	${OBJECTDIR}/ThingFactory.o \
-	${OBJECTDIR}/Result.o \
 	${OBJECTDIR}/RoverInterface.o \
 	${OBJECTDIR}/MoveEvent.o
 
@@ -69,7 +68,7 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -mno-cygwin -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libModel.dll ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
 ${OBJECTDIR}/Logger.o: Logger.C 
 	${MKDIR} -p ${OBJECTDIR}
@@ -110,11 +109,6 @@ ${OBJECTDIR}/ThingFactory.o: ThingFactory.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/ThingFactory.o ThingFactory.C
-
-${OBJECTDIR}/Result.o: Result.C 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Result.o Result.C
 
 ${OBJECTDIR}/RoverInterface.o: RoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}

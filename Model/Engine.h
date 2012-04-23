@@ -19,7 +19,7 @@
 #include "Result.h"
 #include "ThingFactory.h"
 
-//typedef std::string String;
+typedef std::string String;
 using namespace std;
 namespace Model {
 
