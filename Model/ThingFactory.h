@@ -46,13 +46,13 @@ namespace Model{
         void GenerateThings();
         
         //Methods to obtain thing objects.
-        Thing GetThingAt(int index);
-        Thing GetThingWithID(int id);
+        Thing* GetThingWithID(int id);
+        Thing* GetThingWithName(string name);
         
         //Obtains a random Thing object.  All Thing object currently have equal chances
         //of being returned. If this is called enough times, it is possible to have every
         ///Thing return at some point.
-        Thing GetRandomThing();
+        Thing* GetRandomThing();
         
     };
 
