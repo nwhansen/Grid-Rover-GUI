@@ -34,7 +34,16 @@ namespace Titan {
                 ) : Days(days),
         Hours(hours),
         Minutes(minutes) {
-
+                    //Ok value check.
+                    while(Minutes > 59){
+                        //Roll around
+                        Minutes = Minutes - 60;
+                        Hours++;
+                    }
+                    while(Hours > 23) {
+                        Hours = Hours - 24;
+                        Days++;
+                    }
         }
 
         /**
@@ -53,6 +62,7 @@ namespace Titan {
         unsigned int getNumberOfHours() {
             return 24 * Days + Hours;
         }
+
         /**
          * @return The total number of minutes that have passed since touchdown, rounded down.
          * @remarks A hour is 60 titan minutes
@@ -60,6 +70,7 @@ namespace Titan {
         unsigned int getNumberOfMinutes() {
             return (Days * 24 + Hours)*60 + Minutes;
         }
+
         /**
          * 
          * @return The number of days since touchdown, rounded down.
@@ -68,40 +79,42 @@ namespace Titan {
             return Days;
         }
         //Rewrite.... someday
+
         TitanTime plus(TitanTime const &right) const {
-        	return TitanTime(this->Days + right.Days + (this->Hours + right.Hours + (this->Minutes + right.Minutes) % 60) % 24,
-        					 this->Hours + right.Hours + (this->Minutes + right.Minutes) % 60,
-        					 this->Minutes + right.Minutes);
+
+            return TitanTime(this->Days + right.Days,
+                    this->Hours + right.Hours ,
+                    this->Minutes + right.Minutes);
         }
-        
+
         bool operator ==(TitanTime const &other) const {
             return this->Days == other.Days &&
                     this->Hours == other.Hours &&
                     this->Minutes == other.Minutes;
         }
-        
-        bool operator >(TitanTime const &other) const {
+
+        bool operator>(TitanTime const &other) const {
             //If the days are the same check the hours and same for hours
-            
-            if( Days == other.Days){
-                if(Hours == other.Hours){
+
+            if (Days == other.Days) {
+                if (Hours == other.Hours) {
                     return Minutes > other.Minutes;
-                } else{
+                } else {
                     return Hours > other.Hours;
-                }               
+                }
             } else {
                 return Days > other.Days;
             }
-            
-            
-            
+
+
+
             return (this->Days != other.Days) ? //Check Days 
-                this->Days > other.Days : (this->Hours != other.Hours) ? //Check Hours
+                    this->Days > other.Days : (this->Hours != other.Hours) ? //Check Hours
                     this->Hours > other.Hours : (this->Minutes != Minutes) ? //Check Minutes
                     this->Minutes > other.Minutes : false; //They are equal in all effects therefor it is not greater.
         }
-        
-        bool operator <(TitanTime const &other) const {
+
+        bool operator<(TitanTime const &other) const {
             return other > (*this);
         }
     private:

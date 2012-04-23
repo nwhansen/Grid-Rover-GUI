@@ -10,7 +10,7 @@
 #include "GameOverEvent.h"
 #include "GetCommandEvent.h"
 
-String Engine::empty("");
+std::string Engine::empty("");
 
 Engine::~Engine() {
     //End the game
@@ -24,7 +24,7 @@ Engine::~Engine() {
 
 Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile, String& mapFile)
 : player1(1, 0, roverFile), Width(width), Height(height), Factory(thingsLibrary), currentTime(0, 0, 0) {
-    Logs.openLogs(messageLog, errorLog);
+    //Logs.openLogs(messageLog, errorLog);
     Map = new Tile*[Width];
     for (int i = 0; i < Width; i++) {
         Map[i] = new Tile[Height];

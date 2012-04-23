@@ -79,12 +79,15 @@ RoverInterface::RoverInterface(std::string& filename) {
 std::string RoverInterface::getRoverCommand() {
     //Buffers
     char buffer[1024];
+    for(int i = 0; i < sizeof(buffer); i++){
+        buffer[i] = '\0'; //Clear the damn buffer.
+    }
     size_t totalRead;
-    if (totalRead = read(pipes[1], buffer, sizeof (buffer)) < 0) {
+    if (read(pipes[1], buffer, 1024) < 0) {
 //        log->Error(false, "Unable to read from robot. Sent null terminating character");
         return NULL;
     }
-    return std::string(buffer, totalRead);
+    return std::string(buffer);
 }
 
 bool RoverInterface::SendRoverCommand(const std::string& roverCommand) {

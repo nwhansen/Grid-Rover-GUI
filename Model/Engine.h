@@ -11,7 +11,7 @@
 #include <string>
 #include <queue>
 
-#include "Logger.h"
+//#include "Logger.h"
 #include "Rover.h"
 #include "Tile.h"
 #include "TitanTime.h"
@@ -19,7 +19,7 @@
 #include "Result.h"
 #include "ThingFactory.h"
 
-typedef std::string String;
+typedef const std::string String;
 using namespace std;
 namespace Model {
 
@@ -32,7 +32,7 @@ namespace Model {
 
     class Engine {
     public:
-        static string empty;
+        static std::string empty;
         /**
          * Construct the engine, The engine 0,0 tile is at the top right of the map.
          * @param width the width of the map.
@@ -44,7 +44,12 @@ namespace Model {
          * @param configFile The config file, this can be empty.
          * @param mapFile The map control file, this can be empty.
          */
-        Engine(int width, int height, string& roverFile, string& thingsLibrary, string& errorLog, string& messageLog, string& configFile = empty, string& mapFile = empty);
+        Engine(int width, int height, String& roverFile, 
+                String& thingsLibrary, 
+                String& errorLog, 
+                String& messageLog, 
+                String& configFile = empty, 
+                String& mapFile = empty);
         /**
          * Clean up out mess.
          */
@@ -89,7 +94,7 @@ namespace Model {
         int Width, Height;
         Tile** Map;
         Rover player1;
-        Logging::Logger Logs;
+        //Logging::Logger Logs;
 
         std::priority_queue< Event*, std::vector<Event* >, Sorter > EventQueue;
     };

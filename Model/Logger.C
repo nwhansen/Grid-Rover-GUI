@@ -48,7 +48,7 @@ void Logger::aquireLogger(Logger*& toAssign) {
     toAssign = activeLogger();
 }
 
-bool Logger::openLogs(std::string& messageLog, std::string& errorLog) {
+bool Logger::openLogs(const std::string& messageLog, const std::string& errorLog) {
     //Construct the objects.
     if (messageLog.compare(errorLog) == 0) {
         return false;

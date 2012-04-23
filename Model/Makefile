@@ -58,11 +58,11 @@ build: .build-post
 
 .build-post: .build-impl
 # Add your post 'build' code here...
-
+	g++ -g -Wall -o prog main.c ./dist/Debug/Cygwin-Windows/libmodel.a
 
 # clean
 clean: .clean-post
-
+	rm "prog.exe"
 .clean-pre:
 # Add your pre 'clean' code here...
 
