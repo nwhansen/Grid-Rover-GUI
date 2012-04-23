@@ -85,7 +85,7 @@ std::string RoverInterface::getRoverCommand() {
     size_t totalRead;
     if (read(pipes[1], buffer, 1024) < 0) {
 //        log->Error(false, "Unable to read from robot. Sent null terminating character");
-        return NULL;
+        return std::string("");
     }
     return std::string(buffer);
 }

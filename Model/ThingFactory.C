@@ -65,14 +65,14 @@ Thing* ThingFactory::GetRandomThing(){
 bool ThingFactory::ReadFromFile(vector<string> rawThings){
     
         string data;
-//	ifstream infile;
-//	infile.open (objectFile.c_str());
-//      while(!infile.eof) 
-//        {
-//	        getline(infile,data); 
-//                rawThings.push_back(data);
-//        }
-//	infile.close();
+	ifstream infile;
+	infile.open (objectFile.c_str());
+        while(!infile.eof()) 
+        {
+	        getline(infile,data); 
+                rawThings.push_back(data);
+        }
+	infile.close();
 }
 void ThingFactory::CreateThingFromVector(vector<string> rawThings){
     
