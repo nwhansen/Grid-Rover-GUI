@@ -60,7 +60,7 @@ ResultType Engine::next() {
 
 Tile* Engine::getTileInfo(int XoffSet, int YoffSet) {
     //Check bounds
-    if (XoffSet >= Width || YoffSet >= Height || !inProgress) return NULL;
+    if (XoffSet >= Width || YoffSet >= Height || !inProgress || YoffSet < 0 || XoffSet < 0) return NULL;
     return &(Map[XoffSet][YoffSet]);
 }
 
