@@ -18,24 +18,23 @@ namespace Model {
 
     class TileIterator {
     public:
-        TileIterator(std::vector<Thing* > * myCollection, uint start);
-        Thing& operator *();
+        TileIterator(vector<Thing*>::iterator i);
+        Thing* operator *();
         void operator ++();
         bool operator !=(const TileIterator& other);
 
 
     private:
-        std::vector<Thing* >* items;
-        uint pos;
+        vector<Thing*>::iterator pos;
     };
 
     class Tile {
     public:
-        Tile();
+        Tile() : type(Mountain) {}
         void setProperties(TileType);
         virtual ~Tile();
         
-        TileType getTileType() { return this->type; };
+        TileType getTileType() { return type; }
         /**
          * Delete an item in the collection. 
          * @param toDelete

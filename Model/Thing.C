@@ -6,7 +6,7 @@ Thing::Thing()
 {
     
 }
-Thing::Thing(uint id, uint mass, uint density, uint collectPointValue, uint discoverPointValue) 
+Thing::Thing(string name, uint id, uint collectPointValue, uint discoverPointValue) 
 {
     
 }
@@ -16,7 +16,7 @@ Thing::Thing(uint id, uint mass, uint density, uint collectPointValue, uint disc
 // 1 = this became a new thing;
 // 2 = this created a thing;  Call method GetChild() to obtain the child;
 // 3 = disaster was created. ie. Rock hit rover, thing exploded in rover's "face";
-int Thing::Tweak(){
-    
-    return 0;
-}
+//int Thing::Tweak(){
+//    
+//    return 0;
+//}

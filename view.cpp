@@ -128,9 +128,7 @@ View::View(const QString &name, QWidget *parent)
     label = new QLabel(name);
 
     refreshButton = new QToolButton;
-    refreshButton->setText(tr("Regenerate"));
-    refreshButton->setCheckable(true);
-    refreshButton->setChecked(false);
+    refreshButton->setText(tr("Step Sim"));
     refreshButton->setEnabled(true);
 
     upButton = new QToolButton;

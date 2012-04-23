@@ -10,14 +10,15 @@
 #include <string>
 #include <stdarg.h>
 #include <pthread.h>
+#include <sys/resource.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sstream>
+
 #include "Logger.h"
 #include "Communication.h"
 
-#define EXIT_ROVER "GAME OVER"
 namespace Model {
 
     /**
@@ -31,7 +32,7 @@ namespace Model {
          * Constructs and forks the child process (rover-control program) all messages are blocking.
          * @param roverName The Rover Filename.
          */
-        RoverInterface(const std::string& roverfilename);
+        RoverInterface(std::string& roverfilename);
         std::string getRoverCommand();
         /**
          * Send a message to the rover. Must be properly formated
@@ -47,8 +48,8 @@ namespace Model {
         Communication RecieveFormattedMessage();
     private: 
         std::stringstream remaining;
-
-        Logging::Logger* log;
+#define EXIT_ROVER "GAME OVER"
+        //Logging::Logger* log;
         bool running;
         int pipes[2];
         pid_t pid;

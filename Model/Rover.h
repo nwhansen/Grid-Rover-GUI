@@ -14,49 +14,64 @@
 #include <vector>
 
 using namespace std;
-//using namespace Model;
-typedef unsigned int uint;
+using namespace Model;
+
 namespace Model {
 
     class Rover : public Thing {
     private:
-        //interface b;
-        RoverInterface Rinterface;
+
         vector<Thing> inventory;
         int score;
         int inventoryVolume;
         int maxInventoryVolume;
         int maxCharge;
         int currentCharge;
+        RoverInterface interface;
         int xCoord;
         int yCoord;
-
+        
 
     public:
-
-        virtual ~Rover() {
-        };
-
-        Rover(uint id, uint mass, uint density, uint collectPointValue,
-                uint discoverPointValue, std::string roverFile) : Thing(id, mass, density, collectPointValue, discoverPointValue), Rinterface(roverFile) {
-        };
-
-
+        Rover(uint id, uint discoverPointValue, std::string roverFile) 
+                : Thing( "rover", id, 0, discoverPointValue), interface(roverFile) {
+                    
+                    score = 0;
+                    inventoryVolume = 0;
+                    xCoord = -1;
+                    yCoord = -1;
+                    maxCharge = 100;
+                    currentCharge = maxCharge;
+                    maxInventoryVolume = 100;
+                    
+        }
+        
+        int GetInventoryVolume();
+        int GetMaxCharge();
+        int GetCurrentCharge();
+        int GetMaxInventoryVolume();
+        
+        void SetToMaxCharge();
+        void DecreaseCharge(int amount);
+        void SetCharge(int charge);
+        
+                
+                
         ///Adds a Thing into the rover's inventory.
         ///Returns true if the item is successfully added to the inventory.
         ///Returns false if the item is unable to be added to the inventory.
         ///Reason for the failure would be due to the item's volume being greater than 
         ///the amount of space available.
         bool AddThingToInventory(Thing item);
-
+        
         ///Removes the item that has the id of the said ID.
         ///Returns true if the Rover contains said item and is now removed.
         ///Returns false if the Rover does NOT contain said item initially. 
         bool RemoveThingFromInventory(int ID);
-
+        
         ///The same as using Remove with ID as the parameter.
         bool RemoveThingFromInventory(Thing item);
-
+        
         ///Change the score by a specified amount.
         ///ie. if the score is 5 and points is 2 then the score would now be 7.
         /// if the score is 7 and points is -6 then the score would now be 1.
@@ -64,7 +79,7 @@ namespace Model {
 
         ///Gets the X Coordinate where the rover resides within the map.
         int GetXCoord();
-
+        
         ///Gets the Y Coordinate where the rover resides within the map.
         int GetYCoord();
 
@@ -72,10 +87,7 @@ namespace Model {
         bool SetXCoords(int x, int y);
 
         ///Returns the RoverInterface object for this rover.
-
-        RoverInterface* GetRoverInterface() {
-            return &Rinterface;
-        };
+        RoverInterface* GetRoverInterface(){return &interface;};
 
     };
 

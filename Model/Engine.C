@@ -10,8 +10,7 @@
 #include "GameOverEvent.h"
 #include "GetCommandEvent.h"
 
-using namespace Model;
-std::string Engine::empty("");
+String Engine::empty("");
 
 Engine::~Engine() {
     //End the game
@@ -23,8 +22,8 @@ Engine::~Engine() {
     delete[] Map;
 }
 
-Engine::Engine(int width, int height, string& roverFile, string& thingsLibrary, string& errorLog, string& messageLog, string& configFile, string& mapFile)
-: player1(1, 0, 0, 0, 0, roverFile), Width(width), Height(height), Factory(thingsLibrary), currentTime(0, 0, 0) {
+Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile, String& mapFile)
+: player1(1, 0, roverFile), Width(width), Height(height), Factory(thingsLibrary), currentTime(0, 0, 0) {
     Logs.openLogs(messageLog, errorLog);
     Map = new Tile*[Width];
     for (int i = 0; i < Width; i++) {
@@ -38,6 +37,7 @@ Engine::Engine(int width, int height, string& roverFile, string& thingsLibrary, 
             //If we have about the center then do this.
             if( (Height/2) == i && (Width/2) == j && !isplaced){ //Not doesn't check if tile is invalid.
                 Map[j][i].addItem(&player1);
+                player1.SetXCoords(i, j);
                 isplaced = true;
             }
         }
@@ -89,5 +89,6 @@ bool Engine::AddEvent(Event* event) {
 Rover* Engine::GetRover(int player) {
     if (player == 0)
         return &(this->player1);
+//    return NULL;
 }
 

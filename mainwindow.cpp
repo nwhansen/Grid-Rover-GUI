@@ -60,7 +60,6 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene;
     roverX = 530;
     roverY = 530;
-    populateScene(10,10);    
 
     View *view = new View("World");
     view->view()->setScene(scene);
@@ -81,6 +80,8 @@ MainWindow::MainWindow(QWidget *parent)
     engine = new Engine(10, 10, rvrprog, physobjs, errlog, msglog, empty, empty);
 
     roverObj = engine->GetRover(0);
+
+    populateScene(10,10);
 }
 
 
@@ -121,10 +122,10 @@ void MainWindow::populateScene(int width, int height)
             scene->addItem(item);
 
             for(TileIterator i = tile->begin(); i!=tile->end(); ++i){
-                if(&(*i) == roverObj)
+                if((*i) == roverObj)
                 {
-                    roverX = roverObj->GetXCoord();
-                    roverY = roverObj->GetYCoord();
+                    roverX = roverObj->GetXCoord() * 100;
+                    roverY = roverObj->GetYCoord() * 100;
                     placeRover();
                 }
             }
@@ -158,13 +159,18 @@ void MainWindow::populateScene(int width, int height)
 }
 
 void MainWindow::reloadMap(){
-    QList<QGraphicsItem*> list = scene->items();
-    for(int i = 0; i < list.size(); i++){
-        QGraphicsItem* item = list.at(i);
-        scene->removeItem(item);
-        delete item;
+    if (engine->gameInProgress()) {
+        engine->next();
+        if (engine->gameInProgress()) {
+            QList<QGraphicsItem*> list = scene->items();
+            for(int i = 0; i < list.size(); i++){
+                QGraphicsItem* item = list.at(i);
+                scene->removeItem(item);
+                delete item;
+            }
+            populateScene(10,10);
+        }
     }
-    populateScene(10,10);
 }
 
 void MainWindow::placeRover(){
