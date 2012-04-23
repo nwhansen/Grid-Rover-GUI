@@ -32,6 +32,11 @@ bool Rover::RemoveThingFromInventory(Thing item){
     RemoveThingFromInventory(item.GetID());
 }
 
+int Rover::GetScore(){
+    
+    return score;
+}
+
 int Rover::GetXCoord(){return xCoord;}
 int Rover::GetYCoord(){return yCoord;}
 

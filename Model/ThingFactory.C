@@ -29,18 +29,36 @@ void ThingFactory::GenerateThings(){
 }
         
 //Methods to obtain abstract thing objects.
-Thing ThingFactory::GetThingAt(int index){
-    return objectList[index];
+Thing* ThingFactory::GetThingWithName(string name){
+    Thing* item = 0;
+    for(int i = 0; i < objectList.size(); i++){
+        item = &(objectList[i]);
+        if(item->GetName() == name){
+            return item;
+        }
+    }
+    return item;
 }
-Thing ThingFactory::GetThingWithID(int id){
-    
-    return GetThingAt(id);
+Thing* ThingFactory::GetThingWithID(int id){
+    Thing* item = 0;
+    for(int i = 0; i < objectList.size(); i++){
+        item = &(objectList[i]);
+        if(item->GetID() == id){
+            return item;
+        }
+    }
+    return item;
 }
 
 //TODO: Look into a way to do a "weighted" random.  Such that more rocks are choosen
 //      over rare things. Much like real life.
-Thing ThingFactory::GetRandomThing(){
-    return objectList[rand() % objectList.size()];
+Thing* ThingFactory::GetRandomThing(){
+    
+    uint size = objectList.size();
+    if(size == 0){
+        return 0;
+    }
+    return &(objectList[rand() % size]);
 }
 
 
@@ -67,6 +85,7 @@ void ThingFactory::CreateThingFromVector(vector<string> rawThings){
 
 Thing ThingFactory::ParseRawThingData(string rawThingData){
     
+    string rawString;
     string name;
     uint id;
     uint volume;
@@ -79,19 +98,23 @@ Thing ThingFactory::ParseRawThingData(string rawThingData){
     
     startIndex = rawThingData.find("id=");
     endIndex = rawThingData.find("", startIndex);
-//    id = rawThingData.substr(startIndex, endIndex-startIndex+1);
+    rawString = rawThingData.substr(startIndex, endIndex-startIndex+1);
+    id = atoi(rawString.c_str());
     
     startIndex = rawThingData.find("volume=");
     endIndex = rawThingData.find("", startIndex);
-//    volume = rawThingData.substr(startIndex, endIndex- startIndex+1);
+    rawString = rawThingData.substr(startIndex, endIndex- startIndex+1);
+    volume = atoi(rawString.c_str());
     
     startIndex = rawThingData.find("collectpoint=");
     endIndex = rawThingData.find("", startIndex);
-//    collectPoints = rawThingData.substr(startIndex, endIndex-startIndex+1);
+    rawString = rawThingData.substr(startIndex, endIndex-startIndex+1);
+    collectPoints = atoi(rawString.c_str());
     
     startIndex = rawThingData.find("discoverpoint=");
     endIndex = rawThingData.find("", startIndex);
-//    discoverPoints = rawThingData.substr(startIndex, endIndex-startIndex+1);
+    rawString = rawThingData.substr(startIndex, endIndex-startIndex+1);
+    discoverPoints = atoi(rawString.c_str());
     
 }
 

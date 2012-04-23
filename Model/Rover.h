@@ -50,6 +50,7 @@ namespace Model {
         int GetMaxCharge();
         int GetCurrentCharge();
         int GetMaxInventoryVolume();
+        int GetScore();
         
         void SetToMaxCharge();
         void DecreaseCharge(int amount);
