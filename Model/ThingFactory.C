@@ -78,7 +78,7 @@ void ThingFactory::CreateThingFromVector(vector<string> rawThings){
     
     for(uint i = 0; i < rawThings.size(); i++ ){
         
-        objectList[i] = ParseRawThingData(rawThings[i]);        
+        ParseRawThingData(rawThings[i]);        
     }
     
 }
