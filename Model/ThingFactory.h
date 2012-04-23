@@ -24,13 +24,13 @@ namespace Model{
     class ThingFactory{
         
     private:
-        vector<Thing> objectList;
+        vector<Thing*> objectList;
         string objectFile;
         bool fileSet;
         
-        bool ReadFromFile(vector<string> rawThings);
-        void CreateThingFromVector(vector<string> rawThings);
-        Thing ParseRawThingData(string rawThingData);
+        bool ReadFromFile(vector<string> *rawThings);
+        void CreateThingFromVector(vector<string> *rawThings);
+        void ParseRawThingData(string rawThingData);
     
     public :
         

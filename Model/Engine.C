@@ -49,10 +49,14 @@ Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, 
 }
 
 ResultType Engine::next() {
+    if (!inProgress) return GameOver;
     if (EventQueue.empty()) return Fail;
     Event* tmp = EventQueue.top();
     EventQueue.pop();
     ResultType t = tmp->fire();
+    if(t == Fail) {
+        Logs.Error(false, "Event Failed");
+    }
     currentTime = tmp->fireTime();
     delete tmp;
     return t;
@@ -60,7 +64,7 @@ ResultType Engine::next() {
 
 Tile* Engine::getTileInfo(int XoffSet, int YoffSet) {
     //Check bounds
-    if (XoffSet >= Width || YoffSet >= Height || !inProgress) return NULL;
+    if (XoffSet >= Width || YoffSet >= Height || !inProgress || YoffSet < 0 || XoffSet < 0) return NULL;
     return &(Map[XoffSet][YoffSet]);
 }
 

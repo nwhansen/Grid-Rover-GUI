@@ -2,7 +2,7 @@
 
 using namespace Model;
 
-
+//TODO: Delete Object in destructor.
 ThingFactory::ThingFactory(){
     fileSet = false;
 }
@@ -23,8 +23,8 @@ void ThingFactory::GenerateThings(string filename){
 void ThingFactory::GenerateThings(){
     
     vector<string> rawThings;
-    ReadFromFile( rawThings);
-    CreateThingFromVector( rawThings );
+    ReadFromFile( &rawThings);
+    CreateThingFromVector( &rawThings );
     
 }
         
@@ -32,7 +32,7 @@ void ThingFactory::GenerateThings(){
 Thing* ThingFactory::GetThingWithName(string name){
     Thing* item = 0;
     for(int i = 0; i < objectList.size(); i++){
-        item = &(objectList[i]);
+        item = objectList[i];
         if(item->GetName() == name){
             return item;
         }
@@ -42,7 +42,7 @@ Thing* ThingFactory::GetThingWithName(string name){
 Thing* ThingFactory::GetThingWithID(int id){
     Thing* item = 0;
     for(int i = 0; i < objectList.size(); i++){
-        item = &(objectList[i]);
+        item = objectList[i];
         if(item->GetID() == id){
             return item;
         }
@@ -58,32 +58,34 @@ Thing* ThingFactory::GetRandomThing(){
     if(size == 0){
         return 0;
     }
-    return &(objectList[rand() % size]);
+    return objectList[rand() % size];
 }
 
 
-bool ThingFactory::ReadFromFile(vector<string> rawThings){
+bool ThingFactory::ReadFromFile(vector<string> *rawThings){
     
         string data;
 	ifstream infile;
 	infile.open (objectFile.c_str());
-        while(!infile.eof()) 
-        {
-	        getline(infile,data); 
-                rawThings.push_back(data);
+        if(infile.is_open()){
+            while(!infile.eof()) 
+            {
+                    getline(infile,data); 
+                    rawThings->push_back(data);
+            }
+            infile.close();
         }
-	infile.close();
 }
-void ThingFactory::CreateThingFromVector(vector<string> rawThings){
+void ThingFactory::CreateThingFromVector(vector<string> *rawThings){
     
-    for(uint i = 0; i < rawThings.size(); i++ ){
+    for(uint i = 0; i < rawThings->size(); i++ ){
         
-        ParseRawThingData(rawThings[i]);        
+        ParseRawThingData(rawThings->at(i));        
     }
     
 }
 
-Thing ThingFactory::ParseRawThingData(string rawThingData){
+void ThingFactory::ParseRawThingData(string rawThingData){
     
     string rawString;
     string name;
@@ -93,28 +95,36 @@ Thing ThingFactory::ParseRawThingData(string rawThingData){
     uint discoverPoints;
     
     int startIndex = rawThingData.find("name=");
-    int endIndex = rawThingData.find("",  startIndex);
+    startIndex += 5;
+    int endIndex = rawThingData.find(" ",  startIndex) - 1;
     name = rawThingData.substr( startIndex, endIndex- startIndex+1);
     
     startIndex = rawThingData.find("id=");
-    endIndex = rawThingData.find("", startIndex);
+    startIndex += 3 ;
+    endIndex = rawThingData.find(" ", startIndex) - 1;
     rawString = rawThingData.substr(startIndex, endIndex-startIndex+1);
     id = atoi(rawString.c_str());
     
     startIndex = rawThingData.find("volume=");
-    endIndex = rawThingData.find("", startIndex);
+    startIndex += 7 ;
+    endIndex = rawThingData.find(" ", startIndex) - 1;
     rawString = rawThingData.substr(startIndex, endIndex- startIndex+1);
     volume = atoi(rawString.c_str());
     
     startIndex = rawThingData.find("collectpoint=");
-    endIndex = rawThingData.find("", startIndex);
+    startIndex += 13 ;
+    endIndex = rawThingData.find(" ", startIndex) - 1;
     rawString = rawThingData.substr(startIndex, endIndex-startIndex+1);
     collectPoints = atoi(rawString.c_str());
     
     startIndex = rawThingData.find("discoverpoint=");
-    endIndex = rawThingData.find("", startIndex);
+    startIndex += 14;
+    endIndex = rawThingData.find("\r", startIndex) - 1;
     rawString = rawThingData.substr(startIndex, endIndex-startIndex+1);
     discoverPoints = atoi(rawString.c_str());
+    
+    
+    objectList.push_back(new Thing(name, id, collectPoints, discoverPoints));
     
 }
 

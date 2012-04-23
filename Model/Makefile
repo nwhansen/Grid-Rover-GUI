@@ -59,10 +59,11 @@ build: .build-post
 .build-post: .build-impl
 # Add your post 'build' code here...
 	g++ -g -Wall -o prog main.c ./dist/Debug/Cygwin-Windows/libmodel.a
+	g++ -g -Wall -o rand exec.cpp
 
 # clean
 clean: .clean-post
-	rm "prog.exe"
+	rm -f "prog.exe" "rand.exe" "error.txt" "message.txt"
 .clean-pre:
 # Add your pre 'clean' code here...
 

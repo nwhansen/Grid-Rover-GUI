@@ -15,13 +15,17 @@
 #include "RoverInterface.h"
 #include "Result.h"
 #include "Communication.h"
-
+#include "GameOverEvent.h"
+#include "Logger.h"
+#include "LookEvent.h"
 using namespace Model;
 
 GetCommandEvent::GetCommandEvent(Engine* m, Titan::TitanTime time) : Event(m, time) {
 }
 
 ResultType GetCommandEvent::fire() {
+    Logging::Logger* log;
+    Logging::Logger::aquireLogger(log);
     bool valid = false;
     Rover* rover = engine->GetRover(0);
     RoverInterface* ri = rover->GetRoverInterface();
@@ -38,10 +42,14 @@ ResultType GetCommandEvent::fire() {
             }
         }
     } else if (comm.command.compare("look") == 0) {
+        Logging::Logger::writeToLog(log, "Rover attempted invalid move");
     } else if (comm.command.compare("selfdestruct") == 0) {
-        engine->EndGame();
+        Logging::Logger::writeToLog(log, "Game ended by rover", false);
+        Titan::TitanTime penaltytime(0, 0, 1);
+        engine->AddEvent(new GameOverEvent(engine, completionTime.plus(penaltytime)));
     }
     if (!valid) {
+        Logging::Logger::writeToLog(log, "Failed to get valid message", true);
         Titan::TitanTime penaltytime(0, 0, 1);
         engine->AddEvent(new GetCommandEvent(engine, completionTime.plus(penaltytime)));
         return Fail;

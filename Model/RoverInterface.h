@@ -49,7 +49,7 @@ namespace Model {
     private: 
         std::stringstream remaining;
 #define EXIT_ROVER "GAME OVER"
-        //Logging::Logger* log;
+        Logging::Logger* logger;
         bool running;
         int pipes[2];
         pid_t pid;
