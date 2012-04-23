@@ -11,7 +11,7 @@
 #include <string>
 #include <queue>
 
-//#include "Logger.h"
+#include "Logger.h"
 #include "Rover.h"
 #include "Tile.h"
 #include "TitanTime.h"
@@ -94,7 +94,7 @@ namespace Model {
         int Width, Height;
         Tile** Map;
         Rover player1;
-        //Logging::Logger Logs;
+        Logging::Logger Logs;
 
         std::priority_queue< Event*, std::vector<Event* >, Sorter > EventQueue;
     };

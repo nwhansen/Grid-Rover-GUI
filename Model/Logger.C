@@ -54,7 +54,7 @@ bool Logger::openLogs(const std::string& messageLog, const std::string& errorLog
         return false;
     }
     ErrorLog.open(errorLog.c_str(), std::ios::app | std::ios::app);
-    MessageLog.open(errorLog.c_str(), std::ios::app | std::ios::app);
+    MessageLog.open(messageLog.c_str(), std::ios::app | std::ios::app);
     if (!ErrorLog.is_open() || !MessageLog.is_open()) {
         //close the unopened one
         if (ErrorLog.is_open())
@@ -95,7 +95,7 @@ void Logger::Error(bool console,const std::string& message) {
         //Output to the console in the error console
         std::cerr << constructMessage(message);
     }
-    ErrorLog << constructMessage(message);
+    ErrorLog << constructMessage(message) << std::endl;
     pthread_mutex_unlock(&lock);
 }
 
@@ -105,7 +105,7 @@ void Logger::Message(bool console, const std::string& message) {
     if (console) {
         std::cout << constructMessage(message);
     }
-    MessageLog << constructMessage(message);
+    MessageLog << constructMessage(message) << std::endl;
     pthread_mutex_unlock(&lock);
 }
 
