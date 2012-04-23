@@ -49,10 +49,14 @@ Engine::Engine(int width, int height, String& roverFile, String& thingsLibrary, 
 }
 
 ResultType Engine::next() {
+    if (!inProgress) return GameOver;
     if (EventQueue.empty()) return Fail;
     Event* tmp = EventQueue.top();
     EventQueue.pop();
     ResultType t = tmp->fire();
+    if(t == Fail) {
+        Logs.Error(false, "Event Failed");
+    }
     currentTime = tmp->fireTime();
     delete tmp;
     return t;

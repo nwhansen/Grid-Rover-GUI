@@ -63,7 +63,7 @@ build: .build-post
 
 # clean
 clean: .clean-post
-	rm "prog.exe"
+	rm -f "prog.exe" "rand.exe" "error.txt" "message.txt"
 .clean-pre:
 # Add your pre 'clean' code here...
 
