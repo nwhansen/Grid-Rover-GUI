@@ -10,7 +10,7 @@
 #include "GameOverEvent.h"
 #include "GetCommandEvent.h"
 
-String Engine::empty("");
+std::string Engine::empty("");
 
 Engine::~Engine() {
     //End the game

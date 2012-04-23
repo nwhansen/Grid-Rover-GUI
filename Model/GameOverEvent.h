@@ -30,6 +30,7 @@ namespace Model {
 
         ResultType fire() {
             engine->EndGame();
+            return GameOver;
         }
 
     private:

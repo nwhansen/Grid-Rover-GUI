@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux-x86
+CND_PLATFORM=Cygwin-Windows
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -35,8 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Logger.o \
-	${OBJECTDIR}/Tile.o \
+	${OBJECTDIR}/LookEvent.o \
 	${OBJECTDIR}/Rover.o \
+	${OBJECTDIR}/Tile.o \
+	${OBJECTDIR}/GetCommandEvent.o \
 	${OBJECTDIR}/Thing.o \
 	${OBJECTDIR}/Engine.o \
 	${OBJECTDIR}/ThingFactory.o \
@@ -75,15 +77,25 @@ ${OBJECTDIR}/Logger.o: nbproject/Makefile-${CND_CONF}.mk Logger.C
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.C
 
-${OBJECTDIR}/Tile.o: nbproject/Makefile-${CND_CONF}.mk Tile.C 
+${OBJECTDIR}/LookEvent.o: nbproject/Makefile-${CND_CONF}.mk LookEvent.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
+	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/LookEvent.o LookEvent.C
 
 ${OBJECTDIR}/Rover.o: nbproject/Makefile-${CND_CONF}.mk Rover.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/Rover.o Rover.C
+
+${OBJECTDIR}/Tile.o: nbproject/Makefile-${CND_CONF}.mk Tile.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
+
+${OBJECTDIR}/GetCommandEvent.o: nbproject/Makefile-${CND_CONF}.mk GetCommandEvent.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/GetCommandEvent.o GetCommandEvent.C
 
 ${OBJECTDIR}/Thing.o: nbproject/Makefile-${CND_CONF}.mk Thing.C 
 	${MKDIR} -p ${OBJECTDIR}

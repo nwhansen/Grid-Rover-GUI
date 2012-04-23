@@ -42,7 +42,7 @@ namespace Logging {
          * @param errorLog The Error Log
          * @return The result of opening the logs
          */
-        bool openLogs(std::string& messageLog, std::string& errorLog);
+        bool openLogs(const std::string& messageLog, const std::string& errorLog);
         
         virtual ~Logger();
         

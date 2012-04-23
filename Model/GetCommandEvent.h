@@ -15,7 +15,7 @@
 
 namespace Model {
 
-	class Engine;
+    class Engine;
 
     /**
      * Represents an opportunity for a rover to provide a high-level command
@@ -23,12 +23,12 @@ namespace Model {
      */
     class GetCommandEvent : public Event {
     public:
+
         /**
          * Create a new event with given completion time. When fired, it will
          * use the given function pointers to do its work.
          */
-        GetCommandEvent(Engine* m,
-                  Titan::TitanTime time) : Event(m, time){}
+        GetCommandEvent(Engine* m, Titan::TitanTime time);
 
         ResultType fire();
 

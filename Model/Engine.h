@@ -7,6 +7,7 @@
 
 #ifndef ENGINE_H
 #define	ENGINE_H
+
 #include <string>
 #include <queue>
 
@@ -18,8 +19,8 @@
 #include "Result.h"
 #include "ThingFactory.h"
 
-typedef std::string String;
-
+typedef const std::string String;
+using namespace std;
 namespace Model {
 
     struct Sorter {
@@ -31,7 +32,7 @@ namespace Model {
 
     class Engine {
     public:
-        static String empty;
+        static std::string empty;
         /**
          * Construct the engine, The engine 0,0 tile is at the top right of the map.
          * @param width the width of the map.
@@ -43,7 +44,12 @@ namespace Model {
          * @param configFile The config file, this can be empty.
          * @param mapFile The map control file, this can be empty.
          */
-        Engine(int width, int height, String& roverFile, String& thingsLibrary, String& errorLog, String& messageLog, String& configFile = empty, String& mapFile = empty);
+        Engine(int width, int height, String& roverFile, 
+                String& thingsLibrary, 
+                String& errorLog, 
+                String& messageLog, 
+                String& configFile = empty, 
+                String& mapFile = empty);
         /**
          * Clean up out mess.
          */

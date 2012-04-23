@@ -11,7 +11,7 @@
 namespace Model {
 
     enum ResultType {
-        Move, Get, Look, Fail
+        Move, Get, Look, GameOver, Fail
     };
 
     class Result {
