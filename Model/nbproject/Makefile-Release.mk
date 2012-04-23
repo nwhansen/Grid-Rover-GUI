@@ -35,11 +35,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Logger.o \
+	${OBJECTDIR}/LookEvent.o \
 	${OBJECTDIR}/Rover.o \
 	${OBJECTDIR}/Tile.o \
+	${OBJECTDIR}/GetCommandEvent.o \
 	${OBJECTDIR}/Thing.o \
 	${OBJECTDIR}/Engine.o \
 	${OBJECTDIR}/ThingFactory.o \
+	${OBJECTDIR}/Result.o \
 	${OBJECTDIR}/RoverInterface.o \
 	${OBJECTDIR}/MoveEvent.o
 
@@ -73,6 +76,11 @@ ${OBJECTDIR}/Logger.o: Logger.C
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.C
 
+${OBJECTDIR}/LookEvent.o: LookEvent.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/LookEvent.o LookEvent.C
+
 ${OBJECTDIR}/Rover.o: Rover.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -82,6 +90,11 @@ ${OBJECTDIR}/Tile.o: Tile.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Tile.o Tile.C
+
+${OBJECTDIR}/GetCommandEvent.o: GetCommandEvent.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/GetCommandEvent.o GetCommandEvent.C
 
 ${OBJECTDIR}/Thing.o: Thing.C 
 	${MKDIR} -p ${OBJECTDIR}
@@ -97,6 +110,11 @@ ${OBJECTDIR}/ThingFactory.o: ThingFactory.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/ThingFactory.o ThingFactory.C
+
+${OBJECTDIR}/Result.o: Result.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Result.o Result.C
 
 ${OBJECTDIR}/RoverInterface.o: RoverInterface.C 
 	${MKDIR} -p ${OBJECTDIR}

@@ -40,8 +40,8 @@ void Logger::aquireLogger(Logger*& toAssign) {
     //Spin wheels
     time_t start = time(NULL);
     //Time out after 5 seconds. 
-    while (activeLogger() == 0 && 5.0 > difftime(time(NULL), start))
-        usleep(100000);
+    while (activeLogger() == 0 && 5.0 > difftime(time(NULL), start)) 
+        usleep(1000000);
     //If we time out ativelogger will return 0 therefor we wont have a problem. Or it will magically find us a logger and all will work. 
     toAssign = activeLogger();
 }

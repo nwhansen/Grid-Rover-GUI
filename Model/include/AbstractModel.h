@@ -19,7 +19,7 @@
 
 //class AbstractEvent;
 //Bad practice but i love the upercase string, also string is used enough i like to not type std::, and i don't want std:: appended as we are using our own namespace
-typedef std::string String;
+typedef std::string string;
 
 namespace AbstractModelNameSpace {
 
@@ -40,7 +40,7 @@ namespace AbstractModelNameSpace {
          * @param thingslibrary
          * @param mapfile Optional 
          */
-        virtual void LoadEngine(String& configFile, String& thingslibrary,String& errorLog, String& messageLog, String& mapfile = "") = 0;
+        virtual void LoadEngine(string& configFile, string& thingslibrary,string& errorLog, string& messageLog, string& mapfile = "") = 0;
         /**
          * The Consequence of the call will retrieve various "consequences" 
          *      A move from the user program.

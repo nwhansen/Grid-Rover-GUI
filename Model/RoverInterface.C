@@ -6,7 +6,11 @@
  */
 
 #include "RoverInterface.h"
+#ifndef _WIN32
 #include <sys/resource.h>
+#else
+#define pipe(fds) _pipe(fds,4096, _O_BINARY)
+#endif
 #include <sys/stat.h>
 #include <stdarg.h> 
 #include <stdio.h>
@@ -15,7 +19,7 @@
 
 using namespace Model;
 
-RoverInterface::RoverInterface(std::string& filename) {
+RoverInterface::RoverInterface(const std::string& filename) {
     //Attempt to get the logger The thread will stall if 
 
     log->aquireLogger(log);
@@ -29,7 +33,7 @@ RoverInterface::RoverInterface(std::string& filename) {
 
     if (pipe(pipe_out))
         log->Error(true, std::string("Couldn't setup pipe_out for rover " + filename));
-
+    
     if ((pid = fork()) < 0)
         log->Error(true, std::string("Couldn't fork child process for rover " + filename));
 

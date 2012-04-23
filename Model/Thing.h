@@ -29,6 +29,7 @@ namespace Model {
         string discription;
         //Set Methods
 
+        
         void SetWeight(uint weight) {
             this->weight = weight;
         };
@@ -59,6 +60,8 @@ namespace Model {
 
     public:
         //Get Methods
+        virtual ~Thing() {
+        };
 
         uint GetWeight() {
             return weight;
@@ -97,7 +100,7 @@ namespace Model {
         };
         //Constructors
         Thing();
-        Thing(uint id,uint mass, uint density, uint collectPointValue, uint discoverPointValue);
+        Thing(uint id, uint mass, uint density, uint collectPointValue, uint discoverPointValue);
 
         // Method will return an integer based on the results of the tweak.
         // 0 = no change;
