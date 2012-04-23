@@ -25,6 +25,8 @@ ResultType GetCommandEvent::fire() {
     bool valid = false;
     Rover* rover = engine->GetRover(0);
     RoverInterface* ri = rover->GetRoverInterface();
+    //Fail.
+    ri->SendRoverCommand("get\n");
     Communication comm = ri->RecieveFormattedMessage();
     if (comm.command.compare("move") == 0) {
         if (comm.arguments.size() > 0 && comm.arguments.front().length() > 0) {
