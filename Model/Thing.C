@@ -8,7 +8,10 @@ Thing::Thing()
 }
 Thing::Thing(string name, uint id, uint collectPointValue, uint discoverPointValue) 
 {
-    
+    this->name = name;
+    this->ID = id;
+    this->collectPointValue = collectPointValue;
+    this->discoverPointValue = discoverPointValue;
 }
 
 // Method will return an integer based on the results of the tweak.
