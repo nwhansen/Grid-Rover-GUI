@@ -52,7 +52,7 @@ String empty("");
 String physobjs("Model/Data/physical_objects.xml");
 String errlog("error.log");
 String msglog("messages.log");
-String rvrprog("blah.sh");
+String rvrprog("./blah.sh");
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)

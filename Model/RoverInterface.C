@@ -55,7 +55,7 @@ RoverInterface::RoverInterface(std::string& filename) {
         // we are in another process so exiting does not solve the problem
         Logging::Logger::writeToLog(logger, "Couldn't open robot " + filename, true);
         running = false;
-        exit(-1); //Terminate angry.
+        //exit(-1); //Terminate angry.
     } else {
         close(pipe_out[0]); // Close input side of pipe_out
         close(pipe_in[1]); // Close output side of pipe_in
@@ -90,7 +90,7 @@ std::string RoverInterface::getRoverCommand() {
 bool RoverInterface::SendRoverCommand(const std::string& roverCommand) {
     if (write(pipes[0], roverCommand.c_str(), roverCommand.size())) {
         //TODO: ERROR REPORT
-        Logging::Logger::writeToLog(logger, "Unable to send message! Pipe may be closed", true);
+        //Logging::Logger::writeToLog(logger, "Unable to send message! Pipe may be closed", true);
         return false;
     }
     //Log something maybe.
