@@ -5,6 +5,12 @@ GRIDDIR=`pwd`
 PGRIDDIR=${GRIDDIR}/..
 BUILDDIR=custom-build
 
+if which qmake; then
+	QMAKE=qmake
+else
+	QMAKE=/usr/local/qt4/bin/qmake
+fi
+
 cd $PGRIDDIR
 
 pwd # diagnostic
@@ -18,7 +24,7 @@ mkdir $BUILDDIR
 ls $BUILDDIR # diagnostic
 
 cd $BUILDDIR
-qmake $GRIDDIR/gridrover.pro
+$QMAKE $GRIDDIR/gridrover.pro
 cp $GRIDDIR/Rover-Control-Program .
 chmod +x Rover-Control-Program
 cp -Rf $GRIDDIR/Model .
