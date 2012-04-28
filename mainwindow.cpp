@@ -52,9 +52,9 @@ String empty("");
 String physobjs("Model/Data/physical_objects.xml");
 String errlog("error.log");
 String msglog("messages.log");
-String rvrprog("./blah.sh");
+String defaultroverprog("./Rover-Control-Program");
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(std::string roverprog, QWidget *parent)
     : QWidget(parent)
 {
     scene = new QGraphicsScene;
@@ -77,7 +77,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     setWindowTitle(tr("Grid Rover Map Viewer"));
 
-    engine = new Engine(10, 10, rvrprog, physobjs, errlog, msglog, empty, empty);
+    if (roverprog.compare("") == 0) {
+        roverprog = defaultroverprog;
+    }
+    engine = new Engine(10, 10, roverprog, physobjs, errlog, msglog, empty, empty);
 
     roverObj = engine->GetRover(0);
 

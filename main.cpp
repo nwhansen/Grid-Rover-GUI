@@ -49,7 +49,12 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
     app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    MainWindow window;
+    std::string roverprog = "";
+    if (argc > 1) {
+        roverprog = std::string(argv[1]);
+    }
+
+    MainWindow window(roverprog);
     window.show();   
 
     return app.exec();

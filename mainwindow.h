@@ -58,7 +58,7 @@ class MainWindow : public QWidget
 {
     Q_OBJECT
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(std::string, QWidget *parent = 0);
 
 private slots:
     void reloadMap();
