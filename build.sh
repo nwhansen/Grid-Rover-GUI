@@ -5,6 +5,11 @@ GRIDDIR=`pwd`
 PGRIDDIR=${GRIDDIR}/..
 BUILDDIR=custom-build
 
+CC=/usr/bin/gcc
+CXX=/usr/bin/g++
+
+export CC CXX
+
 if which qmake; then
 	QMAKE=qmake
 else
